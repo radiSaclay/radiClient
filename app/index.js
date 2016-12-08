@@ -10,8 +10,8 @@ const App = () => {
       <Scene key="root">
         <Scene
           component={SignIn}
-          initial={true}
           hideNavBar={true}
+          initial={true}
           key="SignIn"
           title="Sign In"
         />
