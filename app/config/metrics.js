@@ -8,6 +8,7 @@ const metrics = {
   basePadding: 10,
   logoHeight: 70,
   logoWidth: 60,
+  navBarHeight: 54,
   screenHeight: width < height ? height : width,
   screenWidth: width < height ? width : height,
 }
