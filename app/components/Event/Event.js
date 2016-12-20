@@ -19,27 +19,16 @@ class Event extends Component {
 		return (
 			// Main container
 			<View style={styles.mainContainer}>
-				// Image container
 				<View style={styles.imageContainer}>
-					<Image
-						source={require('../../images/icons/radish.png')}
-					/>
+					<Image source={require('../../images/icons/radish.png')} />
 				</View>
 
-				// Text container
 				<View style={styles.textContainer}>
-					<Text style={styles.product}>
-						{this.props.product}
-					</Text>
+					<Text style={styles.product}> {this.props.product} </Text>
 
 					<View style={styles.subtitle}>
-						<Text style={styles.producer}>
-							{this.props.producer}
-						</Text>
-
-						<Text style={styles.daysLeft}>
-							{this.props.daysLeft}
-						</Text>
+						<Text style={styles.producer}> {this.props.producer} </Text>
+						<Text style={styles.daysLeft}> {this.props.daysLeft} </Text>
 					</View>
 				</View>
 			</View>
