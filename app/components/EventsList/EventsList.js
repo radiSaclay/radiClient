@@ -18,20 +18,20 @@ class EventsList extends Component {
   }
 
   _renderRow(rowData) {
-      return <Event
+      return (<Event
                 daysLeft={rowData.daysLeft}
                 producer={rowData.producer}
                 product={rowData.product}
-              />
+              />);
   }
 
   render(rowData) {
-    return <ListView
+    return (<ListView
               dataSource={this.state.dataSource}
               renderRow={this._renderRow}
               renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
               style={styles.container}
-            />
+            />);
   }
 }
 

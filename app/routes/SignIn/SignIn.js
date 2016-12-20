@@ -46,7 +46,7 @@ class SignIn extends Component {
           <TouchableOpacity style={styles.loginButtonWrapper}>
             <Text
               style={styles.loginText}
-              onPress={() => Actions.EventsList()}
+              onPress={() => Actions.MainTab()}
             >
               Log In
             </Text>
