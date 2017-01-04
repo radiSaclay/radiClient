@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TextInput, ScrollView, TouchableOpacity } from 'react-native';
+import {
+	Image,
+	ScrollView,
+	Text,
+	TextInput,
+	TouchableOpacity,
+	View
+} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 import styles from './styles';

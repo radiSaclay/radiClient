@@ -1,14 +1,8 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import colors from '../../config/colors';
 import metrics from '../../config/metrics';
 
 const styles = StyleSheet.create({
-	mainContainer: {
-		top: metrics.navBarHeight,
-		backgroundColor: colors.coral,
-		padding: metrics.basePadding,
-		flex: 1,
-	},
 	horizontalContainer: {
 		flex: 1,
 		flexDirection: 'row',
@@ -35,6 +29,12 @@ const styles = StyleSheet.create({
       padding: metrics.basePadding,
       textAlign: 'center'
     },
+	mainContainer: {
+		top: metrics.navBarHeight,
+		backgroundColor: colors.coral,
+		padding: metrics.basePadding,
+		flex: 1,
+	},
 });
 
 export default styles;

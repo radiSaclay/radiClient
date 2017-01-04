@@ -1,12 +1,8 @@
-import {React, Componenent} from 'react'
-import {View, Text} from 'react-native'
+import { React, Componenent } from 'react'
+import { Text, View } from 'react-native'
 import styles from './styles'
 
 class MainTab extends Component {
-	constructor() {
-
-	}
-
 	render() {
 		return (
 			<View>

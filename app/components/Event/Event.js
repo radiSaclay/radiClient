@@ -1,23 +1,22 @@
 import React, { Component } from 'react';
 import {
-  Text,
-  View,
-  Image,
+    Image,
+    Text,
+    View,
 } from 'react-native';
 
 import styles from './styles';
 
 /*
 	Props:
-	- product: id of the product
-	- producer: id of the producer
+	- product: name of the product
+	- producer: name of the producer
 	- daysLeft: number of days left before the event ends
 */
 
 class Event extends Component {
 	render() {
 		return (
-			// Main container
 			<View style={styles.mainContainer}>
 				<View style={styles.imageContainer}>
 					<Image source={require('../../images/icons/radish.png')} />
