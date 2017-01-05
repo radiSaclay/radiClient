@@ -16,8 +16,6 @@ import {
 import styles from './styles';
 import settings from '../../config/settings'
 
-var STORAGE_KEY = 'id_token'
-
 class SignIn extends Component {
   constructor(){
     super();
@@ -35,9 +33,9 @@ class SignIn extends Component {
       }
   }
 
-  userLogin() {
+  authenticateUser(route){
     if (this.state.email && this.state.password){
-      fetch(settings.AUTH_URL + "login", {
+      fetch(settings.urls.AUTH_URL + route, {
         method: "POST",
         headers: {
           'Accept': 'application/json',
@@ -51,12 +49,12 @@ class SignIn extends Component {
       .then((response) => response.json())
       .then((responseData) => {
         if (responseData.validated){
-          this.onValueChange(STORAGE_KEY, responseData.token),
-          Actions.EventsList();
+          this.onValueChange(settings.keys.ID_TOKEN, responseData.token),
+					Actions.MainTab({type: ActionConst.REPLACE})
         }
         else{
           Alert.alert(
-            "Inscription pas valide",
+            "Problème d'authentification",
             responseData.msg
           )
         }
@@ -65,34 +63,12 @@ class SignIn extends Component {
     }
   }
 
+  userLogin() {
+    this.authenticateUser('login');
+  }
+
   userSignup() {
-    if (this.state.email && this.state.password){
-      fetch(settings.AUTH_URL + "signup", {
-        method: "POST",
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email: this.state.email,
-          password: this.state.password,
-        })
-      })
-      .then((response) => response.json())
-      .then((responseData) => {
-        if (responseData.validated){
-          this.onValueChange(STORAGE_KEY, responseData.token),
-					Actions.MainTab({type: ActionConst.REPLACE})
-        }
-        else{
-          Alert.alert(
-            "Identifiants pas valides",
-            responseData.msg
-          )
-        }
-      })
-      .done();
-    }
+    this.authenticateUser('signup');
   }
 
   render() {
@@ -136,9 +112,7 @@ class SignIn extends Component {
           <TouchableOpacity style={styles.buttonWrapper}>
             <Text
               style={styles.buttonText}
-							onPress={() => {
-								Actions.MainTab({type: ActionConst.REPLACE})
-							}}
+							onPress={this.userLogin.bind(this)}
             >
               Log In
             </Text>
