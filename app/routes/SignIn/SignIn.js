@@ -35,6 +35,36 @@ class SignIn extends Component {
       }
   }
 
+  userLogin() {
+    if (this.state.email && this.state.password){
+      fetch(settings.AUTH_URL + "login", {
+        method: "POST",
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: this.state.email,
+          password: this.state.password,
+        })
+      })
+      .then((response) => response.json())
+      .then((responseData) => {
+        if (responseData.validated){
+          this.onValueChange(STORAGE_KEY, responseData.token),
+          Actions.EventsList();
+        }
+        else{
+          Alert.alert(
+            "Inscription pas valide",
+            responseData.msg
+          )
+        }
+      })
+      .done();
+    }
+  }
+
   userSignup() {
     if (this.state.email && this.state.password){
       fetch(settings.AUTH_URL + "signup", {
@@ -56,7 +86,7 @@ class SignIn extends Component {
         }
         else{
           Alert.alert(
-            "Inscription pas valide",
+            "Identifiants pas valides",
             responseData.msg
           )
         }
