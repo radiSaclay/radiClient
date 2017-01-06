@@ -17,7 +17,7 @@ class EventsList extends Component {
 		};
 	}
 
-	_renderRow(rowData) {
+	renderRow(rowData) {
 		return (
 			<Event
 				daysLeft={rowData.daysLeft}
@@ -29,12 +29,13 @@ class EventsList extends Component {
 
 	render(rowData) {
 		return (
-			<ListView
-				dataSource={this.state.dataSource}
-				renderRow={this._renderRow}
-				renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
-				style={styles.container}
-			/>
+			<View style = {styles.container}>
+				<ListView
+					dataSource={this.state.dataSource}
+					renderRow={this.renderRow}
+					renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
+				/>
+			</View>
 		)
 	}
 }
