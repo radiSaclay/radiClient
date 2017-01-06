@@ -16,7 +16,7 @@ import {
 import styles from './styles';
 import settings from '../../config/settings'
 
-class SignIn extends Component {
+class Authentication extends Component {
   constructor(){
     super();
     this.state = {
@@ -131,4 +131,4 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+export default Authentication;

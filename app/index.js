@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {ActivityIndicator, AsyncStorage, Image} from 'react-native';
 import {Router, Scene, TabBar} from 'react-native-router-flux';
 
-import SignIn from './routes/SignIn';
+import Authentication from './routes/Authentication';
 import EventDetail from './routes/EventDetail';
 import EventsList from './routes/EventsList';
 import AccountDisplay from './routes/AccountDisplay';
@@ -38,7 +38,6 @@ class App extends Component {
   }
 
 	render() {
-		console.log(this.state.isLoaded);
 		if (!this.state.isLoaded){
       return (
         <ActivityIndicator />
@@ -48,11 +47,11 @@ class App extends Component {
         <Router>
           <Scene key="root">
             <Scene
-              component={SignIn}
+              component={Authentication}
               hideNavBar={true}
               initial={!this.state.hasToken}
-              key="SignIn"
-              title="Sign In"
+              key="Authentication"
+              title="Authentication"
             />
 						<Scene
 							direction="vertical"
