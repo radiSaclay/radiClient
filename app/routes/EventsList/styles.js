@@ -4,7 +4,7 @@ import metrics from '../../config/metrics'
 
 export default styles = StyleSheet.create({
 	container: {
-		top	: metrics.navBarHeight
+		top: metrics.navBarHeight
 	},
 	separator: {
 		flex: 1,

@@ -3,15 +3,17 @@ import {
 	Image,
 	Text,
 	TouchableHighlight,
-	View } from 'react-native';
+	View
+} from 'react-native';
 import { Actions } from 'react-native-router-flux';
+
 
 import styles from './styles';
 
 /*
 	Props:
-	- product: id of the product
-	- producer: id of the producer
+	- product: name of the product
+	- producer: name of the producer
 	- daysLeft: number of days left before the event ends
 */
 

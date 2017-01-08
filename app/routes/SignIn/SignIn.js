@@ -6,7 +6,10 @@ import {
 	TouchableOpacity,
 	View
 } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import {
+	ActionConst,
+	Actions,
+} from 'react-native-router-flux';
 
 import styles from './styles';
 
@@ -45,10 +48,13 @@ class SignIn extends Component {
 						secureTextEntry={true}
 						placeholder='Password'
 					/>
+
 					<TouchableOpacity style={styles.loginButtonWrapper}>
 						<Text
 							style={styles.loginText}
-							onPress={() => Actions.EventsList()}
+							onPress={() => {
+								Actions.MainTab({type: ActionConst.REPLACE})
+							}}
 						>
 							Log In
 						</Text>
