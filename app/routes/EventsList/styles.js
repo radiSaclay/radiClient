@@ -4,11 +4,13 @@ import metrics from '../../config/metrics'
 
 export default styles = StyleSheet.create({
 	container: {
-		top: metrics.navBarHeight
+		flex: 1,
+		paddingBottom: metrics.navBarHeight,
+		paddingTop: metrics.navBarHeight
 	},
 	separator: {
-		flex: 1,
-		height: StyleSheet.hairlineWidth,
-		backgroundColor: colors.greyLight,
-	},
+    flex: 1,
+    height: StyleSheet.hairlineWidth,
+    backgroundColor: colors.greyLight,
+  },
 });

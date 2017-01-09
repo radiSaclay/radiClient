@@ -3,6 +3,20 @@ import colors from '../../config/colors';
 import metrics from '../../config/metrics';
 
 const styles = StyleSheet.create({
+	buttonText: {
+		color: colors.greyLight,
+		fontSize: 20,
+		padding: metrics.basePadding,
+		textAlign: 'center'
+	},
+	buttonWrapper: {
+		backgroundColor: colors.salmonLight,
+		borderRadius: metrics.borderRadius,
+		flexDirection: 'row',
+		flex: 1,
+		justifyContent: 'center',
+		marginBottom: metrics.baseMargin,
+	},
 	horizontalContainer: {
 		flex: 1,
 		flexDirection: 'row',
@@ -14,20 +28,6 @@ const styles = StyleSheet.create({
 		marginBottom: metrics.baseMargin,
 		padding: metrics.basePadding,
 		flex: 1,
-	},
-	loginButtonWrapper: {
-		backgroundColor: colors.salmonLight,
-		borderRadius: metrics.borderRadius,
-		marginBottom: metrics.baseMargin,
-		flexDirection: 'row',
-		flex: 1,
-		justifyContent: 'center',
-	},
-	loginText: {
-		color: colors.greyLight,
-		fontSize: 20,
-		padding: metrics.basePadding,
-		textAlign: 'center'
 	},
 	mainContainer: {
 		top: metrics.navBarHeight,
