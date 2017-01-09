@@ -8,7 +8,10 @@ import {
 	TouchableOpacity,
 	View
 } from 'react-native';
-import { Actions } from 'react-native-router-flux';
+import {
+	ActionConst,
+	Actions
+} from 'react-native-router-flux';
 
 import settings from '../../config/settings';
 import styles from './styles';
@@ -21,7 +24,7 @@ class AccountDisplay extends Component {
   async userLogout() {
     try {
       await AsyncStorage.removeItem(settings.keys.ID_TOKEN);
-      Actions.Authentication()
+      Actions.Authentication({type: ActionConst.REPLACE});
     } catch (error) {
       console.log('AsyncStorage error: ' + error.message);
     }
