@@ -3,7 +3,7 @@ import colors from '../../config/colors'
 import metrics from '../../config/metrics'
 
 export default styles = StyleSheet.create({
-	daysLeft: {
+	endDate: {
 		fontSize: 20,
 		flex: 0.3,
 		textAlign: 'right',

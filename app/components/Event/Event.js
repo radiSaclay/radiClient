@@ -14,7 +14,7 @@ import styles from './styles';
 	Props:
 	- product: name of the product
 	- producer: name of the producer
-	- daysLeft: number of days left before the event ends
+	- endDate: event's end date
 */
 
 class Event extends Component {
@@ -38,8 +38,8 @@ class Event extends Component {
 								{this.props.producer}
 							</Text>
 
-							<Text style={styles.daysLeft}>
-								{this.props.daysLeft}
+							<Text style={styles.endDate}>
+								{this.props.endDate}
 							</Text>
 						</View>
 					</View>
