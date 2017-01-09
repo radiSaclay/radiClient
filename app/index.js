@@ -22,7 +22,6 @@ class App extends Component {
 
   componentWillMount() {
     AsyncStorage.getItem(settings.keys.ID_TOKEN).then((token) => {
-			console.log(token);
 			if (token !== null){
         this.setState({
           hasToken: true,
@@ -87,8 +86,6 @@ class App extends Component {
       )
     }
   }
-
-
 }
 
 export default App;

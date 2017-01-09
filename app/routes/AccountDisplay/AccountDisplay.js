@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+	AsyncStorage,
 	Image,
 	ScrollView,
 	Text,
@@ -9,12 +10,22 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
+import settings from '../../config/settings';
 import styles from './styles';
 
 class AccountDisplay extends Component {
 	constructor() {
 		super();
 	}
+
+  async userLogout() {
+    try {
+      await AsyncStorage.removeItem(settings.keys.ID_TOKEN);
+      Actions.Authentication()
+    } catch (error) {
+      console.log('AsyncStorage error: ' + error.message);
+    }
+  }
 
 	render() {
 		return (
@@ -76,10 +87,18 @@ class AccountDisplay extends Component {
 				</View>
 
 				{/* Button to modify the information */}
-				<TouchableOpacity style={styles.loginButtonWrapper}>
+				<TouchableOpacity style={styles.buttonWrapper}>
 					<Image source={require('../../images/settings.png')} />
-					<Text style={styles.loginText} onPress={() => /* TODO redirect the user to the edit view */ Actions.AccountDisplay()}>
+					<Text style={styles.buttonText} onPress={() => /* TODO redirect the user to the edit view */ Actions.AccountDisplay()}>
 						Modifier
+					</Text>
+				</TouchableOpacity>
+				<TouchableOpacity
+					style={styles.buttonWrapper}
+					onPress={this.userLogout}
+				>
+					<Text style={styles.buttonText} >
+						Log out
 					</Text>
 				</TouchableOpacity>
 			</ScrollView>
