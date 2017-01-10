@@ -6,13 +6,13 @@ export default styles = StyleSheet.create({
 	container: {
 		top: metrics.navBarHeight
 	},
-	daysLeft: {
+	endDate: {
 		fontSize: 20,
 	},
-	producer: {
+	farmId: {
 		fontSize: 20,
 	},
-	product: {
+	description: {
 		fontSize: 30,
 		fontWeight: 'bold'
 	},

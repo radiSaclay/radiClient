@@ -43,6 +43,7 @@ class EventsList extends Component {
 		return (
 			<Event
 				endDate={rowData.endAt}
+				eventId={rowData.id}
 				producer={rowData.producer}
 				product={rowData.description}
 			/>

@@ -12,7 +12,7 @@ import styles from './styles';
 class Event extends Component {
 	render() {
 		return (
-			<TouchableHighlight onPress={() => Actions.EventDetail(this.props)}>
+			<TouchableHighlight onPress={() => Actions.EventDetail({eventId: this.props.eventId})}>
 				<View style={styles.mainContainer}>
 					<View style={styles.imageContainer}>
 						<Image
@@ -40,5 +40,12 @@ class Event extends Component {
 		);
 	}
 }
+
+Event.propTypes = {
+	endDate: React.PropTypes.string,
+	eventId: React.PropTypes.number,
+	product: React.PropTypes.string,
+	producer: React.PropTypes.string
+};
 
 export default Event;
