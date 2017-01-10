@@ -9,8 +9,8 @@ export default styles = StyleSheet.create({
 		paddingTop: metrics.navBarHeight
 	},
 	separator: {
+		backgroundColor: colors.greyLight,
 		flex: 1,
 		height: StyleSheet.hairlineWidth,
-		backgroundColor: colors.greyLight,
-  },
+	},
 });

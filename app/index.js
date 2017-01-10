@@ -2,56 +2,59 @@ import React, {Component} from 'react';
 import {ActivityIndicator, AsyncStorage, Image} from 'react-native';
 import {Router, Scene, TabBar} from 'react-native-router-flux';
 
+import AccountDisplay from './routes/AccountDisplay';
 import Authentication from './routes/Authentication';
 import EventDetail from './routes/EventDetail';
 import EventsList from './routes/EventsList';
-import AccountDisplay from './routes/AccountDisplay';
+import FarmsList from './routes/FarmsList';
 
 import settings from './config/settings'
 import styles from './styles.js';
 
 class App extends Component {
 
-  constructor(){
-    super();
-    this.state = {
-      hasToken: false,
-      isLoaded: false
-    }
-  }
+	constructor(){
+		super();
+		this.state = {
+			hasToken: false,
+			isLoaded: false
+		}
+	}
 
-  componentWillMount() {
-    AsyncStorage.getItem(settings.keys.ID_TOKEN).then((token) => {
+	componentWillMount() {
+		AsyncStorage.getItem(settings.keys.ID_TOKEN).then((token) => {
 			if (token !== null){
-        this.setState({
-          hasToken: true,
-          isLoaded: true
-        });
-      } else{
-        this.setState({
-          hasToken: false,
-          isLoaded: true
-        });
-      }
-    });
-  }
+				this.setState({
+					hasToken: true,
+					isLoaded: true
+				});
+			} else {
+				this.setState({
+					hasToken: false,
+					isLoaded: true
+			});
+		}
+		});
+	}
 
 	render() {
 		if (!this.state.isLoaded){
-      return (
-        <ActivityIndicator />
-      )
-    } else {
-      return (
-        <Router>
-          <Scene key="root">
-            <Scene
-              component={Authentication}
-              hideNavBar={true}
-              initial={!this.state.hasToken}
-              key="Authentication"
-              title="Authentication"
-            />
+			// TODO: align the loader at the center of the screen.
+			return (
+				<ActivityIndicator />
+			)
+		} else {
+			return (
+				<Router>
+					<Scene key="root">
+						<Scene
+							component={Authentication}
+							hideNavBar={true}
+							initial={!this.state.hasToken}
+							key="Authentication"
+							title="Authentication"
+							/>
+
 						<Scene
 							direction="vertical"
 							hideNavBar={true}
@@ -59,13 +62,13 @@ class App extends Component {
 							key="MainTab"
 							tabBarStyle={styles.tabBar}
 							tabs={true}
-						>
+							>
 							<Scene
 								component={AccountDisplay}
 								icon={() => {return (<Image source={require('./images/user.png')} />)}}
 								key="AccountDisplay"
 								title="Mon compte"
-							/>
+								/>
 
 							<Scene
 								component={EventsList}
@@ -73,19 +76,27 @@ class App extends Component {
 								initial={true}
 								key="EventsList"
 								title="Mon flux"
-							/>
+								/>
+
+							<Scene
+								component={FarmsList}
+								icon={() => {return (<Image source={require('./images/farm.png')} />)}}
+								key="FarmsList"
+								title="Fermes de la région"
+								/>
 						</Scene>
+
 						<Scene
 							component={EventDetail}
 							hideNavBar={false}
 							key="EventDetail"
 							title="Détails de l'évènement"
-						/>
+							/>
 					</Scene>
-        </Router>
-      )
-    }
-  }
+				</Router>
+			)
+		}
+	}
 }
 
 export default App;
