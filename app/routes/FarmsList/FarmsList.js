@@ -6,7 +6,7 @@ import {
 } from 'react-native'
 
 import settings from '../../config/settings'
-import styles from './styles';
+import styles from './styles'
 
 import Farm from '../../components/Farm'
 

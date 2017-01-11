@@ -7,15 +7,7 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
-
 import styles from './styles';
-
-/*
-	Props:
-	- product: name of the product
-	- producer: name of the producer
-	- endDate: event's end date
-*/
 
 class Event extends Component {
 	render() {
