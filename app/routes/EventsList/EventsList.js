@@ -8,7 +8,7 @@ import {
 import settings from '../../config/settings.js'
 import styles from './styles';
 
-import Event from '../../components/Event'
+import EventContainer from '../../components/Event'
 
 class EventsList extends Component {
 	constructor() {
@@ -41,8 +41,9 @@ class EventsList extends Component {
 	// TODO: the route doesn't return the producer name for the moment. Update the producer prop once the route is updated
 	renderRow(rowData) {
 		return (
-			<Event
+			<EventContainer
 				endDate={rowData.endAt}
+				eventId={rowData.id}
 				producer={rowData.producer}
 				product={rowData.description}
 			/>

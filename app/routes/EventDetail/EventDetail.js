@@ -1,8 +1,5 @@
-import React, { Component } from 'react';
-import {
-	Text,
-	View,
-} from 'react-native';
+import React, {Component} from 'react';
+import {Text, View} from 'react-native';
 
 import styles from './styles';
 
@@ -10,22 +7,26 @@ class EventDetail extends Component {
 	render() {
 		return(
 			<View style={styles.container}>
-				<Text style={styles.product}>
-					{this.props.product}
+				<Text style={styles.description}>
+					{this.props.description}
 				</Text>
 
-				<Text style={styles.producer}>
-					{this.props.producer}
+				<Text style={styles.farmId}>
+					{this.props.farmId}
 				</Text>
 
-				<Text style={styles.daysLeft}>
-					{this.props.daysLeft}
+				<Text style={styles.endDate}>
+					{this.props.endAt}
 				</Text>
 			</View>
 		)
 	}
 }
 
-// TODO: add constraints about the props type
+EventDetail.propTypes = {
+	description: React.PropTypes.string,
+	endAt: React.PropTypes.string,
+	farmId: React.PropTypes.number
+};
 
 export default EventDetail;
