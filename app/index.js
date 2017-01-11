@@ -6,6 +6,7 @@ import AccountDisplay from './routes/AccountDisplay';
 import Authentication from './routes/Authentication';
 import EventDetail from './routes/EventDetail';
 import EventsList from './routes/EventsList';
+import FarmDetail from './routes/FarmDetail';
 import FarmsList from './routes/FarmsList';
 
 import settings from './config/settings'
@@ -82,7 +83,7 @@ class App extends Component {
 								component={FarmsList}
 								icon={() => {return (<Image source={require('./images/farm.png')} />)}}
 								key="FarmsList"
-								title="Fermes de la région"
+								title="Les fermes du plateau"
 								/>
 						</Scene>
 
@@ -91,6 +92,13 @@ class App extends Component {
 							hideNavBar={false}
 							key="EventDetail"
 							title="Détails de l'évènement"
+							/>
+
+						<Scene
+							component={FarmDetail}
+							hideNavBar={false}
+							key="FarmDetail"
+							title="Détails de la ferme"
 							/>
 					</Scene>
 				</Router>

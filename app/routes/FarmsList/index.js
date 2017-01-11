@@ -1,3 +1,3 @@
-import FarmsList from './FarmsList';
+import FarmsList from './FarmsList'
 
-export default FarmsList;
+export default FarmsList

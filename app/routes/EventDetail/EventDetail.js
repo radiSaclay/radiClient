@@ -6,10 +6,8 @@ import {
 
 import styles from './styles';
 
-import Event from '../../components/Event'
-
 class EventDetail extends Component {
-	render(rowData) {
+	render() {
 		return(
 			<View style={styles.container}>
 				<Text style={styles.product}>
@@ -27,5 +25,7 @@ class EventDetail extends Component {
 		)
 	}
 }
+
+// TODO: add constraints about the props type
 
 export default EventDetail;

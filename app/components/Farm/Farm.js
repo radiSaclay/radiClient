@@ -1,43 +1,38 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
+	Image,
 	Text,
+	TouchableHighlight,
 	View,
-} from 'react-native';
+} from 'react-native'
+import { Actions } from 'react-native-router-flux'
 
-import styles from './styles';
+import styles from './styles'
 
 class Farm extends Component {
 	render() {
 		return (
-			<View style={styles.mainContainer}>
-				<Text>
-					{this.props.id}
-				</Text>
+			<TouchableHighlight onPress={() => Actions.FarmDetail(this.props)}>
+				<View style={styles.mainContainer}>
+					<View style={styles.imageContainer}>
+						<Image
+							source={require('../../images/farm.png')}
+							/>
+					</View>
 
-				<Text>
-					{this.props.name}
-				</Text>
+					<View style={styles.textContainer}>
+						<Text style={styles.name}>
+							{this.props.name}
+						</Text>
 
-				<Text>
-					{this.props.ownerId}
-				</Text>
-
-				<Text>
-					{this.props.address}
-				</Text>
-
-				<Text>
-					{this.props.website}
-				</Text>
-
-				<Text>
-					{this.props.phone}
-				</Text>
-
-				<Text>
-					{this.props.email}
-				</Text>
-			</View>
+						<View style={styles.subtitle}>
+							<Text style={styles.address}>
+								{this.props.address}
+							</Text>
+						</View>
+					</View>
+				</View>
+			</TouchableHighlight>
 		)
 	}
 }
