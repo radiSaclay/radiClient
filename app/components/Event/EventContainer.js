@@ -1,21 +1,29 @@
 import React, { Component } from 'react';
+import { AsyncStorage } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
-import settings from '../../config/settings'
+import settings from '../../config/settings';
 
 import Event from './Event.js';
 
 class EventContainer extends Component {
 
 	getEventDetail() {
-		return fetch(settings.urls.EVENTS_URL + this.props.eventId)
-		.then((response) => response.json())
-		.then((eventDetails) => {
-			Actions.EventDetail(eventDetails)
+		AsyncStorage.getItem(settings.keys.ID_TOKEN).then((idToken) => {
+			fetch(settings.urls.EVENTS_URL + this.props.eventId, {
+				method: "GET",
+				headers: {
+					'Authorization': idToken
+				}
+			})
+			.then((response) => response.json())
+			.then((eventDetails) => {
+				Actions.EventDetailContainer(eventDetails)
+			})
+			.catch((error) => {
+				console.error(error);
+			});
 		})
-		.catch((error) => {
-			console.error(error);
-		});
 	}
 
 	render() {

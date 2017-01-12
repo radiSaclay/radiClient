@@ -2,7 +2,7 @@ import React from 'react';
 import {
 	Image,
 	Text,
-	TouchableHighlight,
+	TouchableOpacity,
 	View
 } from 'react-native';
 
@@ -10,7 +10,7 @@ import styles from './styles';
 
 const Event = (props) => {
 	return (
-		<TouchableHighlight onPress={props.getEventDetail}>
+		<TouchableOpacity onPress={props.getEventDetail}>
 			<View style={styles.mainContainer}>
 				<View style={styles.imageContainer}>
 					<Image
@@ -34,7 +34,7 @@ const Event = (props) => {
 					</View>
 				</View>
 			</View>
-		</TouchableHighlight>
+		</TouchableOpacity>
 	);
 }
 
