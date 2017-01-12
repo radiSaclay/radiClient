@@ -8,7 +8,7 @@ import {
 import settings from '../../config/settings'
 import styles from './styles'
 
-import Farm from '../../components/Farm'
+import FarmContainer from '../../components/Farm'
 
 class FarmsList extends Component {
 	constructor() {
@@ -26,8 +26,9 @@ class FarmsList extends Component {
 	/*
 		Gets the list of the farms around the user.
 	*/
+	// TODO: load less information about farms 
 	getFarmsList() {
-		return fetch(settings.urls.FARMS_LIST_URL)
+		return fetch(settings.urls.FARMS_URL)
 		.then((response) => response.json())
 		.then((responseJson) => {
 			const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
@@ -43,7 +44,7 @@ class FarmsList extends Component {
 
 	renderRow(rowData) {
 		return (
-			<Farm
+			<FarmContainer
 				id={rowData.id}
 				name={rowData.name}
 				ownerId={rowData.ownerId}
