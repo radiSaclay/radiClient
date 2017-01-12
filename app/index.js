@@ -4,7 +4,7 @@ import {Router, Scene, TabBar} from 'react-native-router-flux';
 
 import AccountDisplay from './routes/AccountDisplay';
 import Authentication from './routes/Authentication';
-import EventDetail from './routes/EventDetail';
+import EventDetailContainer from './routes/EventDetail';
 import EventsList from './routes/EventsList';
 import FarmDetail from './routes/FarmDetail';
 import FarmsList from './routes/FarmsList';
@@ -88,9 +88,9 @@ class App extends Component {
 						</Scene>
 
 						<Scene
-							component={EventDetail}
+							component={EventDetailContainer}
 							hideNavBar={false}
-							key="EventDetail"
+							key="EventDetailContainer"
 							title="Détails de l'évènement"
 							/>
 

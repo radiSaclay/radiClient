@@ -11,7 +11,7 @@ class EventContainer extends Component {
 		return fetch(settings.urls.EVENTS_URL + this.props.eventId)
 		.then((response) => response.json())
 		.then((eventDetails) => {
-			Actions.EventDetail(eventDetails)
+			Actions.EventDetailContainer(eventDetails)
 		})
 		.catch((error) => {
 			console.error(error);

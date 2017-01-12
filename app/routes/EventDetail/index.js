@@ -1,3 +1,3 @@
-import EventDetail from './EventDetail';
+import EventDetailContainer from './EventDetailContainer';
 
-export default EventDetail;
+export default EventDetailContainer;
