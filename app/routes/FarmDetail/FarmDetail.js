@@ -11,31 +11,31 @@ class FarmDetail extends Component {
 		return (
 			<View style={styles.mainContainer}>
 				<Text>
-					{this.props.id}
+					Id: {this.props.id}
 				</Text>
 
 				<Text>
-					{this.props.name}
+					Nom: {this.props.name}
 				</Text>
 
 				<Text>
-					{this.props.ownerId}
+					Id propriétaire: {this.props.ownerId}
 				</Text>
 
 				<Text>
-					{this.props.address}
+					Adresse: {this.props.address}
 				</Text>
 
 				<Text>
-					{this.props.website}
+					Site web: {this.props.website}
 				</Text>
 
 				<Text>
-					{this.props.phone}
+					Téléphone: {this.props.phone}
 				</Text>
 
 				<Text>
-					{this.props.email}
+					Mail: {this.props.email}
 				</Text>
 			</View>
 		)
