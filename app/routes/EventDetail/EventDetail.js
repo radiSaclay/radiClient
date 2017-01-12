@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, TouchableOpacity} from 'react-native';
 
 import styles from './styles';
 
@@ -17,6 +17,15 @@ const EventDetail = (props) => {
 			<Text style={styles.endDate}>
 				{props.endAt}
 			</Text>
+			
+			<TouchableOpacity
+				onPress={props.togglePinStatus}
+				style={styles.buttonWrapper}
+				>
+				<Text style={styles.buttonText}>
+					{props.isPinned ? 'Dépingler' : 'Épingler'}
+				</Text>
+			</TouchableOpacity>
 		</View>
 	)
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
 	ActivityIndicator,
+	AsyncStorage,
 	ListView,
 	View
 } from 'react-native';
@@ -24,18 +25,25 @@ class EventsList extends Component {
 	}
 
 	getEvents() {
-		return fetch(settings.urls.EVENTS_URL)
-		.then((response) => response.json())
-		.then((responseJson) => {
-			const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-			this.setState({
-				dataSource: ds.cloneWithRows(responseJson),
-				isLoaded: true
+		AsyncStorage.getItem(settings.keys.ID_TOKEN).then((idToken) => {
+			fetch(settings.urls.EVENTS_URL, {
+				method: "GET",
+				headers: {
+					'Authorization': idToken
+				}
+			})
+			.then((response) => response.json())
+			.then((responseJson) => {
+				const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+				this.setState({
+					dataSource: ds.cloneWithRows(responseJson),
+					isLoaded: true
+				})
+			})
+			.catch((error) => {
+				console.error(error);
 			})
 		})
-		.catch((error) => {
-			console.error(error);
-		});
 	}
 
 	// TODO: the route doesn't return the producer name for the moment. Update the producer prop once the route is updated
