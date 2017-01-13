@@ -45,18 +45,14 @@ class FarmsList extends Component {
 	renderRow(rowData) {
 		return (
 			<FarmContainer
+				address={rowData.address}
 				id={rowData.id}
 				name={rowData.name}
-				ownerId={rowData.ownerId}
-				address={rowData.address}
-				website={rowData.website}
-				phone={rowData.phone}
-				email={rowData.email}
 				/>
 		)
 	}
 
-	render(rowData) {
+	render() {
 		if (!this.state.isLoaded) {
 			return (
 				<ActivityIndicator />

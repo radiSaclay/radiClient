@@ -58,7 +58,7 @@ class EventsList extends Component {
 		)
 	}
 
-	render(rowData) {
+	render() {
 		if (!this.state.isLoaded){
 			return(
 				<ActivityIndicator />

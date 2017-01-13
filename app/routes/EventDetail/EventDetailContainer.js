@@ -14,7 +14,7 @@ class EventDetailContainer extends Component {
 
 	togglePinStatus(){
 		AsyncStorage.getItem(settings.keys.ID_TOKEN).then((idToken) => {
-			fetch(settings.urls.EVENTS_URL + (this.state.isPinned ? 'unpin' : 'pin') + '/' + this.props.id, {
+			fetch((this.state.isPinned ? settings.urls.EVENTS_UNPIN_URL : settings.urls.EVENTS_PIN_URL) + this.props.id, {
 				method: "POST",
 				headers: {
 					'Authorization': idToken
