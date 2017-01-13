@@ -6,7 +6,7 @@ import AccountDisplay from './routes/AccountDisplay';
 import Authentication from './routes/Authentication';
 import EventDetailContainer from './routes/EventDetail';
 import EventsList from './routes/EventsList';
-import FarmDetail from './routes/FarmDetail';
+import FarmDetailContainer from './routes/FarmDetail';
 import FarmsList from './routes/FarmsList';
 
 import settings from './config/settings'
@@ -95,9 +95,9 @@ class App extends Component {
 							/>
 
 						<Scene
-							component={FarmDetail}
+							component={FarmDetailContainer}
 							hideNavBar={false}
-							key="FarmDetail"
+							key="FarmDetailContainer"
 							title="Détails de la ferme"
 							/>
 					</Scene>

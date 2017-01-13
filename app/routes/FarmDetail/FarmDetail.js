@@ -1,45 +1,49 @@
-import React, { Component } from 'react'
-import {
-	Text,
-	View,
-} from 'react-native'
+import React from 'react';
+import {Text, TouchableOpacity, View} from 'react-native';
 
 import styles from './styles'
 
-class FarmDetail extends Component {
-	render() {
-		return (
-			<View style={styles.mainContainer}>
-				<Text>
-					Id: {this.props.id}
-				</Text>
+const FarmDetail = (props) => {
+	return (
+		<View style={styles.mainContainer}>
+			<Text>
+				Id: {props.id}
+			</Text>
 
-				<Text>
-					Nom: {this.props.name}
-				</Text>
+			<Text>
+				Nom: {props.name}
+			</Text>
 
-				<Text>
-					Id propriétaire: {this.props.ownerId}
-				</Text>
+			<Text>
+				Id propriétaire: {props.ownerId}
+			</Text>
 
-				<Text>
-					Adresse: {this.props.address}
-				</Text>
+			<Text>
+				Adresse: {props.address}
+			</Text>
 
-				<Text>
-					Site web: {this.props.website}
-				</Text>
+			<Text>
+				Site web: {props.website}
+			</Text>
 
-				<Text>
-					Téléphone: {this.props.phone}
-				</Text>
+			<Text>
+				Téléphone: {props.phone}
+			</Text>
 
-				<Text>
-					Mail: {this.props.email}
+			<Text>
+				Mail: {props.email}
+			</Text>
+
+			<TouchableOpacity
+				onPress={props.toggleSubscriptionStatus}
+				style={styles.buttonWrapper}
+				>
+				<Text style={styles.buttonText}>
+					{props.isSubscribed ? 'Me désabonner' : 'M\'abonner'}
 				</Text>
-			</View>
-		)
-	}
+			</TouchableOpacity>
+		</View>
+	)
 }
 
 FarmDetail.propTypes = {
@@ -49,6 +53,7 @@ FarmDetail.propTypes = {
 	name: React.PropTypes.string,
 	ownerId: React.PropTypes.number,
 	phone: React.PropTypes.string,
+	toggleSubscriptionStatus: React.PropTypes.func,
 	website: React.PropTypes.string,
 }
 
