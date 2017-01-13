@@ -1,38 +1,57 @@
 import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 
 import styles from './styles'
 
 const FarmDetail = (props) => {
 	return (
 		<View style={styles.mainContainer}>
-			<Text>
-				Id: {props.id}
+			<View style={styles.logoContainer}>
+				<Image
+					source={require('../../images/farm.png')}
+					style={styles.logo}
+					/>
+			</View>
+
+			<Text style={styles.name}>
+				{props.name}
 			</Text>
 
-			<Text>
-				Nom: {props.name}
-			</Text>
+			<View style={styles.subtitleContainer}>
+				<View style={styles.iconContainer}>
+					<Image
+						source={require('../../images/farm.png')}
+						style={styles.icon}
+						/>
+				</View>
+				<Text style={styles.subtitle}>
+					{props.address}
+				</Text>
+			</View>
 
-			<Text>
-				Id propriétaire: {props.ownerId}
-			</Text>
+			<View style={styles.subtitleContainer}>
+				<View style={styles.iconContainer}>
+					<Image
+						source={require('../../images/phone.png')}
+						style={styles.icon}
+						/>
+				</View>
+				<Text style={styles.subtitle}>
+					{props.phone}
+				</Text>
+			</View>
 
-			<Text>
-				Adresse: {props.address}
-			</Text>
-
-			<Text>
-				Site web: {props.website}
-			</Text>
-
-			<Text>
-				Téléphone: {props.phone}
-			</Text>
-
-			<Text>
-				Mail: {props.email}
-			</Text>
+			<View style={styles.subtitleContainer}>
+				<View style={styles.iconContainer}>
+					<Image
+						source={require('../../images/farm.png')}
+						style={styles.icon}
+						/>
+				</View>
+				<Text style={styles.subtitle}>
+					{props.website}
+				</Text>
+			</View>
 
 			<TouchableOpacity
 				onPress={props.toggleSubscriptionStatus}
@@ -48,10 +67,7 @@ const FarmDetail = (props) => {
 
 FarmDetail.propTypes = {
 	address: React.PropTypes.string,
-	email: React.PropTypes.string,
-	id: React.PropTypes.number,
 	name: React.PropTypes.string,
-	ownerId: React.PropTypes.number,
 	phone: React.PropTypes.string,
 	toggleSubscriptionStatus: React.PropTypes.func,
 	website: React.PropTypes.string,
