@@ -13,7 +13,7 @@ class FarmDetailContainer extends Component {
 
 	toggleSubscriptionStatus(){
 		AsyncStorage.getItem(settings.keys.ID_TOKEN).then((idToken) => {
-			fetch(settings.urls.FARMS_URL + (this.state.isSubscribed ? 'unsubscribe' : 'subscribe') + '/' + this.props.id, {
+			fetch((this.state.isSubscribed ? settings.urls.FARMS_UNSUBSCRIBE_URL : settings.urls.FARMS_SUBSCRIBE_URL) + this.props.id, {
 				method: "POST",
 				headers: {
 					'Authorization': idToken
