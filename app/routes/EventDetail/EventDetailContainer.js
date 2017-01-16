@@ -8,8 +8,7 @@ import EventDetail from './EventDetail.js';
 class EventDetailContainer extends Component {
 	constructor(props){
 		super();
-		// TODO: get the isPinned from the server once the route returns it
-		this.state = {isPinned: false};
+		this.state = {isPinned: props.pinned};
 	}
 
 	togglePinStatus(){
