@@ -5,8 +5,11 @@ import {
 	ListView,
 	View
 } from 'react-native';
+import {Actions, ActionConst} from 'react-native-router-flux';
 
 import settings from '../../config/settings.js'
+import apiUtils from '../../config/apiUtils.js'
+
 import styles from './styles';
 
 import EventContainer from '../../components/Event'
@@ -24,14 +27,24 @@ class EventsList extends Component {
 		this.getEvents();
 	}
 
+	async userLogout() {
+    try {
+      await AsyncStorage.removeItem(settings.keys.ID_TOKEN);
+      Actions.Authentication({type: ActionConst.REPLACE});
+    } catch (error) {
+      console.log('AsyncStorage error: ' + error.message);
+    }
+  }
+
 	getEvents() {
 		AsyncStorage.getItem(settings.keys.ID_TOKEN).then((idToken) => {
 			fetch(settings.urls.EVENTS_URL, {
 				method: "GET",
 				headers: {
-					'Authorization': idToken
+					'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo4MCwidXNlcl90eXBlIjoidXNlciIsImlhdCI6MTQ4NDIzMjY2NSwibmJmIjoxNDg0MjMyNjY1LCJleHAiOjE0ODQzMTkwNjUsImlzcyI6IjE0Ny4yNTAuODQuMjUwIn0.vHkTXnbHiTXOkcBzgvvd7goLjTNkScg_eCdzEWlRGhs'
 				}
 			})
+			.then(apiUtils.checkStatus)
 			.then((response) => response.json())
 			.then((responseJson) => {
 				const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -41,7 +54,8 @@ class EventsList extends Component {
 				})
 			})
 			.catch((error) => {
-				console.error(error);
+				// console.log(error);
+				// this.userLogout();
 			})
 		})
 	}
