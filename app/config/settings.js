@@ -11,6 +11,11 @@ const settings = {
 		FARMS_SUBSCRIBE_URL: 'http://147.250.84.250:3001/radisaclay/public/api/farms/subscribe/',
 		FARMS_UNSUBSCRIBE_URL: 'http://147.250.84.250:3001/radisaclay/public/api/farms/unsubscribe/',
 	},
+	eventsFlowEnum: {
+		FARM_FLOW: 1,
+		PRODUCT_FLOW: 2,
+		SUBSCRIBMENT_FLOW: 3,
+	},
 }
 
 export default settings

@@ -5,7 +5,7 @@ import {Router, Scene, TabBar} from 'react-native-router-flux';
 import AccountDisplay from './routes/AccountDisplay';
 import Authentication from './routes/Authentication';
 import EventDetailContainer from './routes/EventDetail';
-import EventsList from './routes/EventsList';
+import EventsListContainer from './routes/EventsList';
 import FarmDetailContainer from './routes/FarmDetail';
 import FarmsList from './routes/FarmsList';
 
@@ -72,11 +72,11 @@ class App extends Component {
 								/>
 
 							<Scene
-								component={EventsList}
+								component={EventsListContainer}
 								icon={() => {return (<Image source={require('./images/farm.png')} />)}}
 								initial={true}
 								key="EventsList"
-								title="Mon flux"
+								title="Mes abonnements"
 								/>
 
 							<Scene
