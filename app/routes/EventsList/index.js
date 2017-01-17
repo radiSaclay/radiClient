@@ -1,3 +1,3 @@
-import EventsList from './EventsList';
+import EventsListContainer from './EventsListContainer';
 
-export default EventsList;
+export default EventsListContainer;
