@@ -23,6 +23,9 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		flex: 0.2
 	},
+	informationContainer: {
+		alignItems: 'center',
+	},
 	logo: {
 		borderRadius: 50,
 		height: 100,
@@ -34,7 +37,6 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	mainContainer: {
-		alignItems: 'center',
 		flex: 1,
 		top: metrics.navBarHeight,
 	},
