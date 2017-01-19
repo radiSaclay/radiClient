@@ -1,42 +1,42 @@
 import React, { Component } from 'react';
-import { ActivityIndicator,	AsyncStorage } from 'react-native';
+import { ActivityIndicator, AsyncStorage } from 'react-native';
 
 import settings from '../../config/settings';
 
-import EventsList from './EventsList';
+import ProductsList from './ProductsList';
 
-class EventsListContainer extends Component {
+class ProductsListContainer extends Component {
 
 	constructor() {
-		super();
+		super()
 		this.state = {
-			eventsList: null,
+			productsList: null,
 			isLoaded: false,
-		};
+		}
 	}
 
 	componentWillMount(){
-		this.getEventsList();
+		this.getProductsList()
 	}
 
-	getEventsList() {
+	getProductsList() {
 		AsyncStorage.getItem(settings.keys.ID_TOKEN)
 		.then((idToken) => {
-			fetch(settings.urls.EVENTS_URL, {
+			fetch(settings.urls.PRODUCTS_URL, {
 				method: "GET",
 				headers: {
 					'Authorization': idToken
 				}
 			})
 			.then((response) => response.json())
-			.then((eventsList) => {
+			.then((productsList) => {
 				this.setState({
-					eventsList: eventsList,
-					isLoaded: true
+					productsList: productsList,
+					isLoaded: true,
 				})
 			})
 			.catch((error) => {
-				console.error(error);
+				console.error(error)
 			})
 		})
 	}
@@ -44,7 +44,7 @@ class EventsListContainer extends Component {
 	render() {
 		if (this.state.isLoaded) {
 			return (
-				<EventsList	eventsList={this.state.eventsList} />
+				<ProductsList productsList={this.state.productsList} />
 			)
 		} else {
 			return (
@@ -54,4 +54,4 @@ class EventsListContainer extends Component {
 	}
 }
 
-export default EventsListContainer
+export default ProductsListContainer

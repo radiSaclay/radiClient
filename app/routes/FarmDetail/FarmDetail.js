@@ -68,15 +68,16 @@ const FarmDetail = (props) => {
 					</TouchableOpacity>
 				</View>
 
-				<ScrollableTabView renderTabBar={() => <DefaultTabBar />}>
-					<View tabLabel='Évènements'>
-						<EventsListContainer/>
-					</View>
-					<ScrollView tabLabel='Produits'>
-						<Text>Voici mes produits</Text>
-					</ScrollView>
-				</ScrollableTabView>
-
+				<View>
+					<ScrollableTabView renderTabBar={() => <DefaultTabBar />} >
+						<View tabLabel='Évènements'>
+							<EventsListContainer />
+						</View>
+						<ScrollView tabLabel='Produits'>
+							<Text>Voici mes produits</Text>
+						</ScrollView>
+					</ScrollableTabView>
+				</View>
 			</ScrollView>
 		</View>
 	)

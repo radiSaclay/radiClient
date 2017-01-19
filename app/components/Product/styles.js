@@ -3,11 +3,6 @@ import colors from '../../config/colors';
 import metrics from '../../config/metrics';
 
 export default styles = StyleSheet.create({
-	endDate: {
-		fontSize: 20,
-		flex: 0.3,
-		textAlign: 'right',
-	},
 	imageContainer: {
 		marginRight: metrics.baseMargin,
 	},
@@ -15,17 +10,9 @@ export default styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: 'row',
 	},
-	producer: {
-		fontSize: 20,
-		flex: 0.7
-	},
-	product: {
+	name: {
 		fontSize: 30,
 		fontWeight: 'bold'
-	},
-	subtitle:{
-		flex: 1,
-		flexDirection: 'row'
 	},
 	textContainer: {
 		flex: 1,

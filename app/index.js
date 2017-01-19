@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {ActivityIndicator, AsyncStorage, Image} from 'react-native';
-import {Router, Scene, TabBar} from 'react-native-router-flux';
+import React, { Component } from 'react';
+import { ActivityIndicator, AsyncStorage, Image } from 'react-native';
+import { Router, Scene, TabBar } from 'react-native-router-flux';
 
 import AccountDisplay from './routes/AccountDisplay';
 import Authentication from './routes/Authentication';
@@ -8,8 +8,9 @@ import EventDetailContainer from './routes/EventDetail';
 import EventsListContainer from './routes/EventsList';
 import FarmDetailContainer from './routes/FarmDetail';
 import FarmsList from './routes/FarmsList';
+import ProductsListContainer from './routes/ProductsList';
 
-import settings from './config/settings'
+import settings from './config/settings';
 import styles from './styles.js';
 
 class App extends Component {
@@ -77,6 +78,13 @@ class App extends Component {
 								initial={true}
 								key="EventsList"
 								title="Mes abonnements"
+								/>
+
+							<Scene
+								component={ProductsListContainer}
+								icon={() => {return (<Image source={require('./images/farm.png')} />)}}
+								key="ProductsList"
+								title="Les produits du plateau"
 								/>
 
 							<Scene
