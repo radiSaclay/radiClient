@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, AsyncStorage, Image } from 'react-native';
+import { ActivityIndicator, AsyncStorage, Text } from 'react-native';
 import { Router, Scene, TabBar } from 'react-native-router-flux';
 
 import AccountDisplay from './routes/AccountDisplay';
 import Authentication from './routes/Authentication';
 import EventDetailContainer from './routes/EventDetail';
 import EventsListContainer from './routes/EventsList';
+import NewsContainer from './routes/News';
 import FarmDetailContainer from './routes/FarmDetail';
 import FarmsList from './routes/FarmsList';
 import ProductsListContainer from './routes/ProductsList';
@@ -65,34 +66,43 @@ class App extends Component {
 							tabBarStyle={styles.tabBar}
 							tabs={true}
 							>
+
 							<Scene
-								component={AccountDisplay}
-								icon={() => {return (<Image source={require('./images/user.png')} />)}}
-								key="AccountDisplay"
-								title="Mon compte"
+								component={NewsContainer}
+								icon={() => {return (<Text>Actualités</Text>)}}
+								initial={true}
+								key="News"
+								title="Actualités"
 								/>
 
 							<Scene
 								component={EventsListContainer}
-								icon={() => {return (<Image source={require('./images/farm.png')} />)}}
-								initial={true}
+								icon={() => {return (<Text>Events</Text>)}}
 								key="EventsList"
 								title="Mes abonnements"
 								/>
 
 							<Scene
 								component={ProductsListContainer}
-								icon={() => {return (<Image source={require('./images/farm.png')} />)}}
+								icon={() => {return (<Text>Produits</Text>)}}
 								key="ProductsList"
 								title="Les produits du plateau"
 								/>
 
 							<Scene
 								component={FarmsList}
-								icon={() => {return (<Image source={require('./images/farm.png')} />)}}
+								icon={() => {return (<Text>Fermes</Text>)}}
 								key="FarmsList"
 								title="Les fermes du plateau"
 								/>
+
+							<Scene
+								component={AccountDisplay}
+								icon={() => {return (<Text>Profile</Text>)}}
+								key="AccountDisplay"
+								title="Mon compte"
+								/>
+
 						</Scene>
 
 						<Scene
