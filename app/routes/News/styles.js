@@ -8,9 +8,25 @@ export default styles = StyleSheet.create({
 		paddingBottom: metrics.navBarHeight,
 		paddingTop: metrics.navBarHeight
 	},
-	separator: {
-		flex: 1,
-		height: StyleSheet.hairlineWidth,
-		backgroundColor: colors.greyLight,
-  },
+	headerButton: {
+		color: colors.white,
+		fontSize: 20,
+		fontWeight: 'bold',
+	},
+	headerContainer:{
+		backgroundColor: colors.coral,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		padding: metrics.basePadding,
+	},
+	headerTitle: {
+		color: colors.white,
+		fontSize: 20,
+		fontWeight: 'bold',
+	},
+	newsContainer: {
+		borderColor: colors.coral,
+		borderWidth: 1,
+		margin: metrics.baseMargin,
+	},
 });
