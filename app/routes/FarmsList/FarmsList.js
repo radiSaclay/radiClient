@@ -19,7 +19,7 @@ class FarmsList extends Component {
 		}
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		this.getFarmsList()
 	}
 

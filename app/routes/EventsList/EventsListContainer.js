@@ -15,7 +15,7 @@ class EventsListContainer extends Component {
 		};
 	}
 
-	componentWillMount(){
+	componentDidMount(){
 		this.getEventsList();
 	}
 

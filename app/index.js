@@ -24,7 +24,7 @@ class App extends Component {
 		}
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		AsyncStorage.getItem(settings.keys.ID_TOKEN).then((token) => {
 			if (token !== null){
 				this.setState({
