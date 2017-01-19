@@ -33,7 +33,7 @@ class EventContainer extends Component {
 
 				endDate={this.props.endDate}
 				producer={this.props.producer}
-				product={this.props.product}
+				title={this.props.title}
 				/>
 		);
 	}
@@ -43,7 +43,7 @@ EventContainer.propTypes = {
 	endDate: React.PropTypes.string,
 	eventId: React.PropTypes.number,
 	producer: React.PropTypes.string,
-	product: React.PropTypes.string
+	title: React.PropTypes.string
 };
 
 export default EventContainer;
