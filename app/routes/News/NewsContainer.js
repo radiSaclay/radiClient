@@ -13,6 +13,7 @@ class NewsContainer extends Component {
 		this.state = {
 			eventsList: null,
 			farmsList: null,
+			productsList: null,
 			isLoaded: false,
 		};
 	}
@@ -40,10 +41,20 @@ class NewsContainer extends Component {
 				})
 				.then((response) => response.json())
 				.then((farmsList) => {
-					this.setState({
-						eventsList: eventsList.slice(0,3),
-						farmsList: farmsList.slice(0,3),
-						isLoaded: true
+					fetch(settings.urls.PRODUCTS_URL, {
+						method: "GET",
+						headers: {
+							'Authorization': idToken
+						}
+					})
+					.then((response) => response.json())
+					.then((productsList) => {
+						this.setState({
+							eventsList: eventsList.slice(0,3),
+							farmsList: farmsList.slice(0,3),
+							productsList: productsList.slice(0,3),
+							isLoaded: true
+						})
 					})
 				})
 			})
@@ -61,15 +72,21 @@ class NewsContainer extends Component {
 		Actions.FarmsList()
 	}
 
+	showProductsList() {
+		Actions.ProductsList()
+	}
+
 	render() {
 		if (this.state.isLoaded) {
 			return(
 				<News
 					showEventsList = {this.showEventsList}
 					showFarmsList = {this.showFarmsList}
+					showProductsList = {this.showProductsList}
 
 					eventsList = {this.state.eventsList}
 					farmsList = {this.state.farmsList}
+					productsList = {this.state.productsList}
 					/>
 			)
 		} else {

@@ -5,6 +5,7 @@ import styles from './styles'
 
 import EventContainer from '../../components/Event';
 import FarmContainer from '../../components/Farm';
+import ProductContainer from '../../components/Product';
 
 var createEventRow = (event) =>
 	<EventContainer
@@ -21,6 +22,15 @@ var createFarmRow = (farm) =>
 		id={farm.id}
 		key={farm.id}
 		name={farm.name}
+		/>
+
+	var createProductRow = (product) =>
+	<ProductContainer
+		farms={product.farms}
+		id={product.id}
+		key={product.id}
+		name={product.name}
+		subscribed={product.subscribed}
 		/>
 
 const News = (props) => {
@@ -62,6 +72,25 @@ const News = (props) => {
 						{props.farmsList.map(createFarmRow)}
 					</ScrollView>
 				</View>
+
+				<View style={styles.newsContainer}>
+					<View style={styles.headerContainer}>
+						<Text style={styles.headerTitle}>
+							Les nouveaux produits
+						</Text>
+						<TouchableOpacity
+							onPress={props.showProductsList}
+							>
+							<Text style={styles.headerButton} >
+								>
+							</Text>
+						</TouchableOpacity>
+					</View>
+					<ScrollView style={{padding: 10}}>
+						{props.farmsList.map(createProductRow)}
+					</ScrollView>
+				</View>
+
 			</ScrollView>
 		</View>
 	)
