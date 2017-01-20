@@ -10,10 +10,8 @@ class ProductsList extends Component {
 	renderRow(rowData) {
 		return (
 			<ProductContainer
-				farms={rowData.farms}
 				id={rowData.id}
 				name={rowData.name}
-				subscribed={rowData.subscribed}
 				/>
 		)
 	}

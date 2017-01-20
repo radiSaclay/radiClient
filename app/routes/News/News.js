@@ -26,11 +26,9 @@ var createFarmRow = (farm) =>
 
 	var createProductRow = (product) =>
 	<ProductContainer
-		farms={product.farms}
 		id={product.id}
 		key={product.id}
 		name={product.name}
-		subscribed={product.subscribed}
 		/>
 
 const News = (props) => {

@@ -27,7 +27,6 @@ const Product = (props) => {
 }
 
 Product.propTypes = {
-	farms: React.PropTypes.array,
 	name: React.PropTypes.string,
 }
 
