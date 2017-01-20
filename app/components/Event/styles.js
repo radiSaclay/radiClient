@@ -19,15 +19,15 @@ export default styles = StyleSheet.create({
 		fontSize: 20,
 		flex: 0.7
 	},
-	product: {
-		fontSize: 30,
-		fontWeight: 'bold'
-	},
 	subtitle:{
 		flex: 1,
 		flexDirection: 'row'
 	},
 	textContainer: {
 		flex: 1,
+	},
+	title: {
+		fontSize: 20,
+		fontWeight: 'bold'
 	},
 });

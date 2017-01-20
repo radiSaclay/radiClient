@@ -19,8 +19,8 @@ const Event = (props) => {
 				</View>
 
 				<View style={styles.textContainer}>
-					<Text style={styles.product}>
-						{props.product}
+					<Text style={styles.title}>
+						{props.title}
 					</Text>
 
 					<View style={styles.subtitle}>

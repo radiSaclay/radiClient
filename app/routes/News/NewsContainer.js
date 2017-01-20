@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { ActivityIndicator,	AsyncStorage } from 'react-native';
+import { AsyncStorage, ActivityIndicator } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 import settings from '../../config/settings';
 
-import EventsList from './EventsList';
+import News from './News.js'
 
-class EventsListContainer extends Component {
+class NewsContainer extends Component {
 
 	constructor() {
 		super();
@@ -31,7 +32,8 @@ class EventsListContainer extends Component {
 			.then((response) => response.json())
 			.then((eventsList) => {
 				this.setState({
-					eventsList: eventsList,
+					// TODO: find a way to filter the last posted events
+					eventsList: eventsList.slice(0,3),
 					isLoaded: true
 				})
 			})
@@ -41,10 +43,18 @@ class EventsListContainer extends Component {
 		})
 	}
 
+	showEventsList() {
+		Actions.EventsList()
+	}
+
 	render() {
 		if (this.state.isLoaded) {
-			return (
-				<EventsList	eventsList={this.state.eventsList} />
+			return(
+				<News
+					showEventsList = {this.showEventsList}
+
+					eventsList = {this.state.eventsList}
+					/>
 			)
 		} else {
 			return (
@@ -54,4 +64,4 @@ class EventsListContainer extends Component {
 	}
 }
 
-export default EventsListContainer
+export default NewsContainer

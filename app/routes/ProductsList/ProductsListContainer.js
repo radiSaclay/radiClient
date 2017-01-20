@@ -15,7 +15,7 @@ class ProductsListContainer extends Component {
 		}
 	}
 
-	componentWillMount(){
+	componentDidMount(){
 		this.getProductsList()
 	}
 

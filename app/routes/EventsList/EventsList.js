@@ -14,7 +14,7 @@ class EventsList extends Component {
 				endDate={rowData.endAt}
 				eventId={rowData.id}
 				producer={rowData.producer}
-				product={rowData.description}
+				title={rowData.title}
 				/>
 		)
 	}
