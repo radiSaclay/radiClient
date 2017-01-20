@@ -1,46 +1,11 @@
 import React, { Component } from 'react'
-import {
-	ActivityIndicator,
-	ListView,
-	View,
-} from 'react-native'
+import { ListView, View } from 'react-native'
 
-import settings from '../../config/settings'
 import styles from './styles'
 
 import FarmContainer from '../../components/Farm'
 
 class FarmsList extends Component {
-	constructor() {
-		super();
-		this.state = {
-			dataSource: null,
-			isLoaded: false,
-		}
-	}
-
-	componentDidMount() {
-		this.getFarmsList()
-	}
-
-	/*
-		Gets the list of the farms around the user.
-	*/
-	// TODO: load less information about farms 
-	getFarmsList() {
-		return fetch(settings.urls.FARMS_URL)
-		.then((response) => response.json())
-		.then((responseJson) => {
-			const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
-			this.setState({
-				dataSource: ds.cloneWithRows(responseJson),
-				isLoaded: true,
-			})
-		})
-		.catch((error) => {
-			console.error(error)
-		})
-	}
 
 	renderRow(rowData) {
 		return (
@@ -53,22 +18,22 @@ class FarmsList extends Component {
 	}
 
 	render() {
-		if (!this.state.isLoaded) {
-			return (
-				<ActivityIndicator />
-			)
-		} else {
-			return (
-				<View style = {styles.container}>
-					<ListView
-						dataSource={this.state.dataSource}
-						renderRow={this.renderRow}
-						renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
-						/>
-				</View>
-			)
-		}
+		const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+		var dataSource = ds.cloneWithRows(this.props.farmsList)
+		return (
+			<View style = {styles.container}>
+				<ListView
+					dataSource={dataSource}
+					renderRow={this.renderRow}
+					renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
+					/>
+			</View>
+		)
 	}
+}
+
+FarmsList.propTypes = {
+	farmsList: React.PropTypes.array,
 }
 
 export default FarmsList;

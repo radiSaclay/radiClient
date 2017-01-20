@@ -8,7 +8,7 @@ import EventDetailContainer from './routes/EventDetail';
 import EventsListContainer from './routes/EventsList';
 import NewsContainer from './routes/News';
 import FarmDetailContainer from './routes/FarmDetail';
-import FarmsList from './routes/FarmsList';
+import FarmsListContainer from './routes/FarmsList';
 import ProductsListContainer from './routes/ProductsList';
 
 import settings from './config/settings';
@@ -90,7 +90,7 @@ class App extends Component {
 								/>
 
 							<Scene
-								component={FarmsList}
+								component={FarmsListContainer}
 								icon={() => {return (<Text>Fermes</Text>)}}
 								key="FarmsList"
 								title="Les fermes du plateau"

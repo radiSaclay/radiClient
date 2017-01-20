@@ -1,3 +1,3 @@
-import FarmsList from './FarmsList'
+import FarmsListContainer from './FarmsListContainer'
 
-export default FarmsList
+export default FarmsListContainer
