@@ -12,15 +12,16 @@ class NewsContainer extends Component {
 		super();
 		this.state = {
 			eventsList: null,
+			farmsList: null,
 			isLoaded: false,
 		};
 	}
 
 	componentDidMount(){
-		this.getEventsList();
+		this.getAllNews();
 	}
 
-	getEventsList() {
+	getAllNews() {
 		AsyncStorage.getItem(settings.keys.ID_TOKEN)
 		.then((idToken) => {
 			fetch(settings.urls.EVENTS_URL, {
@@ -31,10 +32,19 @@ class NewsContainer extends Component {
 			})
 			.then((response) => response.json())
 			.then((eventsList) => {
-				this.setState({
-					// TODO: find a way to filter the last posted events
-					eventsList: eventsList.slice(0,3),
-					isLoaded: true
+				fetch(settings.urls.FARMS_URL, {
+					method: "GET",
+					headers: {
+						'Authorization': idToken
+					}
+				})
+				.then((response) => response.json())
+				.then((farmsList) => {
+					this.setState({
+						eventsList: eventsList.slice(0,3),
+						farmsList: farmsList.slice(0,3),
+						isLoaded: true
+					})
 				})
 			})
 			.catch((error) => {
@@ -47,13 +57,19 @@ class NewsContainer extends Component {
 		Actions.EventsList()
 	}
 
+	showFarmsList() {
+		Actions.FarmsList()
+	}
+
 	render() {
 		if (this.state.isLoaded) {
 			return(
 				<News
 					showEventsList = {this.showEventsList}
+					showFarmsList = {this.showFarmsList}
 
 					eventsList = {this.state.eventsList}
+					farmsList = {this.state.farmsList}
 					/>
 			)
 		} else {
