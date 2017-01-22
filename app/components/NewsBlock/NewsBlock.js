@@ -3,6 +3,12 @@ import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles.js';
 
+/*	NewsBlock receiving props:
+	- createNewsRow: function
+	- headerTitle : string
+	- newsList : array
+	- showCompleteList : function
+*/
 const NewsBlock = (props) => {
 	return (
 		<View style={styles.newsContainer}>

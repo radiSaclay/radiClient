@@ -8,6 +8,11 @@ import {
 
 import styles from './styles'
 
+/*	Farm receiving props:
+	- address : string
+	- getFarmDetail: function
+	- name : string
+*/
 const Farm = (props) => {
 	return (
 		<TouchableOpacity onPress={props.getFarmDetail}>
