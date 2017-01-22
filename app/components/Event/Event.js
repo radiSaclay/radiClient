@@ -8,6 +8,12 @@ import {
 
 import styles from './styles';
 
+/*	Event receiving props:
+	- endDate : string
+	- getEventDetail: function
+	- producer : string
+	- title : string
+*/
 const Event = (props) => {
 	return (
 		<TouchableOpacity onPress={props.getEventDetail}>

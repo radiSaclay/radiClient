@@ -9,7 +9,6 @@ class ProductContainer extends Component {
 	render() {
 		return (
 			<Product
-				farms={this.props.farms}
 				name={this.props.name}
 				/>
 		)
@@ -17,10 +16,8 @@ class ProductContainer extends Component {
 }
 
 ProductContainer.propTypes = {
-	farms: React.PropTypes.array,
 	id: React.PropTypes.number,
 	name: React.PropTypes.string,
-	subscribed: React.PropTypes.bool,
 }
 
 export default ProductContainer
