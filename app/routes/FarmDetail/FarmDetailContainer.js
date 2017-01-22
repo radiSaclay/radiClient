@@ -40,6 +40,7 @@ class FarmDetailContainer extends Component {
 				name={this.props.name}
 				ownerId={this.props.ownerId}
 				phone={this.props.phone}
+				products={this.props.products}
 				website={this.props.website}
 				/>
 		)

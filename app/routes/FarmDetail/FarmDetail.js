@@ -4,7 +4,9 @@ import ScrollableTabView, {DefaultTabBar} from 'react-native-scrollable-tab-view
 
 import styles from './styles';
 
+// TODO: get the events related to this farm once the root is updated
 import EventsListContainer from '../EventsList';
+import ProductsList from '../ProductsList/ProductsList.js'
 
 const FarmDetail = (props) => {
 	return (
@@ -74,7 +76,7 @@ const FarmDetail = (props) => {
 							<EventsListContainer />
 						</View>
 						<ScrollView tabLabel='Produits'>
-							<Text>Voici mes produits</Text>
+							<ProductsList productsList={props.products} />
 						</ScrollView>
 					</ScrollableTabView>
 				</View>
