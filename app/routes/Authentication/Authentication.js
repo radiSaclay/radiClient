@@ -56,7 +56,9 @@ class Authentication extends Component {
 					)
 				}
 			})
-			.done();
+			.catch((error) => {
+				console.error(error);
+			})
 		}
 	}
 
