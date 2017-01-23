@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { AsyncStorage } from 'react-native';
 
+import promises from '../../config/promises.js'
 import settings from '../../config/settings.js'
 
 import EventDetail from './EventDetail.js';
@@ -13,12 +14,8 @@ class EventDetailContainer extends Component {
 
 	togglePinStatus(){
 		AsyncStorage.getItem(settings.keys.ID_TOKEN).then((idToken) => {
-			fetch((this.state.isPinned ? settings.urls.EVENTS_UNPIN_URL : settings.urls.EVENTS_PIN_URL) + this.props.id, {
-				method: "POST",
-				headers: {
-					'Authorization': idToken
-				}
-			})
+			let url = (this.state.isPinned ? settings.urls.EVENTS_UNPIN_URL : settings.urls.EVENTS_PIN_URL) + this.props.id
+			promises.postAuthorized(url, idToken)
 			.then((response) => {
 				this.setState({isPinned: !this.state.isPinned});
 			})

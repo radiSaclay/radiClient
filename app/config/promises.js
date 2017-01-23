@@ -21,6 +21,18 @@ const promises = {
 		})
 		.then(apiUtils.checkStatus)
 		.then(apiUtils.getJson)
+	},
+	postAuthorized: function(url, idToken, body) {
+		return fetch(url, {
+			method: "POST",
+			headers: {
+				'Authorization': idToken,
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(body)
+		})
+		.then(apiUtils.checkStatus)
+		// TODO: add getJson promises once the route doesn't return an empty response
 	}
 };
 export default promises
