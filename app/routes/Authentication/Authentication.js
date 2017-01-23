@@ -15,7 +15,7 @@ import {
 
 import styles from './styles';
 
-import apiUtils from '../../config/apiUtils';
+import promises from '../../config/promises';
 import settings from '../../config/settings';
 
 class Authentication extends Component {
@@ -37,19 +37,13 @@ class Authentication extends Component {
 
 	authenticateUser(route){
 		if (this.state.email && this.state.password){
-			fetch(settings.urls.AUTH_URL + route, {
-				method: "POST",
-				headers: {
-					'Accept': 'application/json',
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
+			promises.post(
+				settings.urls.AUTH_URL + route,
+				{
 					email: this.state.email,
 					password: this.state.password,
-				})
-			})
-			.then(apiUtils.checkStatus)
-			.then(apiUtils.getJson)
+				}
+			)
 			.then((responseData) => {
 				if (responseData.validated){
 					this.onValueChange(settings.keys.ID_TOKEN, responseData.token),
