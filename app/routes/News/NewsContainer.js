@@ -20,64 +20,58 @@ class NewsContainer extends Component {
 	}
 
 	componentDidMount(){
-		Promise.all([
-			this.eventsPromise(),
-			this.farmsPromise(),
-			this.productsPromise()
-		])
-		.then((response) => {
-			this.setState({
-				eventsList: response[0].slice(0,3),
-				farmsList: response[1].slice(0,3),
-				productsList: response[2].slice(0,3),
-				isLoaded: true
-			});
+		AsyncStorage.getItem(settings.keys.ID_TOKEN)
+		.then((idToken) => {
+			Promise.all([
+				this.eventsPromise(idToken),
+				this.farmsPromise(idToken),
+				this.productsPromise(idToken)
+			])
+			.then((response) => {
+				this.setState({
+					eventsList: response[0].slice(0,3),
+					farmsList: response[1].slice(0,3),
+					productsList: response[2].slice(0,3),
+					isLoaded: true
+				});
+			})
 		})
 		.catch((error) => {
 			console.error(error);
 		})
 	}
 
-	eventsPromise() {
-		return AsyncStorage.getItem(settings.keys.ID_TOKEN)
-		.then((idToken) => {
-			return fetch(settings.urls.EVENTS_URL, {
-				method: "GET",
-				headers: {
-					'Authorization': idToken
-				}
-			})
-			.then(apiUtils.checkStatus)
-			.then(apiUtils.getJson)
-		});
-	}
-
-	farmsPromise() {
-		return AsyncStorage.getItem(settings.keys.ID_TOKEN)
-		.then((idToken) => {
-			return fetch(settings.urls.FARMS_URL, {
-				method: "GET",
-				headers: {
-					'Authorization': idToken
-				}
-			})
-			.then(apiUtils.checkStatus)
-			.then(apiUtils.getJson)
-		});
-	}
-
-	productsPromise() {
-		return AsyncStorage.getItem(settings.keys.ID_TOKEN)
-		.then((idToken) => {
-			return fetch(settings.urls.PRODUCTS_URL, {
-				method: "GET",
-				headers: {
-					'Authorization': idToken
-				}
-			})
-			.then(apiUtils.checkStatus)
-			.then(apiUtils.getJson)
+	eventsPromise(idToken) {
+		return fetch(settings.urls.EVENTS_URL, {
+			method: "GET",
+			headers: {
+				'Authorization': idToken
+			}
 		})
+		.then(apiUtils.checkStatus)
+		.then(apiUtils.getJson)
+	}
+
+	farmsPromise(idToken) {
+		return fetch(settings.urls.FARMS_URL, {
+			method: "GET",
+			headers: {
+				'Authorization': idToken
+			}
+		})
+		.then(apiUtils.checkStatus)
+		.then(apiUtils.getJson)
+	}
+
+	productsPromise(idToken) {
+		return fetch(settings.urls.PRODUCTS_URL, {
+			method: "GET",
+			headers: {
+				'Authorization': idToken
+			}
+		})
+		.then(apiUtils.checkStatus)
+		.then(apiUtils.getJson)
 	}
 
 	showEventsList() {
