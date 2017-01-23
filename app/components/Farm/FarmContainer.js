@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { AsyncStorage } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 
+import apiUtils from '../../config/apiUtils'
 import settings from '../../config/settings'
 
 import Farm from './Farm'
@@ -16,7 +17,8 @@ class FarmContainer extends Component {
 					'Authorization': idToken
 				}
 			})
-			.then((response) => response.json())
+			.then(apiUtils.checkStatus)
+			.then(apiUtils.getJson)
 			.then((farmDetail) => {
 				Actions.FarmDetailContainer(farmDetail)
 			})

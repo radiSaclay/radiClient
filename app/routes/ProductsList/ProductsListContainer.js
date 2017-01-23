@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, AsyncStorage } from 'react-native';
 
+import apiUtils from '../../config/apiUtils';
 import settings from '../../config/settings';
 
 import ProductsList from './ProductsList';
@@ -28,7 +29,8 @@ class ProductsListContainer extends Component {
 					'Authorization': idToken
 				}
 			})
-			.then((response) => response.json())
+			.then(apiUtils.checkStatus)
+			.then(apiUtils.getJson)
 			.then((productsList) => {
 				this.setState({
 					productsList: productsList,

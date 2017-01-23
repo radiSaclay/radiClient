@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { ActivityIndicator, AsyncStorage } from 'react-native'
 
+import apiUtils from '../../config/apiUtils'
 import settings from '../../config/settings'
 
 import FarmsList from './FarmsList'
@@ -31,7 +32,8 @@ class FarmsListContainer extends Component {
 					'Authorization': idToken
 				}
 			})
-			.then((response) => response.json())
+			.then(apiUtils.checkStatus)
+			.then(apiUtils.getJson)
 			.then((farmsList) => {
 				this.setState({
 					farmsList: farmsList,

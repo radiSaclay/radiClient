@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AsyncStorage, ActivityIndicator } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
+import apiUtils from '../../config/apiUtils';
 import settings from '../../config/settings';
 
 import News from './News.js'
@@ -37,18 +38,6 @@ class NewsContainer extends Component {
 		})
 	}
 
-	checkStatus(response) {
-	  if (response.status >= 200 && response.status < 300) {
-	    return Promise.resolve(response)
-	  } else {
-	    return Promise.reject(new Error(response.statusText))
-	  }
-	}
-
-	getJson(response) {
-	  return response.json()
-	}
-
 	eventsPromise() {
 		return AsyncStorage.getItem(settings.keys.ID_TOKEN)
 		.then((idToken) => {
@@ -58,8 +47,8 @@ class NewsContainer extends Component {
 					'Authorization': idToken
 				}
 			})
-			.then(this.checkStatus)
-			.then(this.getJson);
+			.then(apiUtils.checkStatus)
+			.then(apiUtils.getJson)
 		});
 	}
 
@@ -72,8 +61,8 @@ class NewsContainer extends Component {
 					'Authorization': idToken
 				}
 			})
-			.then(this.checkStatus)
-			.then(this.getJson);
+			.then(apiUtils.checkStatus)
+			.then(apiUtils.getJson)
 		});
 	}
 
@@ -86,8 +75,8 @@ class NewsContainer extends Component {
 					'Authorization': idToken
 				}
 			})
-			.then(this.checkStatus)
-			.then(this.getJson);
+			.then(apiUtils.checkStatus)
+			.then(apiUtils.getJson)
 		})
 	}
 

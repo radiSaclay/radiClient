@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ActivityIndicator,	AsyncStorage } from 'react-native';
 
+import apiUtils from '../../config/apiUtils'
 import settings from '../../config/settings';
 
 import EventsList from './EventsList';
@@ -28,7 +29,8 @@ class EventsListContainer extends Component {
 					'Authorization': idToken
 				}
 			})
-			.then((response) => response.json())
+			.then(apiUtils.checkStatus)
+			.then(apiUtils.getJson)
 			.then((eventsList) => {
 				this.setState({
 					eventsList: eventsList,

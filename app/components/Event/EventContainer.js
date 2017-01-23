@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AsyncStorage } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
+import apiUtils from '../../config/apiUtils';
 import settings from '../../config/settings';
 
 import Event from './Event.js';
@@ -16,7 +17,8 @@ class EventContainer extends Component {
 					'Authorization': idToken
 				}
 			})
-			.then((response) => response.json())
+			.then(apiUtils.checkStatus)
+			.then(apiUtils.getJson)
 			.then((eventDetails) => {
 				Actions.EventDetailContainer(eventDetails)
 			})

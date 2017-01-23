@@ -14,7 +14,9 @@ import {
 } from 'react-native-router-flux';
 
 import styles from './styles';
-import settings from '../../config/settings'
+
+import apiUtils from '../../config/apiUtils';
+import settings from '../../config/settings';
 
 class Authentication extends Component {
   constructor(){
@@ -46,7 +48,8 @@ class Authentication extends Component {
           password: this.state.password,
         })
       })
-      .then((response) => response.json())
+			.then(apiUtils.checkStatus)
+			.then(apiUtils.getJson)
       .then((responseData) => {
         if (responseData.validated){
           this.onValueChange(settings.keys.ID_TOKEN, responseData.token),
