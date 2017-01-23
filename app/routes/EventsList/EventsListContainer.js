@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ActivityIndicator,	AsyncStorage } from 'react-native';
 
-import apiUtils from '../../config/apiUtils'
+import promises from '../../config/promises'
 import settings from '../../config/settings';
 
 import EventsList from './EventsList';
@@ -23,14 +23,7 @@ class EventsListContainer extends Component {
 	getEventsList() {
 		AsyncStorage.getItem(settings.keys.ID_TOKEN)
 		.then((idToken) => {
-			fetch(settings.urls.EVENTS_URL, {
-				method: "GET",
-				headers: {
-					'Authorization': idToken
-				}
-			})
-			.then(apiUtils.checkStatus)
-			.then(apiUtils.getJson)
+			promises.getAuthorized(settings.urls.EVENTS_URL, idToken)
 			.then((eventsList) => {
 				this.setState({
 					eventsList: eventsList,

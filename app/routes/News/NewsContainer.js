@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { AsyncStorage, ActivityIndicator } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
-import apiUtils from '../../config/apiUtils';
+import promises from '../../config/promises';
 import settings from '../../config/settings';
 
 import News from './News.js'
@@ -20,12 +20,16 @@ class NewsContainer extends Component {
 	}
 
 	componentDidMount(){
+		this.getNews()
+	}
+
+	getNews() {
 		AsyncStorage.getItem(settings.keys.ID_TOKEN)
 		.then((idToken) => {
 			Promise.all([
-				this.eventsPromise(idToken),
-				this.farmsPromise(idToken),
-				this.productsPromise(idToken)
+				promises.getAuthorized(settings.urls.EVENTS_URL, idToken),
+				promises.getAuthorized(settings.urls.FARMS_URL, idToken),
+				promises.getAuthorized(settings.urls.PRODUCTS_URL, idToken)
 			])
 			.then((response) => {
 				this.setState({
@@ -39,39 +43,6 @@ class NewsContainer extends Component {
 		.catch((error) => {
 			console.error(error);
 		})
-	}
-
-	eventsPromise(idToken) {
-		return fetch(settings.urls.EVENTS_URL, {
-			method: "GET",
-			headers: {
-				'Authorization': idToken
-			}
-		})
-		.then(apiUtils.checkStatus)
-		.then(apiUtils.getJson)
-	}
-
-	farmsPromise(idToken) {
-		return fetch(settings.urls.FARMS_URL, {
-			method: "GET",
-			headers: {
-				'Authorization': idToken
-			}
-		})
-		.then(apiUtils.checkStatus)
-		.then(apiUtils.getJson)
-	}
-
-	productsPromise(idToken) {
-		return fetch(settings.urls.PRODUCTS_URL, {
-			method: "GET",
-			headers: {
-				'Authorization': idToken
-			}
-		})
-		.then(apiUtils.checkStatus)
-		.then(apiUtils.getJson)
 	}
 
 	showEventsList() {
