@@ -19,48 +19,75 @@ class NewsContainer extends Component {
 	}
 
 	componentDidMount(){
-		this.getAllNews();
+		Promise.all([
+			this.eventsPromise(),
+			this.farmsPromise(),
+			this.productsPromise()
+		])
+		.then((response) => {
+			this.setState({
+				eventsList: response[0].slice(0,3),
+				farmsList: response[1].slice(0,3),
+				productsList: response[2].slice(0,3),
+				isLoaded: true
+			});
+		})
+		.catch((error) => {
+			console.error(error);
+		})
 	}
 
-	getAllNews() {
-		AsyncStorage.getItem(settings.keys.ID_TOKEN)
+	checkStatus(response) {
+	  if (response.status >= 200 && response.status < 300) {
+	    return Promise.resolve(response)
+	  } else {
+	    return Promise.reject(new Error(response.statusText))
+	  }
+	}
+
+	getJson(response) {
+	  return response.json()
+	}
+
+	eventsPromise() {
+		return AsyncStorage.getItem(settings.keys.ID_TOKEN)
 		.then((idToken) => {
-			fetch(settings.urls.EVENTS_URL, {
+			return fetch(settings.urls.EVENTS_URL, {
 				method: "GET",
 				headers: {
 					'Authorization': idToken
 				}
 			})
-			.then((response) => response.json())
-			.then((eventsList) => {
-				fetch(settings.urls.FARMS_URL, {
-					method: "GET",
-					headers: {
-						'Authorization': idToken
-					}
-				})
-				.then((response) => response.json())
-				.then((farmsList) => {
-					fetch(settings.urls.PRODUCTS_URL, {
-						method: "GET",
-						headers: {
-							'Authorization': idToken
-						}
-					})
-					.then((response) => response.json())
-					.then((productsList) => {
-						this.setState({
-							eventsList: eventsList.slice(0,3),
-							farmsList: farmsList.slice(0,3),
-							productsList: productsList.slice(0,3),
-							isLoaded: true
-						})
-					})
-				})
+			.then(this.checkStatus)
+			.then(this.getJson);
+		});
+	}
+
+	farmsPromise() {
+		return AsyncStorage.getItem(settings.keys.ID_TOKEN)
+		.then((idToken) => {
+			return fetch(settings.urls.FARMS_URL, {
+				method: "GET",
+				headers: {
+					'Authorization': idToken
+				}
 			})
-			.catch((error) => {
-				console.error(error);
+			.then(this.checkStatus)
+			.then(this.getJson);
+		});
+	}
+
+	productsPromise() {
+		return AsyncStorage.getItem(settings.keys.ID_TOKEN)
+		.then((idToken) => {
+			return fetch(settings.urls.PRODUCTS_URL, {
+				method: "GET",
+				headers: {
+					'Authorization': idToken
+				}
 			})
+			.then(this.checkStatus)
+			.then(this.getJson);
 		})
 	}
 
