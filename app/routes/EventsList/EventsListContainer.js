@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ActivityIndicator,	AsyncStorage } from 'react-native';
 
+import promises from '../../config/promises'
 import settings from '../../config/settings';
 
 import EventsList from './EventsList';
@@ -22,13 +23,7 @@ class EventsListContainer extends Component {
 	getEventsList() {
 		AsyncStorage.getItem(settings.keys.ID_TOKEN)
 		.then((idToken) => {
-			fetch(settings.urls.EVENTS_URL, {
-				method: "GET",
-				headers: {
-					'Authorization': idToken
-				}
-			})
-			.then((response) => response.json())
+			promises.getWithToken(settings.urls.EVENTS_URL, idToken)
 			.then((eventsList) => {
 				this.setState({
 					eventsList: eventsList,

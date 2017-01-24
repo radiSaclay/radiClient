@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AsyncStorage } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
+import promises from '../../config/promises';
 import settings from '../../config/settings';
 
 import Event from './Event.js';
@@ -9,14 +10,9 @@ import Event from './Event.js';
 class EventContainer extends Component {
 
 	getEventDetail() {
-		AsyncStorage.getItem(settings.keys.ID_TOKEN).then((idToken) => {
-			fetch(settings.urls.EVENTS_URL + this.props.eventId, {
-				method: "GET",
-				headers: {
-					'Authorization': idToken
-				}
-			})
-			.then((response) => response.json())
+		AsyncStorage.getItem(settings.keys.ID_TOKEN)
+		.then((idToken) => {
+			promises.getWithToken(settings.urls.EVENTS_URL + this.props.eventId, idToken)
 			.then((eventDetails) => {
 				Actions.EventDetailContainer(eventDetails)
 			})

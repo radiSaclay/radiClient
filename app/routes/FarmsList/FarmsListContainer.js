@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { ActivityIndicator, AsyncStorage } from 'react-native'
 
+import promises from '../../config/promises'
 import settings from '../../config/settings'
 
 import FarmsList from './FarmsList'
@@ -25,13 +26,7 @@ class FarmsListContainer extends Component {
 	getFarmsList() {
 		AsyncStorage.getItem(settings.keys.ID_TOKEN)
 		.then((idToken) => {
-			fetch(settings.urls.FARMS_URL, {
-				method: "GET",
-				headers: {
-					'Authorization': idToken
-				}
-			})
-			.then((response) => response.json())
+			promises.getWithToken(settings.urls.FARMS_URL, idToken)
 			.then((farmsList) => {
 				this.setState({
 					farmsList: farmsList,
