@@ -15,7 +15,7 @@ class EventDetailContainer extends Component {
 	togglePinStatus(){
 		AsyncStorage.getItem(settings.keys.ID_TOKEN).then((idToken) => {
 			let url = (this.state.isPinned ? settings.urls.EVENTS_UNPIN_URL : settings.urls.EVENTS_PIN_URL) + this.props.id
-			promises.postAuthorized(url, idToken)
+			promises.postWithToken(url, idToken)
 			.then((response) => {
 				this.setState({isPinned: !this.state.isPinned});
 			})

@@ -12,7 +12,7 @@ class EventContainer extends Component {
 	getEventDetail() {
 		AsyncStorage.getItem(settings.keys.ID_TOKEN)
 		.then((idToken) => {
-			promises.getAuthorized(settings.urls.EVENTS_URL + this.props.eventId, idToken)
+			promises.getWithToken(settings.urls.EVENTS_URL + this.props.eventId, idToken)
 			.then((eventDetails) => {
 				Actions.EventDetailContainer(eventDetails)
 			})

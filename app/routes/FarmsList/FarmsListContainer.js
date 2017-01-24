@@ -26,7 +26,7 @@ class FarmsListContainer extends Component {
 	getFarmsList() {
 		AsyncStorage.getItem(settings.keys.ID_TOKEN)
 		.then((idToken) => {
-			promises.getAuthorized(settings.urls.FARMS_URL, idToken)
+			promises.getWithToken(settings.urls.FARMS_URL, idToken)
 			.then((farmsList) => {
 				this.setState({
 					farmsList: farmsList,

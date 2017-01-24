@@ -1,7 +1,7 @@
 import apiUtils from './apiUtils'
 
 const promises = {
-	getAuthorized: function(url, idToken) {
+	getWithToken: function(url, idToken) {
 		return fetch(url, {
 			method: "GET",
 			headers: {
@@ -22,7 +22,7 @@ const promises = {
 		.then(apiUtils.checkStatus)
 		.then(apiUtils.getJson)
 	},
-	postAuthorized: function(url, idToken, body) {
+	postWithToken: function(url, idToken, body) {
 		return fetch(url, {
 			method: "POST",
 			headers: {

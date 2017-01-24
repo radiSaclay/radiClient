@@ -23,7 +23,7 @@ class EventsListContainer extends Component {
 	getEventsList() {
 		AsyncStorage.getItem(settings.keys.ID_TOKEN)
 		.then((idToken) => {
-			promises.getAuthorized(settings.urls.EVENTS_URL, idToken)
+			promises.getWithToken(settings.urls.EVENTS_URL, idToken)
 			.then((eventsList) => {
 				this.setState({
 					eventsList: eventsList,

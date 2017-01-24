@@ -23,7 +23,7 @@ class ProductsListContainer extends Component {
 	getProductsList() {
 		AsyncStorage.getItem(settings.keys.ID_TOKEN)
 		.then((idToken) => {
-			promises.getAuthorized(settings.urls.PRODUCTS_URL, idToken)
+			promises.getWithToken(settings.urls.PRODUCTS_URL, idToken)
 			.then((productsList) => {
 				this.setState({
 					productsList: productsList,

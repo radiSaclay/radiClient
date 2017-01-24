@@ -27,9 +27,9 @@ class NewsContainer extends Component {
 		AsyncStorage.getItem(settings.keys.ID_TOKEN)
 		.then((idToken) => {
 			Promise.all([
-				promises.getAuthorized(settings.urls.EVENTS_URL, idToken),
-				promises.getAuthorized(settings.urls.FARMS_URL, idToken),
-				promises.getAuthorized(settings.urls.PRODUCTS_URL, idToken)
+				promises.getWithToken(settings.urls.EVENTS_URL, idToken),
+				promises.getWithToken(settings.urls.FARMS_URL, idToken),
+				promises.getWithToken(settings.urls.PRODUCTS_URL, idToken)
 			])
 			.then((response) => {
 				this.setState({
