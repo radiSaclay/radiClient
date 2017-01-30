@@ -48,9 +48,16 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-	actions: React.PropTypes.array,
-	navigation: React.PropTypes.object,
-	title: React.PropTypes.string,
+	actions: React.PropTypes.arrayOf(
+		React.PropTypes.shape({
+			onPress: React.PropTypes.func.isRequired,
+			source: React.PropTypes.number.isRequired,
+	})),
+	navigation: React.PropTypes.shape({
+		onPress: React.PropTypes.func.isRequired,
+		source: React.PropTypes.number.isRequired,
+	}),
+	title: React.PropTypes.string.isRequired,
 }
 
 export default Header

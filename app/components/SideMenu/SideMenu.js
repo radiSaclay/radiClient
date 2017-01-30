@@ -41,7 +41,11 @@ class SideMenu extends Component {
 }
 
 SideMenu.propTypes = {
-	actions: React.PropTypes.array,
+	actions: React.PropTypes.arrayOf(
+		React.PropTypes.shape({
+			label: React.PropTypes.string.isRequired,
+			onPress: React.PropTypes.func.isRequired,
+	})),
 }
 
 export default SideMenu
