@@ -13,12 +13,10 @@ const styles = StyleSheet.create({
 		backgroundColor: colors.salmonLight,
 		borderRadius: metrics.borderRadius,
 		flexDirection: 'row',
-		flex: 1,
 		justifyContent: 'center',
 		marginBottom: metrics.baseMargin,
 	},
 	horizontalContainer: {
-		flex: 1,
 		flexDirection: 'row',
 	},
 	inputText: {
@@ -27,13 +25,11 @@ const styles = StyleSheet.create({
 		color: colors.greyLight,
 		marginBottom: metrics.baseMargin,
 		padding: metrics.basePadding,
-		flex: 1,
 	},
 	mainContainer: {
-		top: metrics.navBarHeight,
 		backgroundColor: colors.coral,
-		padding: metrics.basePadding,
 		flex: 1,
+		padding: metrics.basePadding,
 	},
 });
 
