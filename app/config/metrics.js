@@ -6,6 +6,9 @@ const metrics = {
 	borderRadius: 4,
 	baseMargin: 10,
 	basePadding: 10,
+	icons: {
+		small: 24,
+	},
 	logoHeight: 70,
 	logoWidth: 60,
 	navBarHeight: 54,

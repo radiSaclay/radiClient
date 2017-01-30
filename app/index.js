@@ -98,6 +98,7 @@ class App extends Component {
 
 							<Scene
 								component={AccountDisplay}
+								hideNavBar={true}
 								icon={() => {return (<Text>Profile</Text>)}}
 								key="AccountDisplay"
 								title="Mon compte"

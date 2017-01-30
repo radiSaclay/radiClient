@@ -1,4 +1,4 @@
-var SERVEUR_ROOT = 'http://147.250.84.250:3001/radisaclay/public/'
+var SERVEUR_ROOT = 'https://evening-meadow-38993.herokuapp.com/'
 var API_PATH = 'api/'
 
 const settings = {
