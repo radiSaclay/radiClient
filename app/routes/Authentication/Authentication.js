@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+	ActivityIndicator,
 	Alert,
 	AsyncStorage,
 	Image,
@@ -8,15 +9,14 @@ import {
 	TouchableOpacity,
 	View
 } from 'react-native';
-import {
-	ActionConst,
-	Actions,
-} from 'react-native-router-flux';
+import { ActionConst, Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux'
 
 import styles from './styles';
 
 import promises from '../../config/promises';
 import settings from '../../config/settings';
+import * as userOperations from '../../operations/userOperations'
 
 class Authentication extends Component {
 	constructor(){
@@ -24,6 +24,16 @@ class Authentication extends Component {
 		this.state = {
 			email: null,
 			password: null
+		}
+	}
+
+	// TODO:
+	// 	1- Do we still need to store the idToken in the AsyncStorage since it's already on the store?
+	// 	2 - Find a better way to fire the action transition once the authentication has been verified
+	componentWillUpdate(nextProps) {
+		if(nextProps.idToken) {
+			this.onValueChange(settings.keys.ID_TOKEN, nextProps.idToken)
+			Actions.MainTab({type: ActionConst.REPLACE})
 		}
 	}
 
@@ -35,99 +45,110 @@ class Authentication extends Component {
 		}
 	}
 
-	authenticateUser(route){
+	userLogin() {
 		if (this.state.email && this.state.password){
-			promises.post(
-				settings.urls.AUTH_URL + route,
-				{
-					email: this.state.email,
-					password: this.state.password,
-				}
-			)
-			.then((responseData) => {
-				if (responseData.validated){
-					this.onValueChange(settings.keys.ID_TOKEN, responseData.token),
-					Actions.MainTab({type: ActionConst.REPLACE})
-				}
-				else{
-					Alert.alert(
-						"Problème d'authentification",
-						responseData.msg
-					)
-				}
-			})
-			.catch((error) => {
-				console.error(error);
-			})
+			this.props.userLogin(this.state.email, this.state.password)
 		}
 	}
 
-	userLogin() {
-		this.authenticateUser('login');
-	}
-
 	userSignup() {
-		this.authenticateUser('signup');
+		if (this.state.email && this.state.password){
+			this.props.userSignup(this.state.email, this.state.password)
+		}
 	}
 
 	render() {
-		return (
-			<View style={styles.container}>
-				<Image
-					source={require('../../images/logo.png')}
-					style={styles.logo}
-					/>
-				<Text style={styles.title}>
-					RadiSaclay
-				</Text>
-				<View style={styles.form}>
-					<TextInput
-						autoCapitalize='none'
-						autoCorrect={false}
-						editable={true}
-						keyboardType='email-address'
-						onChangeText={(email) => this.setState({email})}
-						placeholder='Email'
-						ref='email'
-						returnKeyType='next'
-						style={styles.inputText}
-						value={this.state.email}
-						underlineColorAndroid='transparent'
+		if (this.props.isLoading) {
+			return <ActivityIndicator />
+		} else {
+			return (
+				<View style={styles.container}>
+					<Image
+						source={require('../../images/logo.png')}
+						style={styles.logo}
 						/>
-					<TextInput
-						autoCapitalize='none'
-						autoCorrect={false}
-						editable={true}
-						keyboardType='default'
-						onChangeText={(password) => this.setState({password})}
-						placeholder='Password'
-						ref='password'
-						returnKeyType='next'
-						secureTextEntry={true}
-						style={styles.inputText}
-						value={this.state.password}
-						underlineColorAndroid='transparent'
-						/>
-					<TouchableOpacity style={styles.buttonWrapper}>
-						<Text
-							style={styles.buttonText}
-							onPress={this.userLogin.bind(this)}
-							>
-							Log In
-						</Text>
-					</TouchableOpacity>
-					<TouchableOpacity style={styles.buttonWrapper}>
-						<Text
-							style={styles.buttonText}
-							onPress={this.userSignup.bind(this)}
-							>
-							Sign Up
-						</Text>
-					</TouchableOpacity>
+					<Text style={styles.title}>
+						RadiSaclay
+					</Text>
+					<View style={styles.form}>
+						<TextInput
+							autoCapitalize='none'
+							autoCorrect={false}
+							editable={true}
+							keyboardType='email-address'
+							onChangeText={(email) => this.setState({email})}
+							placeholder='Email'
+							ref='email'
+							returnKeyType='next'
+							style={styles.inputText}
+							value={this.state.email}
+							underlineColorAndroid='transparent'
+							/>
+						<TextInput
+							autoCapitalize='none'
+							autoCorrect={false}
+							editable={true}
+							keyboardType='default'
+							onChangeText={(password) => this.setState({password})}
+							placeholder='Password'
+							ref='password'
+							returnKeyType='next'
+							secureTextEntry={true}
+							style={styles.inputText}
+							value={this.state.password}
+							underlineColorAndroid='transparent'
+							/>
+						<TouchableOpacity style={styles.buttonWrapper}>
+							<Text
+								style={styles.buttonText}
+								onPress={this.userLogin.bind(this)}
+								>
+								Log In
+							</Text>
+						</TouchableOpacity>
+						<TouchableOpacity style={styles.buttonWrapper}>
+							<Text
+								style={styles.buttonText}
+								onPress={this.userSignup.bind(this)}
+								>
+								Sign Up
+							</Text>
+						</TouchableOpacity>
+					</View>
 				</View>
-			</View>
-		);
+			);
+		}
 	}
 }
 
-export default Authentication;
+const mapStateToProps = (store) => {
+  return {
+		idToken: store.user.idToken,
+		isLoading: store.user.isLoading
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		userLogin: (email, password) => {
+			dispatch(userOperations.userAuth(
+				settings.urls.AUTH_LOGIN_URL,
+				{
+					email,
+					password
+				}
+			))
+		},
+		userSignup: (email, password) => {
+			dispatch(userOperations.userAuth(
+				settings.urls.AUTH_SIGNUP_URL,
+				{
+					email,
+					password
+				}
+			))
+		}
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Authentication);
