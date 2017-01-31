@@ -1,38 +1,21 @@
-import apiUtils from './apiUtils'
+import axios from 'axios'
 
 const promises = {
 	getWithToken: function(url, idToken) {
-		return fetch(url, {
-			method: "GET",
-			headers: {
-				'Authorization': idToken
-			}
+		return axios.get( url, {
+			headers: {'Authorization': idToken}
 		})
-		.then(apiUtils.checkStatus)
-		.then(apiUtils.getJson)
 	},
 	post: function(url, body) {
-		return fetch(url, {
-			method: "POST",
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(body)
-		})
-		.then(apiUtils.checkStatus)
-		.then(apiUtils.getJson)
+		return axios.post(url, body)
 	},
 	postWithToken: function(url, idToken, body) {
-		return fetch(url, {
-			method: "POST",
-			headers: {
-				'Authorization': idToken,
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(body)
+		return axios({
+			body: body,
+			headers: {'Authorization': idToken},
+			method: 'post',
+			url: url
 		})
-		.then(apiUtils.checkStatus)
-		// TODO: add getJson promises once the route doesn't return an empty response
 	}
 };
 export default promises

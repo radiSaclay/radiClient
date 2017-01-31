@@ -13,11 +13,11 @@ class FarmContainer extends Component {
 		AsyncStorage.getItem(settings.keys.ID_TOKEN)
 		.then((idToken) => {
 			promises.getWithToken(settings.urls.FARMS_URL + this.props.id, idToken)
-			.then((farmDetail) => {
-				Actions.FarmDetailContainer(farmDetail)
+			.then((response) => {
+				Actions.FarmDetailContainer(response.data)
 			})
 			.catch((error) => {
-				console.error(error)
+				console.error(error.response.data)
 			})
 		})
 	}
