@@ -6,7 +6,8 @@ const settings = {
 		ID_TOKEN: 'id_token'
 	},
 	urls: {
-		AUTH_URL: SERVEUR_ROOT + 'auth/',
+		AUTH_LOGIN_URL: SERVEUR_ROOT + 'auth/login',
+		AUTH_SIGNUP_URL: SERVEUR_ROOT + 'auth/signup',
 		EVENTS_URL: SERVEUR_ROOT + API_PATH + 'events/',
 		EVENTS_PIN_URL: SERVEUR_ROOT + API_PATH + 'events/pin/',
 		EVENTS_UNPIN_URL: SERVEUR_ROOT + API_PATH + 'events/unpin/',
