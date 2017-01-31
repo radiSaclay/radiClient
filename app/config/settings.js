@@ -1,4 +1,4 @@
-var SERVEUR_ROOT = 'https://evening-meadow-38993.herokuapp.com/'
+var SERVEUR_ROOT = 'http://ec2-52-56-114-123.eu-west-2.compute.amazonaws.com/'
 var API_PATH = 'api/'
 
 const settings = {
