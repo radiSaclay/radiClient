@@ -1,53 +1,47 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, AsyncStorage } from 'react-native';
+import { ActivityIndicator } from 'react-native';
+import { connect } from 'react-redux';
 
-import promises from '../../config/promises';
 import settings from '../../config/settings';
+import * as productOperations from '../../operations/productOperations';
 
 import ProductsList from './ProductsList';
 
 class ProductsListContainer extends Component {
 
-	constructor() {
-		super()
-		this.state = {
-			productsList: null,
-			isLoaded: false,
+	componentWillMount(){
+		// TODO: find better strategy to load know when to load products list
+		if (!this.props.productsList.length){
+			this.props.fetchProductsList(this.props.idToken)
 		}
 	}
 
-	componentDidMount(){
-		this.getProductsList()
-	}
-
-	// TODO: add better error handling
-	getProductsList() {
-		AsyncStorage.getItem(settings.keys.ID_TOKEN)
-		.then((idToken) => {
-			promises.getWithToken(settings.urls.PRODUCTS_URL, idToken)
-			.then((response) => {
-				this.setState({
-					productsList: response.data,
-					isLoaded: true,
-				})
-			})
-			.catch((error) => {
-				console.error(error.response.data)
-			})
-		})
-	}
-
+	// TODO: add error handling
 	render() {
-		if (this.state.isLoaded) {
+		if (this.props.isLoading) {
 			return (
-				<ProductsList productsList={this.state.productsList} />
+				<ActivityIndicator />
 			)
 		} else {
 			return (
-				<ActivityIndicator />
+				<ProductsList	productsList={this.props.productsList} />
 			)
 		}
 	}
 }
 
-export default ProductsListContainer
+const mapStateToProps = (store) => {
+	return {
+		idToken: store.user.idToken,
+		isLoading: store.products.isLoading,
+		productsList: store.products.products
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		fetchProductsList: (idToken) => dispatch(productOperations.productsListFetch(idToken))
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsListContainer);
