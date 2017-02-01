@@ -122,10 +122,10 @@ class Authentication extends Component {
 }
 
 const mapStateToProps = (store) => {
-  return {
+	return {
 		idToken: store.user.idToken,
 		isLoading: store.user.isLoading
-  }
+	}
 }
 
 const mapDispatchToProps = (dispatch) => {
