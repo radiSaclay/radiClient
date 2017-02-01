@@ -20,18 +20,19 @@ class EventsListContainer extends Component {
 		this.getEventsList();
 	}
 
+	// TODO: add better error handling
 	getEventsList() {
 		AsyncStorage.getItem(settings.keys.ID_TOKEN)
 		.then((idToken) => {
 			promises.getWithToken(settings.urls.EVENTS_URL, idToken)
-			.then((eventsList) => {
+			.then(response => {
 				this.setState({
-					eventsList: eventsList,
+					eventsList: response.data,
 					isLoaded: true
 				})
 			})
-			.catch((error) => {
-				console.error(error);
+			.catch(error => {
+				console.error(error.response.data)
 			})
 		})
 	}

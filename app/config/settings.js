@@ -1,4 +1,4 @@
-var SERVEUR_ROOT = 'https://evening-meadow-38993.herokuapp.com/'
+var SERVEUR_ROOT = 'http://ec2-52-56-114-123.eu-west-2.compute.amazonaws.com/'
 var API_PATH = 'api/'
 
 const settings = {
@@ -6,7 +6,8 @@ const settings = {
 		ID_TOKEN: 'id_token'
 	},
 	urls: {
-		AUTH_URL: SERVEUR_ROOT + 'auth/',
+		AUTH_LOGIN_URL: SERVEUR_ROOT + 'auth/login',
+		AUTH_SIGNUP_URL: SERVEUR_ROOT + 'auth/signup',
 		EVENTS_URL: SERVEUR_ROOT + API_PATH + 'events/',
 		EVENTS_PIN_URL: SERVEUR_ROOT + API_PATH + 'events/pin/',
 		EVENTS_UNPIN_URL: SERVEUR_ROOT + API_PATH + 'events/unpin/',

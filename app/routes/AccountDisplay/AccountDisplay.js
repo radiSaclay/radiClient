@@ -13,9 +13,12 @@ import {
 	ActionConst,
 	Actions
 } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 
 import settings from '../../config/settings';
 import styles from './styles';
+
+import * as userOperations from '../../operations/userOperations'
 
 import Header from '../../components/Header'
 import SideMenu from '../../components/SideMenu'
@@ -26,12 +29,14 @@ class AccountDisplay extends Component {
 		this.actions = [
 			{
 				label: "Log out",
-				onPress: this.userLogout,
+				onPress: this.userLogout.bind(this),
 			},
 		]
 	}
 
+	// TODO: improve AsyncStorage acces and Action firing
 	async userLogout() {
+		this.props.userLogout()
 		try {
 			await AsyncStorage.removeItem(settings.keys.ID_TOKEN);
 			Actions.Authentication({type: ActionConst.REPLACE});
@@ -146,4 +151,11 @@ class AccountDisplay extends Component {
 	}
 }
 
-export default AccountDisplay;
+const mapStateToProps = (store) => { return {user: store.user} }
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		userLogout: () => dispatch(userOperations.userLogout())
+	}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(AccountDisplay);

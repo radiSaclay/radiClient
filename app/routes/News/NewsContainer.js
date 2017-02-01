@@ -33,15 +33,15 @@ class NewsContainer extends Component {
 			])
 			.then((response) => {
 				this.setState({
-					eventsList: response[0].slice(0,3),
-					farmsList: response[1].slice(0,3),
-					productsList: response[2].slice(0,3),
+					eventsList: response[0].data.slice(0,3),
+					farmsList: response[1].data.slice(0,3),
+					productsList: response[2].data.slice(0,3),
 					isLoaded: true
 				});
 			})
 		})
 		.catch((error) => {
-			console.error(error);
+			console.error(error.response.data);
 		})
 	}
 

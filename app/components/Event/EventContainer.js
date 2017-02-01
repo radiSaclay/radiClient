@@ -13,11 +13,11 @@ class EventContainer extends Component {
 		AsyncStorage.getItem(settings.keys.ID_TOKEN)
 		.then((idToken) => {
 			promises.getWithToken(settings.urls.EVENTS_URL + this.props.eventId, idToken)
-			.then((eventDetails) => {
-				Actions.EventDetailContainer(eventDetails)
+			.then((response) => {
+				Actions.EventDetailContainer(response.data)
 			})
 			.catch((error) => {
-				console.error(error);
+				console.error(error.response.data);
 			});
 		})
 	}

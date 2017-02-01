@@ -19,22 +19,20 @@ class FarmsListContainer extends Component {
 		this.getFarmsList()
 	}
 
-	/*
-		Gets the list of the farms around the user.
-	*/
+	// TODO: add better error handling
 	// TODO: load less information about farms
 	getFarmsList() {
 		AsyncStorage.getItem(settings.keys.ID_TOKEN)
 		.then((idToken) => {
 			promises.getWithToken(settings.urls.FARMS_URL, idToken)
-			.then((farmsList) => {
+			.then((response) => {
 				this.setState({
-					farmsList: farmsList,
+					farmsList: response.data,
 					isLoaded: true
 				})
 			})
 			.catch((error) => {
-				console.error(error);
+				console.error(error.response.data);
 			})
 		})
 	}

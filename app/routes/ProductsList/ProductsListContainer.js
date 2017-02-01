@@ -20,18 +20,19 @@ class ProductsListContainer extends Component {
 		this.getProductsList()
 	}
 
+	// TODO: add better error handling
 	getProductsList() {
 		AsyncStorage.getItem(settings.keys.ID_TOKEN)
 		.then((idToken) => {
 			promises.getWithToken(settings.urls.PRODUCTS_URL, idToken)
-			.then((productsList) => {
+			.then((response) => {
 				this.setState({
-					productsList: productsList,
+					productsList: response.data,
 					isLoaded: true,
 				})
 			})
 			.catch((error) => {
-				console.error(error)
+				console.error(error.response.data)
 			})
 		})
 	}
