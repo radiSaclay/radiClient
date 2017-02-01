@@ -1,53 +1,47 @@
 import React, { Component } from 'react';
-import { ActivityIndicator,	AsyncStorage } from 'react-native';
+import { ActivityIndicator } from 'react-native';
+import { connect } from 'react-redux'
 
-import promises from '../../config/promises'
 import settings from '../../config/settings';
+import * as eventOperations from '../../operations/eventOperations'
 
 import EventsList from './EventsList';
 
 class EventsListContainer extends Component {
 
-	constructor() {
-		super();
-		this.state = {
-			eventsList: null,
-			isLoaded: false,
-		};
+	componentWillMount(){
+		// TODO: find better strategy to load know when to load events list
+		if (!this.props.eventsList.length){
+			this.props.fetchEventsList(this.props.idToken)
+		}
 	}
 
-	componentDidMount(){
-		this.getEventsList();
-	}
-
-	// TODO: add better error handling
-	getEventsList() {
-		AsyncStorage.getItem(settings.keys.ID_TOKEN)
-		.then((idToken) => {
-			promises.getWithToken(settings.urls.EVENTS_URL, idToken)
-			.then(response => {
-				this.setState({
-					eventsList: response.data,
-					isLoaded: true
-				})
-			})
-			.catch(error => {
-				console.error(error.response.data)
-			})
-		})
-	}
-
+	// TODO: add error handling
 	render() {
-		if (this.state.isLoaded) {
+		if (this.props.isLoading) {
 			return (
-				<EventsList	eventsList={this.state.eventsList} />
+				<ActivityIndicator />
 			)
 		} else {
 			return (
-				<ActivityIndicator />
+				<EventsList	eventsList={this.props.eventsList} />
 			)
 		}
 	}
 }
 
-export default EventsListContainer
+const mapStateToProps = (store) => {
+	return {
+		eventsList: store.events.events,
+		idToken: store.user.idToken,
+		isLoading: store.events.isLoading
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		fetchEventsList: (idToken) => dispatch(eventOperations.eventsListFetch(idToken))
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventsListContainer);
