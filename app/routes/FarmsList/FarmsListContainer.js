@@ -1,53 +1,47 @@
 import React, { Component } from 'react'
-import { ActivityIndicator, AsyncStorage } from 'react-native'
+import { ActivityIndicator } from 'react-native'
+import { connect } from 'react-redux'
 
-import promises from '../../config/promises'
 import settings from '../../config/settings'
+import * as farmOperations from '../../operations/farmOperations'
 
 import FarmsList from './FarmsList'
 
 class FarmsListContainer extends Component {
-	constructor() {
-		super();
-		this.state = {
-			farmsList: null,
-			isLoaded: false,
+
+	componentWillMount(){
+		// TODO: find better strategy to load know when to load farms list
+		if (!this.props.farmsList.length){
+			this.props.fetchFarmsList(this.props.idToken)
 		}
 	}
 
-	componentDidMount() {
-		this.getFarmsList()
-	}
-
-	// TODO: add better error handling
-	// TODO: load less information about farms
-	getFarmsList() {
-		AsyncStorage.getItem(settings.keys.ID_TOKEN)
-		.then((idToken) => {
-			promises.getWithToken(settings.urls.FARMS_URL, idToken)
-			.then((response) => {
-				this.setState({
-					farmsList: response.data,
-					isLoaded: true
-				})
-			})
-			.catch((error) => {
-				console.error(error.response.data);
-			})
-		})
-	}
-
+	// TODO: add error handling
 	render() {
-		if (this.state.isLoaded) {
+		if (this.props.isLoading) {
 			return (
-				<FarmsList	farmsList={this.state.farmsList} />
+				<ActivityIndicator />
 			)
 		} else {
 			return (
-				<ActivityIndicator />
+				<FarmsList	farmsList={this.props.farmsList} />
 			)
 		}
 	}
 }
 
-export default FarmsListContainer;
+const mapStateToProps = (store) => {
+	return {
+		farmsList: store.farms.farms,
+		idToken: store.user.idToken,
+		isLoading: store.farms.isLoading
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		fetchFarmsList: (idToken) => dispatch(farmOperations.farmsListFetch(idToken))
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FarmsListContainer);
