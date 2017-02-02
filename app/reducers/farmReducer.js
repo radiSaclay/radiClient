@@ -1,3 +1,5 @@
+import actionTypes from '../config/actionTypes';
+
 const initialState = {
 	error: null,
 	farms: [],
@@ -6,15 +8,15 @@ const initialState = {
 
 export default function farms(state = initialState, action) {
 	switch (action.type) {
-		case 'FARMS_LIST_FETCH_REQUEST':
+		case actionTypes.FARMS_LIST_FETCH_REQUEST:
 			return {...state, isLoading: true}
-		case 'FARMS_LIST_FETCH_SUCCESS':
+		case actionTypes.FARMS_LIST_FETCH_SUCCESS:
 			return {
 				...state,
 				farms: action.farms,
 				isLoading:false
 			}
-		case 'FARMS_LIST_FETCH_ERROR':
+		case actionTypes.FARMS_LIST_FETCH_ERROR:
 			return {
 				...state,
 				error: action.error,

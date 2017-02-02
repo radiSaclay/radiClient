@@ -1,9 +1,10 @@
-import * as farmActions from '../../app/actions/farmActions'
+import actionTypes from '../../app/config/actionTypes';
+import * as farmActions from '../../app/actions/farmActions';
 
 describe('Get farms from the API', () => {
 	it('should create an action when fetch farms list request fires', () => {
 		let expectedAction = {
-			type: 'FARMS_LIST_FETCH_REQUEST',
+			type: actionTypes.FARMS_LIST_FETCH_REQUEST,
 		}
 		expect(farmActions.farmsListFetchRequest()).toEqual(expectedAction)
 	})
@@ -34,7 +35,7 @@ describe('Get farms from the API', () => {
 			},
 		]
 		let expectedAction = {
-			type: 'FARMS_LIST_FETCH_SUCCESS',
+			type: actionTypes.FARMS_LIST_FETCH_SUCCESS,
 			farms
 		}
 		expect(farmActions.farmsListFetchSuccess(farms)).toEqual(expectedAction)
@@ -43,7 +44,7 @@ describe('Get farms from the API', () => {
 	it('should create an action when fetch farms list raises an error', () => {
 		let error = new Error()
 		let expectedAction = {
-			type: 'FARMS_LIST_FETCH_ERROR',
+			type: actionTypes.FARMS_LIST_FETCH_ERROR,
 			error
 		}
 		expect(farmActions.farmsListFetchError(error)).toEqual(expectedAction)

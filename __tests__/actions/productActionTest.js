@@ -1,9 +1,10 @@
-import * as productActions from '../../app/actions/productActions'
+import actionTypes from '../../app/config/actionTypes';
+import * as productActions from '../../app/actions/productActions';
 
 describe('Get products from the API', () => {
 	it('should create an action when fetch products list request fires', () => {
 		let expectedAction = {
-			type: 'PRODUCTS_LIST_FETCH_REQUEST',
+			type: actionTypes.PRODUCTS_LIST_FETCH_REQUEST,
 		}
 		expect(productActions.productsListFetchRequest()).toEqual(expectedAction)
 	})
@@ -28,7 +29,7 @@ describe('Get products from the API', () => {
 			},
 		]
 		let expectedAction = {
-			type: 'PRODUCTS_LIST_FETCH_SUCCESS',
+			type: actionTypes.PRODUCTS_LIST_FETCH_SUCCESS,
 			products
 		}
 		expect(productActions.productsListFetchSuccess(products)).toEqual(expectedAction)
@@ -37,7 +38,7 @@ describe('Get products from the API', () => {
 	it('should create an action when fetch products list raises an error', () => {
 		let error = new Error()
 		let expectedAction = {
-			type: 'PRODUCTS_LIST_FETCH_ERROR',
+			type: actionTypes.PRODUCTS_LIST_FETCH_ERROR,
 			error
 		}
 		expect(productActions.productsListFetchError(error)).toEqual(expectedAction)

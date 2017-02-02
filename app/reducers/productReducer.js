@@ -1,3 +1,5 @@
+import actionTypes from '../config/actionTypes';
+
 const initialState = {
 	error: null,
 	isLoading: false,
@@ -6,15 +8,15 @@ const initialState = {
 
 export default function products(state = initialState, action) {
 	switch (action.type) {
-		case 'PRODUCTS_LIST_FETCH_REQUEST':
+		case actionTypes.PRODUCTS_LIST_FETCH_REQUEST:
 			return {...state, isLoading: true}
-		case 'PRODUCTS_LIST_FETCH_SUCCESS':
+		case actionTypes.PRODUCTS_LIST_FETCH_SUCCESS:
 			return {
 				...state,
 				isLoading:false,
 				products: action.products
 			}
-		case 'PRODUCTS_LIST_FETCH_ERROR':
+		case actionTypes.PRODUCTS_LIST_FETCH_ERROR:
 			return {
 				...state,
 				error: action.error,

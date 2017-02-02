@@ -1,19 +1,21 @@
+import actionTypes from '../config/actionTypes';
+
 export function productsListFetchRequest() {
 	return {
-		type: 'PRODUCTS_LIST_FETCH_REQUEST'
+		type: actionTypes.PRODUCTS_LIST_FETCH_REQUEST
 	}
 }
 
 export function productsListFetchSuccess(products) {
 	return {
-		type: 'PRODUCTS_LIST_FETCH_SUCCESS',
+		type: actionTypes.PRODUCTS_LIST_FETCH_SUCCESS,
 		products
 	}
 }
 
 export function productsListFetchError(error) {
 	return {
-		type: 'PRODUCTS_LIST_FETCH_ERROR',
+		type: actionTypes.PRODUCTS_LIST_FETCH_ERROR,
 		error
 	}
 }

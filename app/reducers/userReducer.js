@@ -1,3 +1,5 @@
+import actionTypes from '../config/actionTypes';
+
 const initialState = {
 	error: null,
 	idToken: null,
@@ -6,21 +8,21 @@ const initialState = {
 
 export default function user(state = initialState, action) {
 	switch (action.type) {
-		case 'USER_AUTHENTICATION_REQUEST':
+		case actionTypes.USER_AUTHENTICATION_REQUEST:
 			return {...state, isLoading: true}
-		case 'USER_AUTHENTICATION_SUCCESS':
+		case actionTypes.USER_AUTHENTICATION_SUCCESS:
 			return {
 				...state,
 				idToken: action.idToken,
 				isLoading:false
 			}
-		case 'USER_AUTHENTICATION_ERROR':
+		case actionTypes.USER_AUTHENTICATION_ERROR:
 			return {
 				...state,
 				error: action.error,
 				isLoading: false
 			}
-		case 'USER_LOGOUT':
+		case actionTypes.USER_LOGOUT:
 		return{
 			...state,
 			idToken: null,

@@ -1,9 +1,10 @@
-import * as eventActions from '../../app/actions/eventActions'
+import actionTypes from '../../app/config/actionTypes';
+import * as eventActions from '../../app/actions/eventActions';
 
 describe('Get events from the API', () => {
 	it('should create an action when fetch events list request fires', () => {
 		let expectedAction = {
-			type: 'EVENTS_LIST_FETCH_REQUEST',
+			type: actionTypes.EVENTS_LIST_FETCH_REQUEST,
 		}
 		expect(eventActions.eventsListFetchRequest()).toEqual(expectedAction)
 	})
@@ -34,7 +35,7 @@ describe('Get events from the API', () => {
 			},
 		]
 		let expectedAction = {
-			type: 'EVENTS_LIST_FETCH_SUCCESS',
+			type: actionTypes.EVENTS_LIST_FETCH_SUCCESS,
 			events
 		}
 		expect(eventActions.eventsListFetchSuccess(events)).toEqual(expectedAction)
@@ -43,7 +44,7 @@ describe('Get events from the API', () => {
 	it('should create an action when fetch events list raises an error', () => {
 		let error = new Error()
 		let expectedAction = {
-			type: 'EVENTS_LIST_FETCH_ERROR',
+			type: actionTypes.EVENTS_LIST_FETCH_ERROR,
 			error
 		}
 		expect(eventActions.eventsListFetchError(error)).toEqual(expectedAction)
