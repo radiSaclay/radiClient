@@ -29,6 +29,7 @@ project.xcworkspace
 .gradle
 .keystore
 local.properties
+android/gradle.properties
 
 # node.js
 #
@@ -40,5 +41,3 @@ buck-out/
 \.buckd/
 android/app/libs
 *.keystore
-
-dfsdf
