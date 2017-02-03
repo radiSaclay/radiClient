@@ -1,9 +1,10 @@
-import * as userActions from '../../app/actions/userActions'
+import actionTypes from '../../app/config/actionTypes';
+import * as userActions from '../../app/actions/userActions';
 
 describe('Authenticate user', () => {
 	it('should create an action when authentication request fires', () => {
 		let expectedAction = {
-			type: 'USER_AUTHENTICATION_REQUEST',
+			type: actionTypes.USER_AUTHENTICATION_REQUEST,
 		}
 		expect(userActions.authRequest()).toEqual(expectedAction)
 	})
@@ -11,7 +12,7 @@ describe('Authenticate user', () => {
 	it('should create an action when authentication succeeds', () => {
 		let idToken = ' b1e0871be71b2e98b128eb812be9b1'
 		let expectedAction = {
-			type: 'USER_AUTHENTICATION_SUCCESS',
+			type: actionTypes.USER_AUTHENTICATION_SUCCESS,
 			idToken
 		}
 		expect(userActions.authSuccess(idToken)).toEqual(expectedAction)
@@ -20,7 +21,7 @@ describe('Authenticate user', () => {
 	it('should create an action when authentication raises an error', () => {
 		let error = new Error()
 		let expectedAction = {
-			type: 'USER_AUTHENTICATION_ERROR',
+			type: actionTypes.USER_AUTHENTICATION_ERROR,
 			error
 		}
 		expect(userActions.authError(error)).toEqual(expectedAction)
@@ -30,7 +31,7 @@ describe('Authenticate user', () => {
 describe('Logout user', () => {
 	it('should create an action when the user logs out', () => {
 		let expectedAction = {
-			type: 'USER_LOGOUT',
+			type: actionTypes.USER_LOGOUT,
 		}
 		expect(userActions.logout()).toEqual(expectedAction)
 	})

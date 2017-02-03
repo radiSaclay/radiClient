@@ -1,19 +1,21 @@
+import actionTypes from '../config/actionTypes';
+
 export function eventsListFetchRequest() {
 	return {
-		type: 'EVENTS_LIST_FETCH_REQUEST'
+		type: actionTypes.EVENTS_LIST_FETCH_REQUEST
 	}
 }
 
 export function eventsListFetchSuccess(events) {
 	return {
-		type: 'EVENTS_LIST_FETCH_SUCCESS',
+		type: actionTypes.EVENTS_LIST_FETCH_SUCCESS,
 		events
 	}
 }
 
 export function eventsListFetchError(error) {
 	return {
-		type: 'EVENTS_LIST_FETCH_ERROR',
+		type: actionTypes.EVENTS_LIST_FETCH_ERROR,
 		error
 	}
 }

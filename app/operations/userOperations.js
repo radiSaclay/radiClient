@@ -1,8 +1,6 @@
 import * as actions from '../actions/userActions'
 import promises from '../config/promises'
 
-import apiUtils from '../config/apiUtils'
-
 export function userAuth (url, body) {
 	return dispatch => {
 		dispatch(actions.authRequest())

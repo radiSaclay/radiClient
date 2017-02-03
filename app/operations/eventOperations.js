@@ -2,8 +2,6 @@ import * as actions from '../actions/eventActions'
 import promises from '../config/promises'
 import settings from '../config/settings'
 
-import axios from 'axios'
-
 export function eventsListFetch (idToken) {
 	return dispatch => {
 		dispatch(actions.eventsListFetchRequest())
