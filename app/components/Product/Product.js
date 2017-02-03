@@ -1,16 +1,15 @@
 import React from 'react';
-import {
-	Image,
-	Text,
-	TouchableOpacity,
-	View,
-} from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles';
 
+/*	Product receiving props:
+	- getProductDetail : function
+	- name : string
+*/
 const Product = (props) => {
 	return (
-		<TouchableOpacity>
+		<TouchableOpacity onPress={props.getProductDetail}>
 			<View style={styles.mainContainer}>
 				<View style={styles.imageContainer}>
 					<Image source={require('../../images/icons/radish.png')} />
@@ -24,10 +23,6 @@ const Product = (props) => {
 			</View>
 		</TouchableOpacity>
 	)
-}
-
-Product.propTypes = {
-	name: React.PropTypes.string,
 }
 
 export default Product

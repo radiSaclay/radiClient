@@ -15,6 +15,8 @@ const settings = {
 		FARMS_SUBSCRIBE_URL: SERVEUR_ROOT + API_PATH + 'farms/subscribe/',
 		FARMS_UNSUBSCRIBE_URL: SERVEUR_ROOT + API_PATH + 'farms/unsubscribe/',
 		PRODUCTS_URL: SERVEUR_ROOT + API_PATH + 'products/',
+		PRODUCTS_SUBSCRIBE_URL: SERVEUR_ROOT + API_PATH + 'products/subscribe/',
+		PRODUCTS_UNSUBSCRIBE_URL: SERVEUR_ROOT + API_PATH + 'products/unsubscribe/',
 	},
 }
 

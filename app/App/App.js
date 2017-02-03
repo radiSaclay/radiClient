@@ -9,6 +9,7 @@ import EventsListContainer from '../routes/EventsList';
 import NewsContainer from '../routes/News';
 import FarmDetailContainer from '../routes/FarmDetail';
 import FarmsListContainer from '../routes/FarmsList';
+import ProductDetailContainer from '../routes/ProductDetail';
 import ProductsListContainer from '../routes/ProductsList';
 
 import settings from '../config/settings';
@@ -118,6 +119,13 @@ class App extends Component {
 							hideNavBar={false}
 							key="FarmDetailContainer"
 							title="Détails de la ferme"
+							/>
+
+						<Scene
+							component={ProductDetailContainer}
+							hideNavBar={false}
+							key="ProductDetailContainer"
+							title="Détails du produit"
 							/>
 					</Scene>
 				</Router>
