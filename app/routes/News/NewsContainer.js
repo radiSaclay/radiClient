@@ -1,48 +1,16 @@
 import React, { Component } from 'react';
 import { AsyncStorage, ActivityIndicator } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux'
 
-import promises from '../../config/promises';
-import settings from '../../config/settings';
+import * as newsOperations from '../../operations/newsOperations'
 
 import News from './News.js'
 
 class NewsContainer extends Component {
 
-	constructor() {
-		super();
-		this.state = {
-			eventsList: null,
-			farmsList: null,
-			productsList: null,
-			isLoaded: false,
-		};
-	}
-
-	componentDidMount(){
-		this.getNews()
-	}
-
-	getNews() {
-		AsyncStorage.getItem(settings.keys.ID_TOKEN)
-		.then((idToken) => {
-			Promise.all([
-				promises.getWithToken(settings.urls.EVENTS_URL, idToken),
-				promises.getWithToken(settings.urls.FARMS_URL, idToken),
-				promises.getWithToken(settings.urls.PRODUCTS_URL, idToken)
-			])
-			.then((response) => {
-				this.setState({
-					eventsList: response[0].data.slice(0,3),
-					farmsList: response[1].data.slice(0,3),
-					productsList: response[2].data.slice(0,3),
-					isLoaded: true
-				});
-			})
-		})
-		.catch((error) => {
-			console.error(error.response.data);
-		})
+	componentWillMount(){
+		this.props.fetchNews(this.props.idToken)
 	}
 
 	showEventsList() {
@@ -58,24 +26,40 @@ class NewsContainer extends Component {
 	}
 
 	render() {
-		if (this.state.isLoaded) {
-			return(
+		if (this.props.isLoading) {
+			return (
+				<ActivityIndicator />
+			)
+		} else {
+			return (
 				<News
 					showEventsList = {this.showEventsList}
 					showFarmsList = {this.showFarmsList}
 					showProductsList = {this.showProductsList}
 
-					eventsList = {this.state.eventsList}
-					farmsList = {this.state.farmsList}
-					productsList = {this.state.productsList}
+					eventsList = {this.props.featuredEvents}
+					farmsList = {this.props.featuredFarms}
+					productsList = {this.props.featuredProducts}
 					/>
-			)
-		} else {
-			return (
-				<ActivityIndicator />
 			)
 		}
 	}
 }
 
-export default NewsContainer
+const mapStateToProps = (store) => {
+	return {
+		featuredEvents: store.events.events.slice(0,3),
+		featuredFarms: store.farms.farms.slice(0,3),
+		featuredProducts: store.products.products.slice(0,3),
+		idToken: store.user.idToken,
+		isLoading: store.news.isLoading
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		fetchNews: (idToken) => dispatch(newsOperations.newsFetch(idToken))
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewsContainer);
