@@ -7,6 +7,7 @@ import * as productOperations from './productOperations'
 
 const store = configureStore()
 
+// TODO: find a way to test this composition of operations
 export function newsFetch (idToken) {
 	return dispatch => {
 		dispatch(actions.newsFetchRequest())
