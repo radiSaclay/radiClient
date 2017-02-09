@@ -1,52 +1,56 @@
 import userReducer from '../../app/reducers/userReducer'
 import * as userActions from '../../app/actions/userActions'
+import actionTypes from '../../app/config/actionTypes';
+
 
 describe('userReducer', () =>{
 	it('should return the initialState', () => {
 		let expectedState = {
 			error: null,
 			idToken: null,
-			isLoading: false
+			isLoading: false,
+			isMounted: false
 		}
 		expect(userReducer(undefined, {})).toEqual(expectedState)
 	})
 
+	it('should handle REDUX_STORAGE_LOAD', () => {
+		let expectedState = {
+			isMounted: true
+		}
+		expect(userReducer([], { type: actionTypes.REDUX_STORAGE_LOAD })).toEqual(expectedState)
+	})
+
 	it('should handle USER_AUTHENTICATION_REQUEST', () => {
 		let expectedState = {
-			error: null,
-			idToken: null,
-			isLoading: true
+			isLoading: true,
 		}
-		expect(userReducer(undefined, userActions.authRequest())).toEqual(expectedState)
+		expect(userReducer([], userActions.authRequest())).toEqual(expectedState)
 	})
 
 	it('should handle USER_AUTHENTICATION_SUCCESS', () => {
 		let idToken = 'dbnub23dunb23p9ub238b'
 		let expectedState = {
-			error: null,
 			idToken: idToken,
-			isLoading: false
+			isLoading: false,
 		}
-		expect(userReducer(undefined, userActions.authSuccess(idToken))).toEqual(expectedState)
+		expect(userReducer([], userActions.authSuccess(idToken))).toEqual(expectedState)
 	})
 
 	it('should handle USER_AUTHENTICATION_ERROR', () => {
 		let error = new Error()
 		let expectedState = {
 			error: error,
-			idToken: null,
-			isLoading: false
+			isLoading: false,
 		}
-		expect(userReducer(undefined, userActions.authError(error))).toEqual(expectedState)
+		expect(userReducer([], userActions.authError(error))).toEqual(expectedState)
 	})
 
 	it('should handle USER_LOGOUT', () => {
 		let expectedState = {
-			error: null,
 			idToken: null,
-			isLoading: false
 		}
-		expect(userReducer(undefined, userActions.logout())).toEqual(expectedState)
+		expect(userReducer([], userActions.logout())).toEqual(expectedState)
 	})
 
 })

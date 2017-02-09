@@ -13,11 +13,9 @@ describe('Event reducer', () =>{
 
 	it('should handle EVENTS_LIST_FETCH_REQUEST', () => {
 		let expectedState = {
-			events: [],
-			error: null,
 			isLoading: true
 		}
-		expect(eventReducer(undefined, eventActions.eventsListFetchRequest())).toEqual(expectedState)
+		expect(eventReducer([], eventActions.eventsListFetchRequest())).toEqual(expectedState)
 	})
 
 	it('should handle EVENTS_LIST_FETCH_SUCCESS', () => {
@@ -46,21 +44,19 @@ describe('Event reducer', () =>{
 			},
 		]
 		let expectedState = {
-			error: null,
 			events: events,
 			isLoading: false
 		}
-		expect(eventReducer(undefined, eventActions.eventsListFetchSuccess(events))).toEqual(expectedState)
+		expect(eventReducer([], eventActions.eventsListFetchSuccess(events))).toEqual(expectedState)
 	})
 
 	it('should handle EVENTS_LIST_FETCH_ERROR', () => {
 		let error = new Error()
 		let expectedState = {
 			error: error,
-			events: [],
 			isLoading: false
 		}
-		expect(eventReducer(undefined, eventActions.eventsListFetchError(error))).toEqual(expectedState)
+		expect(eventReducer([], eventActions.eventsListFetchError(error))).toEqual(expectedState)
 	})
 
 })
