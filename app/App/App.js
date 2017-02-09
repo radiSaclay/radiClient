@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ActivityIndicator, AsyncStorage, Text } from 'react-native';
 import { Router, Scene, TabBar } from 'react-native-router-flux';
+import { connect } from 'react-redux'
 
 import AccountDisplay from '../routes/AccountDisplay';
 import Authentication from '../routes/Authentication';
@@ -16,34 +17,9 @@ import settings from '../config/settings';
 import styles from './styles.js';
 
 class App extends Component {
-
-	constructor(){
-		super();
-		this.state = {
-			hasToken: false,
-			isLoaded: false
-		}
-	}
-
-	componentDidMount() {
-		AsyncStorage.getItem(settings.keys.ID_TOKEN).then((token) => {
-			if (token !== null){
-				this.setState({
-					hasToken: true,
-					isLoaded: true
-				});
-			} else {
-				this.setState({
-					hasToken: false,
-					isLoaded: true
-			});
-		}
-		});
-	}
-
 	render() {
-		if (!this.state.isLoaded){
-			// TODO: align the loader at the center of the screen.
+		if (!this.props.isMounted){
+			// TODO: Replace this loader by a welcome screen
 			return (
 				<ActivityIndicator />
 			)
@@ -54,7 +30,7 @@ class App extends Component {
 						<Scene
 							component={Authentication}
 							hideNavBar={true}
-							initial={!this.state.hasToken}
+							initial={!this.props.idToken}
 							key="Authentication"
 							title="Authentication"
 							/>
@@ -62,7 +38,7 @@ class App extends Component {
 						<Scene
 							direction="vertical"
 							hideNavBar={true}
-							initial={this.state.hasToken}
+							initial={this.props.idToken}
 							key="MainTab"
 							tabBarStyle={styles.tabBar}
 							tabs={true}
@@ -134,4 +110,11 @@ class App extends Component {
 	}
 }
 
-export default App;
+const mapStateToProps = (store) => {
+	return {
+		idToken: store.user.idToken,
+		isMounted: store.user.isMounted,
+	}
+}
+
+export default connect(mapStateToProps)(App);
