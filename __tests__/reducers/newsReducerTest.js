@@ -12,18 +12,16 @@ describe('News reducer', () =>{
 
 	it('should handle NEWS_FETCH_REQUEST', () => {
 		let expectedState = {
-			error: null,
 			isLoading: true
 		}
-		expect(newsReducer(undefined, newsActions.newsFetchRequest())).toEqual(expectedState)
+		expect(newsReducer([], newsActions.newsFetchRequest())).toEqual(expectedState)
 	})
 
 	it('should handle NEWS_FETCH_SUCCESS', () => {
 		let expectedState = {
-			error: null,
 			isLoading: false
 		}
-		expect(newsReducer(undefined, newsActions.newsFetchSuccess())).toEqual(expectedState)
+		expect(newsReducer([], newsActions.newsFetchSuccess())).toEqual(expectedState)
 	})
 
 	it('should handle NEWS_FETCH_ERROR', () => {
@@ -32,7 +30,7 @@ describe('News reducer', () =>{
 			error: error,
 			isLoading: false
 		}
-		expect(newsReducer(undefined, newsActions.newsFetchError(error))).toEqual(expectedState)
+		expect(newsReducer([], newsActions.newsFetchError(error))).toEqual(expectedState)
 	})
 
 })

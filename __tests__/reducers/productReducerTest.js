@@ -13,11 +13,9 @@ describe('Product reducer', () =>{
 
 	it('should handle PRODUCTS_LIST_FETCH_REQUEST', () => {
 		let expectedState = {
-			error: null,
-			isLoading: true,
-			products: []
+			isLoading: true
 		}
-		expect(productReducer(undefined, productActions.productsListFetchRequest())).toEqual(expectedState)
+		expect(productReducer([], productActions.productsListFetchRequest())).toEqual(expectedState)
 	})
 
 	it('should handle PRODUCTS_LIST_FETCH_SUCCESS', () => {
@@ -40,11 +38,10 @@ describe('Product reducer', () =>{
 			},
 		]
 		let expectedState = {
-			error: null,
 			products: products,
 			isLoading: false
 		}
-		expect(productReducer(undefined, productActions.productsListFetchSuccess(products))).toEqual(expectedState)
+		expect(productReducer([], productActions.productsListFetchSuccess(products))).toEqual(expectedState)
 	})
 
 	it('should handle PRODUCTS_LIST_FETCH_ERROR', () => {
@@ -52,9 +49,8 @@ describe('Product reducer', () =>{
 		let expectedState = {
 			error: error,
 			isLoading: false,
-			products: []
 		}
-		expect(productReducer(undefined, productActions.productsListFetchError(error))).toEqual(expectedState)
+		expect(productReducer([], productActions.productsListFetchError(error))).toEqual(expectedState)
 	})
 
 })
