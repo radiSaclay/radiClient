@@ -110,6 +110,14 @@ class Authentication extends Component {
 	}
 }
 
+Authentication.propTypes = {
+	// from redux
+	isLoading: React.PropTypes.bool,
+	idToken: React.PropTypes.string,
+	userLogin: React.PropTypes.func,
+	userSignup: React.PropTypes.func,
+}
+
 const mapStateToProps = (store) => {
 	return {
 		idToken: store.user.idToken,

@@ -41,6 +41,7 @@ class SideMenu extends Component {
 }
 
 SideMenu.propTypes = {
+	// from parent
 	actions: React.PropTypes.arrayOf(
 		React.PropTypes.shape({
 			label: React.PropTypes.string.isRequired,

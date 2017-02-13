@@ -48,6 +48,7 @@ class Header extends Component {
 }
 
 Header.propTypes = {
+	// from parent
 	actions: React.PropTypes.arrayOf(
 		React.PropTypes.shape({
 			onPress: React.PropTypes.func.isRequired,

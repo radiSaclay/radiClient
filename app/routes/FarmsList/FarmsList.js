@@ -33,6 +33,7 @@ class FarmsList extends Component {
 }
 
 FarmsList.propTypes = {
+	// from parent
 	farmsList: React.PropTypes.array,
 }
 
