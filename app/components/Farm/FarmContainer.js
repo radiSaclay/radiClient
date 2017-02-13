@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { AsyncStorage } from 'react-native'
 import { Actions } from 'react-native-router-flux'
+import { connect } from 'react-redux'
 
 import promises from '../../config/promises'
 import settings from '../../config/settings'
@@ -10,15 +10,12 @@ import Farm from './Farm'
 class FarmContainer extends Component {
 
 	getFarmDetail() {
-		AsyncStorage.getItem(settings.keys.ID_TOKEN)
-		.then((idToken) => {
-			promises.getWithToken(settings.urls.FARMS_URL + this.props.id, idToken)
-			.then((response) => {
-				Actions.FarmDetailContainer(response.data)
-			})
-			.catch((error) => {
-				console.error(error.response.data)
-			})
+		promises.getWithToken(settings.urls.FARMS_URL + this.props.id, this.props.idToken)
+		.then((response) => {
+			Actions.FarmDetailContainer(response.data)
+		})
+		.catch((error) => {
+			console.error(error.response.data)
 		})
 	}
 
@@ -35,9 +32,19 @@ class FarmContainer extends Component {
 }
 
 FarmContainer.propTypes = {
+	// from parent
 	address: React.PropTypes.string,
 	id: React.PropTypes.number,
 	name: React.PropTypes.string,
+
+	// from redux
+	idToken: React.PropTypes.string,
 }
 
-export default FarmContainer
+const mapStateToProps = (store) => {
+	return {
+		idToken: store.user.idToken,
+	}
+}
+
+export default connect(mapStateToProps)(FarmContainer)

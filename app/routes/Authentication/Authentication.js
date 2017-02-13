@@ -27,21 +27,10 @@ class Authentication extends Component {
 		}
 	}
 
-	// TODO:
-	// 	1- Do we still need to store the idToken in the AsyncStorage since it's already on the store?
-	// 	2 - Find a better way to fire the action transition once the authentication has been verified
+	// TODO: Find a better way to fire the action transition once the authentication has been verified
 	componentWillUpdate(nextProps) {
 		if(nextProps.idToken) {
-			this.onValueChange(settings.keys.ID_TOKEN, nextProps.idToken)
 			Actions.MainTab({type: ActionConst.REPLACE})
-		}
-	}
-
-	async onValueChange(item, selectedValue) {
-		try {
-			await AsyncStorage.setItem(item, selectedValue);
-		} catch (error) {
-			console.log('AsyncStorage error: ' + error.message);
 		}
 	}
 

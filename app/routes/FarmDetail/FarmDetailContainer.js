@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { AsyncStorage } from 'react-native';
+import { connect } from 'react-redux';
 
 import promises from '../../config/promises.js'
 import settings from '../../config/settings.js'
@@ -13,15 +13,13 @@ class FarmDetailContainer extends Component {
 	}
 
 	toggleSubscriptionStatus(){
-		AsyncStorage.getItem(settings.keys.ID_TOKEN).then((idToken) => {
-			let url = (this.state.isSubscribed ? settings.urls.FARMS_UNSUBSCRIBE_URL : settings.urls.FARMS_SUBSCRIBE_URL) + this.props.id
-			promises.postWithToken(url, idToken)
-			.then((response) => {
-				this.setState({isSubscribed: !this.state.isSubscribed});
-			})
-			.catch((error) => {
-				console.error(error);
-			})
+		let url = (this.state.isSubscribed ? settings.urls.FARMS_UNSUBSCRIBE_URL : settings.urls.FARMS_SUBSCRIBE_URL) + this.props.id
+		promises.postWithToken(url, this.props.idToken)
+		.then((response) => {
+			this.setState({isSubscribed: !this.state.isSubscribed});
+		})
+		.catch((error) => {
+			console.error(error);
 		})
 	}
 
@@ -45,6 +43,7 @@ class FarmDetailContainer extends Component {
 }
 
 FarmDetailContainer.propTypes = {
+	// from parent
 	address: React.PropTypes.string,
 	email: React.PropTypes.string,
 	id: React.PropTypes.number,
@@ -53,6 +52,15 @@ FarmDetailContainer.propTypes = {
 	phone: React.PropTypes.string,
 	subscribed: React.PropTypes.bool,
 	website: React.PropTypes.string,
+
+	// from redux
+	idToken: React.PropTypes.string,
 }
 
-export default FarmDetailContainer
+const mapStateToProps = (store) => {
+	return {
+		idToken: store.user.idToken,
+	}
+}
+
+export default connect(mapStateToProps)(FarmDetailContainer)

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { AsyncStorage } from 'react-native'
+import { connect } from 'react-redux'
 
 import promises from '../../config/promises'
 import settings from '../../config/settings'
@@ -14,8 +14,7 @@ class ProductDetailContainer extends Component {
 	}
 
 	toggleSubscriptionStatus(){
-		AsyncStorage.getItem(settings.keys.ID_TOKEN)
-		.then((idToken) => promises.postWithToken((this.state.isSubscribed ? settings.urls.PRODUCTS_UNSUBSCRIBE_URL : settings.urls.PRODUCTS_SUBSCRIBE_URL) + this.props.id, idToken))
+		promises.postWithToken((this.state.isSubscribed ? settings.urls.PRODUCTS_UNSUBSCRIBE_URL : settings.urls.PRODUCTS_SUBSCRIBE_URL) + this.props.id, idToken)
 		.then((response) => {
 			/* TODO: get the confirmation of the change of the isSubscribed state from the server*/
 			this.setState({isSubscribed: !this.state.isSubscribed});
@@ -39,10 +38,20 @@ class ProductDetailContainer extends Component {
 }
 
 ProductDetailContainer.propTypes = {
+	// from parent
 	farms: React.PropTypes.array,
 	id: React.PropTypes.number.isRequired,
 	name: React.PropTypes.string.isRequired,
 	subscribed: React.PropTypes.bool.isRequired,
+
+	// from redux
+	idToken: React.PropTypes.string,
 }
 
-export default ProductDetailContainer
+const mapStateToProps = (store) => {
+	return {
+		idToken: store.user.idToken,
+	}
+}
+
+export default connect(mapStateToProps)(ProductDetailContainer)

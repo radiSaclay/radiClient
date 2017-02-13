@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { AsyncStorage } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 
 import promises from '../../config/promises';
 import settings from '../../config/settings';
@@ -10,16 +10,13 @@ import Event from './Event.js';
 class EventContainer extends Component {
 
 	getEventDetail() {
-		AsyncStorage.getItem(settings.keys.ID_TOKEN)
-		.then((idToken) => {
-			promises.getWithToken(settings.urls.EVENTS_URL + this.props.eventId, idToken)
-			.then((response) => {
-				Actions.EventDetailContainer(response.data)
-			})
-			.catch((error) => {
-				console.error(error.response.data);
-			});
+		promises.getWithToken(settings.urls.EVENTS_URL + this.props.eventId, this.props.idToken)
+		.then((response) => {
+			Actions.EventDetailContainer(response.data)
 		})
+		.catch((error) => {
+			console.error(error.response.data)
+		});
 	}
 
 	render() {
@@ -36,10 +33,20 @@ class EventContainer extends Component {
 }
 
 EventContainer.propTypes = {
+	// from parent
 	endDate: React.PropTypes.string,
 	eventId: React.PropTypes.number,
 	producer: React.PropTypes.string,
-	title: React.PropTypes.string
+	title: React.PropTypes.string,
+
+	// from redux
+	idToken: React.PropTypes.string,
 };
 
-export default EventContainer;
+const mapStateToProps = (store) => {
+	return {
+		idToken: store.user.idToken,
+	}
+}
+
+export default connect(mapStateToProps)(EventContainer);

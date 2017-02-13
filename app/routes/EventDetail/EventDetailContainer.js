@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { AsyncStorage } from 'react-native';
+import { connect } from 'react-redux';
 
 import promises from '../../config/promises.js'
 import settings from '../../config/settings.js'
@@ -13,15 +13,13 @@ class EventDetailContainer extends Component {
 	}
 
 	togglePinStatus(){
-		AsyncStorage.getItem(settings.keys.ID_TOKEN).then((idToken) => {
-			let url = (this.state.isPinned ? settings.urls.EVENTS_UNPIN_URL : settings.urls.EVENTS_PIN_URL) + this.props.id
-			promises.postWithToken(url, idToken)
-			.then((response) => {
-				this.setState({isPinned: !this.state.isPinned});
-			})
-			.catch((error) => {
-				console.error(error);
-			})
+		let url = (this.state.isPinned ? settings.urls.EVENTS_UNPIN_URL : settings.urls.EVENTS_PIN_URL) + this.props.id
+		promises.postWithToken(url, idToken)
+		.then((response) => {
+			this.setState({isPinned: !this.state.isPinned});
+		})
+		.catch((error) => {
+			console.error(error);
 		})
 	}
 
@@ -40,10 +38,20 @@ class EventDetailContainer extends Component {
 }
 
 EventDetailContainer.propTypes = {
+	// from parent
 	description: React.PropTypes.string,
 	endAt: React.PropTypes.string,
 	farmId: React.PropTypes.number,
-	id: React.PropTypes.number
-};
+	id: React.PropTypes.number,
 
-export default EventDetailContainer;
+	// from redux
+	idToken: React.PropTypes.string,
+}
+
+const mapStateToProps = (store) => {
+	return {
+		idToken: store.user.idToken,
+	}
+}
+
+export default connect(mapStateToProps)(EventDetailContainer);
