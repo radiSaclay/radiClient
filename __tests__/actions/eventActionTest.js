@@ -50,3 +50,16 @@ describe('Get events from the API', () => {
 		expect(eventActions.eventsListFetchError(error)).toEqual(expectedAction)
 	})
 })
+
+describe('Toggle event pinned status', () => {
+	it('should create an action when toggle pinned status fires', () => {
+		let eventId = 1
+		let pinnedStatus = true
+		let expectedAction = {
+			type: actionTypes.EVENT_TOGGLE_PINNED_STATUS,
+			eventId,
+			pinnedStatus
+		}
+		expect(eventActions.eventTogglePinnedStatus(eventId, pinnedStatus)).toEqual(expectedAction)
+	})
+})

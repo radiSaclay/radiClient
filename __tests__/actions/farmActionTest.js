@@ -50,3 +50,16 @@ describe('Get farms from the API', () => {
 		expect(farmActions.farmsError(error)).toEqual(expectedAction)
 	})
 })
+
+describe('Toggle farm subscribed status', () => {
+	it('should create an action when toggle subscribed status fires', () => {
+		let farmId = 1
+		let subscribedStatus = true
+		let expectedAction = {
+			type: actionTypes.FARM_TOGGLE_SUBSCRIBED_STATUS,
+			farmId,
+			subscribedStatus
+		}
+		expect(farmActions.farmToggleSubscribedStatus(farmId, subscribedStatus)).toEqual(expectedAction)
+	})
+})

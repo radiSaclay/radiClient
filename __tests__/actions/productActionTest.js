@@ -44,3 +44,16 @@ describe('Get products from the API', () => {
 		expect(productActions.productsError(error)).toEqual(expectedAction)
 	})
 })
+
+describe('Toggle product subscribed status', () => {
+	it('should create an action when toggle subscribed status fires', () => {
+		let productId = 1
+		let subscribedStatus = true
+		let expectedAction = {
+			type: actionTypes.PRODUCT_TOGGLE_SUBSCRIBED_STATUS,
+			productId,
+			subscribedStatus
+		}
+		expect(productActions.productToggleSubscribedStatus(productId, subscribedStatus)).toEqual(expectedAction)
+	})
+})
