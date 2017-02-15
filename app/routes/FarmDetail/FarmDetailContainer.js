@@ -1,37 +1,25 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import _ from 'lodash'
 
 import promises from '../../config/promises.js'
 import settings from '../../config/settings.js'
+import * as farmOperations from '../../operations/farmOperations'
 
 import FarmDetail from './FarmDetail.js';
 
 class FarmDetailContainer extends Component {
-	constructor(props){
-		super();
-		this.state = {isSubscribed: props.subscribed};
-	}
-
-	toggleSubscriptionStatus(){
-		let url = (this.state.isSubscribed ? settings.urls.FARMS_UNSUBSCRIBE_URL : settings.urls.FARMS_SUBSCRIBE_URL) + this.props.id
-		promises.postWithToken(url, this.props.idToken)
-		.then((response) => {
-			this.setState({isSubscribed: !this.state.isSubscribed});
-		})
-		.catch((error) => {
-			console.error(error);
-		})
-	}
 
 	render() {
+		var {idToken, id, subscribed} = this.props
 		return(
 			<FarmDetail
-				toggleSubscriptionStatus={this.toggleSubscriptionStatus.bind(this)}
+				toggleSubscriptionStatus={this.props.toggleSubscriptionStatus.bind(this, idToken, id, subscribed)}
 
 				address={this.props.address}
 				email={this.props.email}
 				id={this.props.id}
-				isSubscribed={this.state.isSubscribed}
+				isSubscribed={this.props.subscribed}
 				name={this.props.name}
 				ownerId={this.props.ownerId}
 				phone={this.props.phone}
@@ -50,17 +38,25 @@ FarmDetailContainer.propTypes = {
 	name: React.PropTypes.string,
 	ownerId: React.PropTypes.number,
 	phone: React.PropTypes.string,
-	subscribed: React.PropTypes.bool,
 	website: React.PropTypes.string,
 
 	// from redux
 	idToken: React.PropTypes.string,
+	subscribed: React.PropTypes.bool,
+	toggleSubscriptionStatus: React.PropTypes.func,
 }
 
-const mapStateToProps = (store) => {
+const mapStateToProps = (store, ownProps) => {
 	return {
 		idToken: store.user.idToken,
+		subscribed: _.find(store.farms.farms, (farm) => { return farm.id === ownProps.id }).subscribed,
 	}
 }
 
-export default connect(mapStateToProps)(FarmDetailContainer)
+const mapDispatchToProps = (dispatch) => {
+	return {
+		toggleSubscriptionStatus: (idToken, farmId, subscribedStatus) => dispatch(farmOperations.farmToggleSubscribedStatus(idToken, farmId, subscribedStatus)),
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FarmDetailContainer)

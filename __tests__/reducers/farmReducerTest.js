@@ -50,13 +50,13 @@ describe('Farm reducer', () =>{
 		expect(farmReducer([], farmActions.farmsListFetchSuccess(farms))).toEqual(expectedState)
 	})
 
-	it('should handle FARMS_LIST_FETCH_ERROR', () => {
+	it('should handle FARMS_ERROR', () => {
 		let error = new Error()
 		let expectedState = {
 			error: error,
 			isLoading: false
 		}
-		expect(farmReducer([], farmActions.farmsListFetchError(error))).toEqual(expectedState)
+		expect(farmReducer([], farmActions.farmsError(error))).toEqual(expectedState)
 	})
 
 })

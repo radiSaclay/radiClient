@@ -61,12 +61,12 @@ describe('Farms list fetch operations', () => {
 	})
 
 
-	it('creates FARMS_LIST_FETCH_ERROR when fetching farms list fails', () => {
+	it('creates FARMS_ERROR when fetching farms list fails', () => {
 		let responseError = new Error('something awful happened')
 		let store = mockStore({farms: [], error: null, isLoading: false})
 		let expectedActions = [
 			farmActions.farmsListFetchRequest(),
-			farmActions.farmsListFetchError(responseError)
+			farmActions.farmsError(responseError)
 		]
 
 		nock(url, requestHeaders)
