@@ -55,12 +55,12 @@ describe('Products list fetch operations', () => {
 	})
 
 
-	it('creates PRODUCTS_LIST_FETCH_ERROR when fetching products list fails', () => {
+	it('creates PRODUCTS_ERROR when fetching products list fails', () => {
 		let responseError = new Error('something awful happened')
 		let store = mockStore({products: [], error: null, isLoading: false})
 		let expectedActions = [
 			productActions.productsListFetchRequest(),
-			productActions.productsListFetchError(responseError)
+			productActions.productsError(responseError)
 		]
 
 		nock(url, requestHeaders)

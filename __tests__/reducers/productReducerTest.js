@@ -44,13 +44,13 @@ describe('Product reducer', () =>{
 		expect(productReducer([], productActions.productsListFetchSuccess(products))).toEqual(expectedState)
 	})
 
-	it('should handle PRODUCTS_LIST_FETCH_ERROR', () => {
+	it('should handle PRODUCTS_ERROR', () => {
 		let error = new Error()
 		let expectedState = {
 			error: error,
 			isLoading: false,
 		}
-		expect(productReducer([], productActions.productsListFetchError(error))).toEqual(expectedState)
+		expect(productReducer([], productActions.productsError(error))).toEqual(expectedState)
 	})
 
 })
