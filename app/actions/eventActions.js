@@ -21,9 +21,9 @@ export function eventsListFetchSuccess(events) {
 	}
 }
 
-export function eventsListFetchError(error) {
+export function eventError(error) {
 	return {
-		type: actionTypes.EVENTS_LIST_FETCH_ERROR,
+		type: actionTypes.EVENT_ERROR,
 		error
 	}
 }

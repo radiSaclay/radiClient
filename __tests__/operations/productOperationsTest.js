@@ -74,3 +74,68 @@ describe('Products list fetch operations', () => {
 	})
 
 })
+
+describe('Product toggle subscribed status operation', () => {
+
+	const idToken = 'bqdiuqbw9udb19b129dub1'
+	const requestHeaders = {'Authorization': idToken}
+	const productId = 1
+	const subscribedStatus = false
+	const url = settings.urls.PRODUCTS_SUBSCRIBE_URL + productId
+
+	afterEach(() => {
+		nock.cleanAll()
+	})
+
+	it('creates PRODUCT_TOGGLE_SUBSCRIBED_STATUS when toggle subscribed status succeeds', () => {
+		let store = mockStore({
+			products: [{
+				"id": 1,
+				"name": "radis",
+				"subscribed": false,
+				"farms": [1, 2],
+				"subproducts": [3, 4],
+				"ancestors": [1],
+			}],
+			error: null,
+			isLoading: false
+		})
+		let expectedActions = [
+			productActions.productToggleSubscribedStatus(productId, !subscribedStatus)
+		]
+
+		nock(url, requestHeaders)
+		.post('')
+		.reply(200)
+
+		return store.dispatch(operations.productToggleSubscribedStatus(idToken, productId, subscribedStatus))
+		.then(() => expect(store.getActions()).toEqual(expectedActions))
+	})
+
+	it('creates PRODUCT_TOGGLE_SUBSCRIBED_STATUS when toggle subscribed status fails', () => {
+		errorMessage = 'error occured'
+		let error = new Error(errorMessage)
+		let store = mockStore({
+			products: [{
+				"id": 1,
+				"name": "radis",
+				"subscribed": false,
+				"farms": [1, 2],
+				"subproducts": [3, 4],
+				"ancestors": [1],
+			}],
+			error: null,
+			isLoading: false
+		})
+		let expectedActions = [
+			productActions.productsError(error)
+		]
+
+		nock(url, requestHeaders)
+		.post('')
+		.replyWithError(errorMessage)
+
+		return store.dispatch(operations.productToggleSubscribedStatus(idToken, productId, subscribedStatus))
+		.then(() => expect(store.getActions()).toEqual(expectedActions))
+	})
+})

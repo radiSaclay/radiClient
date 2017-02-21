@@ -25,7 +25,7 @@ export default function events(state = initialState, action) {
 				events: action.events,
 				isLoading:false
 			}
-		case actionTypes.EVENTS_LIST_FETCH_ERROR:
+		case actionTypes.EVENT_ERROR:
 			return {
 				...state,
 				error: action.error,

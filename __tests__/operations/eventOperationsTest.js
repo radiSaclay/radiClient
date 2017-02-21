@@ -61,12 +61,12 @@ describe('Events list fetch operations', () => {
 	})
 
 
-	it('creates EVENTS_LIST_FETCH_ERROR when fetching events list fails', () => {
+	it('creates EVENT_ERROR when fetching events list fails', () => {
 		let responseError = new Error('something awful happened')
 		let store = mockStore({events: [], error: null, isLoading: false})
 		let expectedActions = [
 			eventActions.eventsListFetchRequest(),
-			eventActions.eventsListFetchError(responseError)
+			eventActions.eventError(responseError)
 		]
 
 		nock(url, requestHeaders)
@@ -79,4 +79,75 @@ describe('Events list fetch operations', () => {
 			})
 	})
 
+})
+
+describe('Event toggle pinned status operation', () => {
+
+	const idToken = 'bqdiuqbw9udb19b129dub1'
+	const requestHeaders = {'Authorization': idToken}
+	const eventId = 1
+	const pinnedStatus = false
+	const url = settings.urls.EVENTS_PIN_URL + eventId
+
+	afterEach(() => {
+		nock.cleanAll()
+	})
+
+	it('creates EVENT_TOGGLE_PINNED_STATUS when toggle pinned status succeeds', () => {
+		let store = mockStore({
+			events: [{
+				"id": 1,
+				"title": "Vente de Radis",
+				"description": "C'est la folie! Ce weekend il y a cuiellette de radis",
+				"publishAt": "2017-01-01",
+				"BeginAt": "2017-01-01",
+				"EndAt": "2017-01-30",
+				"pinned": true,
+				"farmId": 1,
+				"products": []
+			}],
+			error: null,
+			isLoading: false
+		})
+		let expectedActions = [
+			eventActions.eventTogglePinnedStatus(eventId, !pinnedStatus)
+		]
+
+		nock(url, requestHeaders)
+		.post('')
+		.reply(200)
+
+		return store.dispatch(operations.eventTogglePinnedStatus(idToken, eventId, pinnedStatus))
+		.then(() => expect(store.getActions()).toEqual(expectedActions))
+	})
+
+	it('creates EVENT_TOGGLE_PINNED_STATUS when toggle pinned status fails', () => {
+		errorMessage = 'error occured'
+		let error = new Error(errorMessage)
+		let store = mockStore({
+			events: [{
+				"id": 1,
+				"title": "Vente de Radis",
+				"description": "C'est la folie! Ce weekend il y a cuiellette de radis",
+				"publishAt": "2017-01-01",
+				"BeginAt": "2017-01-01",
+				"EndAt": "2017-01-30",
+				"pinned": true,
+				"farmId": 1,
+				"products": []
+			}],
+			error: null,
+			isLoading: false
+		})
+		let expectedActions = [
+			eventActions.eventError(error)
+		]
+
+		nock(url, requestHeaders)
+		.post('')
+		.replyWithError(errorMessage)
+
+		return store.dispatch(operations.eventTogglePinnedStatus(idToken, eventId, pinnedStatus))
+		.then(() => expect(store.getActions()).toEqual(expectedActions))
+	})
 })

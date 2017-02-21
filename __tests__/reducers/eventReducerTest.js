@@ -56,7 +56,7 @@ describe('Event reducer', () =>{
 			error: error,
 			isLoading: false
 		}
-		expect(eventReducer([], eventActions.eventsListFetchError(error))).toEqual(expectedState)
+		expect(eventReducer([], eventActions.eventError(error))).toEqual(expectedState)
 	})
 
 	it('should handle EVENT_TOGGLE_PINNED_STATUS', () => {
