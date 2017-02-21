@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { AsyncStorage, ActivityIndicator } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux'
+import _ from 'lodash'
 
 import * as newsOperations from '../../operations/newsOperations'
 
@@ -48,9 +49,9 @@ class NewsContainer extends Component {
 
 const mapStateToProps = (store) => {
 	return {
-		featuredEvents: store.events.events.slice(0,3),
-		featuredFarms: store.farms.farms.slice(0,3),
-		featuredProducts: store.products.products.slice(0,3),
+		featuredEvents: _.slice(store.events.events, 0, 3),
+		featuredFarms: _.slice(store.farms.farms, 0, 3),
+		featuredProducts: _.slice(store.products.products, 0, 3),
 		idToken: store.user.idToken,
 		isLoading: store.news.isLoading
 	}

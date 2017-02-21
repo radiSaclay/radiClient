@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
 	Alert,
-	AsyncStorage,
 	Image,
 	Text,
 	TextInput,
@@ -34,15 +33,9 @@ class AccountDisplay extends Component {
 		]
 	}
 
-	// TODO: improve AsyncStorage acces and Action firing
-	async userLogout() {
+	userLogout() {
 		this.props.userLogout()
-		try {
-			await AsyncStorage.removeItem(settings.keys.ID_TOKEN);
-			Actions.Authentication({type: ActionConst.REPLACE});
-		} catch (error) {
-			console.log('AsyncStorage error: ' + error.message);
-		}
+		Actions.Authentication({type: ActionConst.REPLACE})
 	}
 
 	openControlPanel() {
@@ -151,7 +144,12 @@ class AccountDisplay extends Component {
 	}
 }
 
-const mapStateToProps = (store) => { return {user: store.user} }
+AccountDisplay.propTypes = {
+	// from redux
+	userLogout: React.PropTypes.func,
+}
+
+const mapStateToProps = (store) => { return {} }
 
 const mapDispatchToProps = (dispatch) => {
 	return {

@@ -61,12 +61,12 @@ describe('Farms list fetch operations', () => {
 	})
 
 
-	it('creates FARMS_LIST_FETCH_ERROR when fetching farms list fails', () => {
+	it('creates FARMS_ERROR when fetching farms list fails', () => {
 		let responseError = new Error('something awful happened')
 		let store = mockStore({farms: [], error: null, isLoading: false})
 		let expectedActions = [
 			farmActions.farmsListFetchRequest(),
-			farmActions.farmsListFetchError(responseError)
+			farmActions.farmsError(responseError)
 		]
 
 		nock(url, requestHeaders)
@@ -79,4 +79,74 @@ describe('Farms list fetch operations', () => {
 		})
 	})
 
+	describe('Farm toggle subscribed status operation', () => {
+
+		const idToken = 'bqdiuqbw9udb19b129dub1'
+		const requestHeaders = {'Authorization': idToken}
+		const farmId = 1
+		const subscribedStatus = false
+		const url = settings.urls.FARMS_SUBSCRIBE_URL + farmId
+
+		afterEach(() => {
+			nock.cleanAll()
+		})
+
+		it('creates FARM_TOGGLE_SUBSCRIBED_STATUS when toggle subscribed status succeeds', () => {
+			let store = mockStore({
+				farms: [{
+					"id": 1,
+					"name": "Farm 1",
+					"website": "www.farm.com",
+					"address": "123 rue de la ferme, 75000 Palaiseau",
+					"phone": "+33123456789",
+					"email": "farmer1@test.com",
+					"subscribed": false,
+					"ownerId": 1,
+					"products": [1, 2, 3]
+				}],
+				error: null,
+				isLoading: false
+			})
+			let expectedActions = [
+				farmActions.farmToggleSubscribedStatus(farmId, !subscribedStatus)
+			]
+
+			nock(url, requestHeaders)
+			.post('')
+			.reply(200)
+
+			return store.dispatch(operations.farmToggleSubscribedStatus(idToken, farmId, subscribedStatus))
+			.then(() => expect(store.getActions()).toEqual(expectedActions))
+		})
+
+		it('creates FARM_TOGGLE_SUBSCRIBED_STATUS when toggle subscribed status fails', () => {
+			errorMessage = 'error occured'
+			let error = new Error(errorMessage)
+			let store = mockStore({
+				farms: [{
+					"id": 1,
+					"name": "Farm 1",
+					"website": "www.farm.com",
+					"address": "123 rue de la ferme, 75000 Palaiseau",
+					"phone": "+33123456789",
+					"email": "farmer1@test.com",
+					"subscribed": false,
+					"ownerId": 1,
+					"products": [1, 2, 3]
+				}],
+				error: null,
+				isLoading: false
+			})
+			let expectedActions = [
+				farmActions.farmsError(error)
+			]
+
+			nock(url, requestHeaders)
+			.post('')
+			.replyWithError(errorMessage)
+
+			return store.dispatch(operations.farmToggleSubscribedStatus(idToken, farmId, subscribedStatus))
+			.then(() => expect(store.getActions()).toEqual(expectedActions))
+		})
+	})
 })

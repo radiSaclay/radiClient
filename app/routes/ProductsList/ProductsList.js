@@ -32,6 +32,7 @@ class ProductsList extends Component {
 }
 
 ProductsList.propTypes = {
+	// from parent
 	productsList: React.PropTypes.array,
 }
 

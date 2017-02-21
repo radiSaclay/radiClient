@@ -20,6 +20,7 @@ class ImageButton extends Component {
 }
 
 ImageButton.propTypes = {
+	// from parent
 	onPress: React.PropTypes.func,
 	source: React.PropTypes.number,
 }

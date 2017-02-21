@@ -1,48 +1,52 @@
 import React, { Component } from 'react'
-import { AsyncStorage } from 'react-native'
+import { connect } from 'react-redux'
+import _ from 'lodash'
 
 import promises from '../../config/promises'
 import settings from '../../config/settings'
+import * as productOperations from '../../operations/productOperations'
 
 import ProductDetail from './ProductDetail'
 
 class ProductDetailContainer extends Component {
 
-	constructor(props){
-		super(props)
-		this.state = {isSubscribed: this.props.subscribed}
-	}
-
-	toggleSubscriptionStatus(){
-		AsyncStorage.getItem(settings.keys.ID_TOKEN)
-		.then((idToken) => promises.postWithToken((this.state.isSubscribed ? settings.urls.PRODUCTS_UNSUBSCRIBE_URL : settings.urls.PRODUCTS_SUBSCRIBE_URL) + this.props.id, idToken))
-		.then((response) => {
-			/* TODO: get the confirmation of the change of the isSubscribed state from the server*/
-			this.setState({isSubscribed: !this.state.isSubscribed});
-		})
-		.catch((error) => {
-			console.error(error);
-		})
-	}
-
 	render() {
+		var {idToken, id, subscribed} = this.props
 		return(
 			<ProductDetail
-				toggleSubscriptionStatus={this.toggleSubscriptionStatus.bind(this)}
+				toggleSubscriptionStatus={this.props.toggleSubscriptionStatus.bind(this, idToken, id, subscribed)}
 
 				farms={this.props.farms}
 				name={this.props.name}
-				isSubscribed={this.state.isSubscribed}
+				isSubscribed={this.props.subscribed}
 				/>
 		)
 	}
 }
 
 ProductDetailContainer.propTypes = {
+	// from parent
 	farms: React.PropTypes.array,
 	id: React.PropTypes.number.isRequired,
 	name: React.PropTypes.string.isRequired,
+
+	// from redux
+	idToken: React.PropTypes.string,
 	subscribed: React.PropTypes.bool.isRequired,
+	toggleSubscriptionStatus: React.PropTypes.func,
 }
 
-export default ProductDetailContainer
+const mapStateToProps = (store, ownProps) => {
+	return {
+		idToken: store.user.idToken,
+		subscribed: _.find(store.products.products, (product) => { return product.id === ownProps.id }).subscribed,
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		toggleSubscriptionStatus: (idToken, productId, subscribedStatus) => dispatch(productOperations.productToggleSubscribedStatus(idToken, productId, subscribedStatus)),
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetailContainer)

@@ -2,6 +2,17 @@ import * as actions from '../actions/farmActions'
 import promises from '../config/promises'
 import settings from '../config/settings'
 
+export function farmToggleSubscribedStatus (idToken, farmId, subscribedStatus) {
+	return dispatch => {
+		let url = (subscribedStatus ? settings.urls.FARMS_UNSUBSCRIBE_URL : settings.urls.FARMS_SUBSCRIBE_URL) + farmId
+		return promises.postWithToken(url, idToken)
+		.then((response) => {
+			dispatch(actions.farmToggleSubscribedStatus(farmId, !subscribedStatus))
+		})
+		.catch((error) => dispatch(actions.farmsError(error)))
+	}
+}
+
 export function farmsListFetch (idToken) {
 	return dispatch => {
 		dispatch(actions.farmsListFetchRequest())
@@ -9,6 +20,6 @@ export function farmsListFetch (idToken) {
 		.then((farms) => {
 			dispatch(actions.farmsListFetchSuccess(farms.data))
 		})
-		.catch(error => dispatch(actions.farmsListFetchError(error)))
+		.catch(error => dispatch(actions.farmsError(error)))
 	}
 }

@@ -35,6 +35,7 @@ class EventsList extends Component {
 }
 
 EventsList.propTypes = {
+	// from parent
 	eventsList: React.PropTypes.array,
 }
 

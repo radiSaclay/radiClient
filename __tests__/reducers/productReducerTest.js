@@ -11,6 +11,38 @@ describe('Product reducer', () =>{
 		expect(productReducer(undefined, {})).toEqual(expectedState)
 	})
 
+	it('should handle PRODUCT_TOGGLE_SUBSCRIBED_STATUS', () => {
+		let initialState = {
+			products: [
+				{
+					"id": 1,
+					"name": "radis",
+					"subscribed": false,
+					"farms": [1, 2],
+					"subproducts": [3, 4],
+					"ancestors": [1],
+				}
+			]
+		}
+
+		let productId = 1
+		let subscribedStatus = true
+
+		let expectedState = {
+			products: [
+				{
+					"id": 1,
+					"name": "radis",
+					"subscribed": true,
+					"farms": [1, 2],
+					"subproducts": [3, 4],
+					"ancestors": [1],
+				}
+			]
+		}
+		expect(productReducer(initialState, productActions.productToggleSubscribedStatus(productId, subscribedStatus))).toEqual(expectedState)
+	})
+
 	it('should handle PRODUCTS_LIST_FETCH_REQUEST', () => {
 		let expectedState = {
 			isLoading: true
@@ -44,13 +76,60 @@ describe('Product reducer', () =>{
 		expect(productReducer([], productActions.productsListFetchSuccess(products))).toEqual(expectedState)
 	})
 
-	it('should handle PRODUCTS_LIST_FETCH_ERROR', () => {
+	it('should handle PRODUCTS_ERROR', () => {
 		let error = new Error()
 		let expectedState = {
 			error: error,
 			isLoading: false,
 		}
-		expect(productReducer([], productActions.productsListFetchError(error))).toEqual(expectedState)
+		expect(productReducer([], productActions.productsError(error))).toEqual(expectedState)
 	})
 
+	it('should handle PRODUCT_TOGGLE_SUBSCRIBED_STATUS', () => {
+		let initialState = {
+			products: [
+				{
+					"id": 1,
+					"name": "radis",
+					"subscribed": false,
+					"farms": [1, 2],
+					"subproducts": [3, 4],
+					"ancestors": [1],
+				},
+				{
+					"id": 2,
+					"name": "poulet",
+					"subscribed": false,
+					"farms": [1, 2],
+					"subproducts": [3, 4],
+					"ancestors": [1],
+				}
+			]
+		}
+
+		let productId = 1
+		let subscribedStatus = true
+
+		let expectedState = {
+			products: [
+				{
+					"id": 1,
+					"name": "radis",
+					"subscribed": true,
+					"farms": [1, 2],
+					"subproducts": [3, 4],
+					"ancestors": [1],
+				},
+				{
+					"id": 2,
+					"name": "poulet",
+					"subscribed": false,
+					"farms": [1, 2],
+					"subproducts": [3, 4],
+					"ancestors": [1],
+				}
+			]
+		}
+		expect(productReducer(initialState, productActions.productToggleSubscribedStatus(productId, subscribedStatus))).toEqual(expectedState)
+	})
 })

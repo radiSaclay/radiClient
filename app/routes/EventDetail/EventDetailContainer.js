@@ -1,49 +1,57 @@
 import React, {Component} from 'react';
-import { AsyncStorage } from 'react-native';
+import { connect } from 'react-redux';
+import _ from 'lodash'
 
 import promises from '../../config/promises.js'
 import settings from '../../config/settings.js'
+import * as eventOperations from '../../operations/eventOperations'
 
 import EventDetail from './EventDetail.js';
 
 class EventDetailContainer extends Component {
-	constructor(props){
-		super();
-		this.state = {isPinned: props.pinned};
-	}
-
-	togglePinStatus(){
-		AsyncStorage.getItem(settings.keys.ID_TOKEN).then((idToken) => {
-			let url = (this.state.isPinned ? settings.urls.EVENTS_UNPIN_URL : settings.urls.EVENTS_PIN_URL) + this.props.id
-			promises.postWithToken(url, idToken)
-			.then((response) => {
-				this.setState({isPinned: !this.state.isPinned});
-			})
-			.catch((error) => {
-				console.error(error);
-			})
-		})
-	}
 
 	render() {
+		var {idToken, id, pinned} = this.props
 		return(
 			<EventDetail
-				togglePinStatus={this.togglePinStatus.bind(this)}
+				togglePinStatus={this.props.togglePinStatus.bind(this, idToken, id, pinned)}
 
 				description={this.props.description}
 				endAt={this.props.endAt}
 				farmId={this.props.farmId}
-				isPinned={this.state.isPinned}
+				isPinned={this.props.pinned}
 				/>
 		)
 	}
 }
 
 EventDetailContainer.propTypes = {
+	// from parent
+	beginAt: React.PropTypes.string,
 	description: React.PropTypes.string,
 	endAt: React.PropTypes.string,
 	farmId: React.PropTypes.number,
-	id: React.PropTypes.number
-};
+	id: React.PropTypes.number,
+	publishAt: React.PropTypes.string,
+	title: React.PropTypes.string,
 
-export default EventDetailContainer;
+	// from redux
+	idToken: React.PropTypes.string,
+	pinned: React.PropTypes.bool,
+	togglePinStatus: React.PropTypes.func,
+}
+
+const mapStateToProps = (store, ownProps) => {
+	return {
+		idToken: store.user.idToken,
+		pinned: _.find(store.events.events, (event) => { return event.id === ownProps.id }).pinned,
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		togglePinStatus: (idToken, eventId, pinnedStatus) => dispatch(eventOperations.eventTogglePinnedStatus(idToken, eventId, pinnedStatus)),
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventDetailContainer);

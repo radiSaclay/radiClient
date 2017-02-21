@@ -44,9 +44,22 @@ describe('Get farms from the API', () => {
 	it('should create an action when fetch farms list raises an error', () => {
 		let error = new Error()
 		let expectedAction = {
-			type: actionTypes.FARMS_LIST_FETCH_ERROR,
+			type: actionTypes.FARMS_ERROR,
 			error
 		}
-		expect(farmActions.farmsListFetchError(error)).toEqual(expectedAction)
+		expect(farmActions.farmsError(error)).toEqual(expectedAction)
+	})
+})
+
+describe('Toggle farm subscribed status', () => {
+	it('should create an action when toggle subscribed status fires', () => {
+		let farmId = 1
+		let subscribedStatus = true
+		let expectedAction = {
+			type: actionTypes.FARM_TOGGLE_SUBSCRIBED_STATUS,
+			farmId,
+			subscribedStatus
+		}
+		expect(farmActions.farmToggleSubscribedStatus(farmId, subscribedStatus)).toEqual(expectedAction)
 	})
 })

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, AsyncStorage, Text } from 'react-native';
+import { ActivityIndicator, Text } from 'react-native';
 import { Router, Scene, TabBar } from 'react-native-router-flux';
 import { connect } from 'react-redux'
 

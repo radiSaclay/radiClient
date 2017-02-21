@@ -86,6 +86,7 @@ const FarmDetail = (props) => {
 }
 
 FarmDetail.propTypes = {
+	// from parent
 	address: React.PropTypes.string,
 	name: React.PropTypes.string,
 	phone: React.PropTypes.string,

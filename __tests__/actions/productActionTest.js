@@ -38,9 +38,22 @@ describe('Get products from the API', () => {
 	it('should create an action when fetch products list raises an error', () => {
 		let error = new Error()
 		let expectedAction = {
-			type: actionTypes.PRODUCTS_LIST_FETCH_ERROR,
+			type: actionTypes.PRODUCTS_ERROR,
 			error
 		}
-		expect(productActions.productsListFetchError(error)).toEqual(expectedAction)
+		expect(productActions.productsError(error)).toEqual(expectedAction)
+	})
+})
+
+describe('Toggle product subscribed status', () => {
+	it('should create an action when toggle subscribed status fires', () => {
+		let productId = 1
+		let subscribedStatus = true
+		let expectedAction = {
+			type: actionTypes.PRODUCT_TOGGLE_SUBSCRIBED_STATUS,
+			productId,
+			subscribedStatus
+		}
+		expect(productActions.productToggleSubscribedStatus(productId, subscribedStatus)).toEqual(expectedAction)
 	})
 })

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { AsyncStorage } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 
 import promises from '../../config/promises';
 import settings from '../../config/settings';
@@ -10,8 +10,7 @@ import Product from './Product';
 class ProductContainer extends Component {
 
 	getProductDetail() {
-		AsyncStorage.getItem(settings.keys.ID_TOKEN)
-		.then((idToken) => promises.getWithToken(settings.urls.PRODUCTS_URL + this.props.id, idToken))
+		promises.getWithToken(settings.urls.PRODUCTS_URL + this.props.id, this.props.idToken)
 		.then((response) => {
 			Actions.ProductDetailContainer(response.data);
 		})
@@ -32,10 +31,20 @@ class ProductContainer extends Component {
 }
 
 ProductContainer.propTypes = {
+	// from parent
 	/* TODO: ask server team to not send farms list in the PRODUCTS_URL route */
 	farms: React.PropTypes.array,
 	id: React.PropTypes.number.isRequired,
 	name: React.PropTypes.string.isRequired,
+
+	// from redux
+	idToken: React.PropTypes.string,
 }
 
-export default ProductContainer
+const mapStateToProps = (store) => {
+	return {
+		idToken: store.user.idToken,
+	}
+}
+
+export default connect(mapStateToProps)(ProductContainer)
