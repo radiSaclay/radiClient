@@ -29,7 +29,6 @@ project.xcworkspace
 .gradle
 .keystore
 local.properties
-android/gradle.properties
 
 # node.js
 #
