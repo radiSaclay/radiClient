@@ -98,10 +98,12 @@ android {
     }
     signingConfigs {
         release {
-            storeFile file(RADISACLAY_RELEASE_STORE_FILE)
-            storePassword RADISACLAY_RELEASE_STORE_PASSWORD
-            keyAlias RADISACLAY_RELEASE_KEY_ALIAS
-            keyPassword RADISACLAY_RELEASE_KEY_PASSWORD
+			if (project.hasProperty('RADISACLAY_RELEASE_STORE_FILE')) {
+	            storeFile file(RADISACLAY_RELEASE_STORE_FILE)
+	            storePassword RADISACLAY_RELEASE_STORE_PASSWORD
+	            keyAlias RADISACLAY_RELEASE_KEY_ALIAS
+	            keyPassword RADISACLAY_RELEASE_KEY_PASSWORD
+			}
         }
     }
     splits {
