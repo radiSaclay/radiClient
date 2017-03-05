@@ -3,11 +3,6 @@ import colors from '../../config/colors';
 import metrics from '../../config/metrics';
 
 export default styles = StyleSheet.create({
-	actionsContainer: {
-		flex: 0.25,
-		flexDirection: 'row',
-		justifyContent: 'flex-end',
-	},
 	headerContainer: {
 		alignItems: 'center',
 		backgroundColor: colors.white,
@@ -19,16 +14,20 @@ export default styles = StyleSheet.create({
 		paddingRight: metrics.basePadding,
 	},
 	mainContainer: {
-		height: metrics.navBarHeight,
-		width: metrics.screenWidth,
+		flex: 1,
 	},
 	navContainer: {
 		flex: 0.25,
 		flexDirection: 'row',
 	},
+	quickActionsContainer: {
+		flex: 0.25,
+		flexDirection: 'row',
+		justifyContent: 'flex-end',
+	},
 	title: {
+		color: colors.black,
 		fontSize: 20,
-		fontWeight: 'bold',
 		textAlign: 'center',
 	},
 	titleContainer: {

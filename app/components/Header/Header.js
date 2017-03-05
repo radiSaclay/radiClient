@@ -1,14 +1,29 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
+import Drawer from 'react-native-drawer'
 
 import styles from './styles'
 
 import ImageButton from '../ImageButton'
+import SideMenu from '../SideMenu'
 
 class Header extends Component {
+	openControlPanel() {
+		this._sideMenu.open()
+	}
+
 	render() {
 		return (
-			<View style={styles.mainContainer}>
+			<Drawer
+				acceptPan={true}
+				content={<SideMenu actions={this.props.menuActions} />}
+				openDrawerOffset={0.1}
+				ref={(ref) => this._sideMenu = ref}
+				side="right"
+				tapToClose={true}
+				type="overlay"
+				>
+
 				<View style={styles.headerContainer}>
 					<View style={styles.navContainer}>
 						{
@@ -26,11 +41,11 @@ class Header extends Component {
 						</Text>
 					</View>
 
-					<View style={styles.actionsContainer}>
+					<View style={styles.quickActionsContainer}>
 						{
-							this.props.actions &&
-							this.props.actions.length > 0 &&
-							this.props.actions.map(function(action, key){
+							this.props.quickActions &&
+							this.props.quickActions.length > 0 &&
+							this.props.quickActions.map(function(action, key){
 								return (
 									<ImageButton
 										key={key}
@@ -40,24 +55,42 @@ class Header extends Component {
 								)
 							})
 						}
+
+						{
+							this.props.menuActions &&
+							this.props.menuActions.length > 0 &&
+							<ImageButton
+								onPress={this.openControlPanel.bind(this)}
+								source={require('../../images/menu.png')}
+								/>
+						}
 					</View>
 				</View>
-			</View>
+
+				<View style={styles.mainContainer}>
+					{this.props.children}
+				</View>
+			</Drawer>
 		)
 	}
 }
 
 Header.propTypes = {
 	// from parent
-	actions: React.PropTypes.arrayOf(
+	menuActions: React.PropTypes.arrayOf(
 		React.PropTypes.shape({
+			label: React.PropTypes.string.isRequired,
 			onPress: React.PropTypes.func.isRequired,
-			source: React.PropTypes.number.isRequired,
 	})),
 	navigation: React.PropTypes.shape({
 		onPress: React.PropTypes.func.isRequired,
 		source: React.PropTypes.number.isRequired,
 	}),
+	quickActions: React.PropTypes.arrayOf(
+		React.PropTypes.shape({
+			onPress: React.PropTypes.func.isRequired,
+			source: React.PropTypes.number.isRequired,
+	})),
 	title: React.PropTypes.string.isRequired,
 }
 
