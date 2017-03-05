@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import Drawer from 'react-native-drawer'
+import { ActionConst, Actions } from 'react-native-router-flux'
+import { connect } from 'react-redux'
 
 import styles from './styles'
+
+import * as userOperations from '../../operations/userOperations'
 
 import ImageButton from '../ImageButton'
 import SideMenu from '../SideMenu'
@@ -57,8 +61,6 @@ class Header extends Component {
 						}
 
 						{
-							this.props.menuActions &&
-							this.props.menuActions.length > 0 &&
 							<ImageButton
 								onPress={this.openControlPanel.bind(this)}
 								source={require('../../images/menu.png')}
@@ -92,6 +94,31 @@ Header.propTypes = {
 			source: React.PropTypes.number.isRequired,
 	})),
 	title: React.PropTypes.string.isRequired,
+
+	// from redux
+	userLogout: React.PropTypes.func,
 }
 
-export default Header
+const mapStateToProps = (store) => { return {} }
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		userLogout: () => dispatch(userOperations.userLogout())
+	}
+}
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => {
+	stateProps.menuActions = ownProps.menuActions.concat([
+		{
+			// Adds logout option to the SideMenu
+			label: 'Logout',
+			onPress: function(){
+				dispatchProps.userLogout()
+				Actions.Authentication({type: ActionConst.REPLACE})
+			}
+		}
+	])
+	return Object.assign({}, ownProps, stateProps, dispatchProps)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Header);
