@@ -1,75 +1,35 @@
 import React, { Component } from 'react';
-import {
-	Alert,
-	Image,
-	Text,
-	TextInput,
-	TouchableOpacity,
-	View
-} from 'react-native';
-import Drawer from 'react-native-drawer'
-import {
-	ActionConst,
-	Actions
-} from 'react-native-router-flux';
+import { Alert, Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
 import settings from '../../config/settings';
 import styles from './styles';
 
-import * as userOperations from '../../operations/userOperations'
-
 import Header from '../../components/Header'
-import SideMenu from '../../components/SideMenu'
 
 class AccountDisplay extends Component {
-	constructor() {
-		super()
-		this.actions = [
-			{
-				label: "Log out",
-				onPress: this.userLogout.bind(this),
-			},
-		]
-	}
-
-	userLogout() {
-		this.props.userLogout()
-		Actions.Authentication({type: ActionConst.REPLACE})
-	}
-
-	openControlPanel() {
-		this._sideMenu.open()
-	}
-
 	render() {
 		return (
-			<Drawer
-				acceptPan={true}
-				content={<SideMenu actions={this.actions} />}
-				openDrawerOffset={0.2}
-				ref={(ref) => this._sideMenu = ref}
-				side="right"
-				tapToClose={true}
-				type="overlay"
+			<Header
+				menuActions={[
+					{
+						label: 'Awesome option',
+						onPress: function(){Alert.alert('Incredible option')},
+					}
+				]}
+				navigation={{
+					source: require('../../images/back.png'),
+					onPress: function(){Actions.News()},
+				}}
+				quickActions={[
+					{
+						source: require('../../images/settings.png'),
+						onPress: function(){Alert.alert('Settings Clicked !')},
+					}
+				]}
+				title={this.props.title}
 				>
-				<Header
-					actions={[
-						{
-							source: require('../../images/settings.png'),
-							onPress: function(){Alert.alert('Settings Clicked !')},
-						},
-						{
-							source: require('../../images/menu.png'),
-							onPress: this.openControlPanel.bind(this),
-						}
-					]}
-					navigation={{
-						source: require('../../images/back.png'),
-						onPress: function(){Actions.News()},
-					}}
-					title='Mon Compte'
-					/>
 
 				<View style={styles.mainContainer}>
 					{/* Firstname, lastname */}
@@ -139,21 +99,9 @@ class AccountDisplay extends Component {
 						</Text>
 					</TouchableOpacity>
 				</View>
-			</Drawer>
+			</Header>
 		);
 	}
 }
 
-AccountDisplay.propTypes = {
-	// from redux
-	userLogout: React.PropTypes.func,
-}
-
-const mapStateToProps = (store) => { return {} }
-
-const mapDispatchToProps = (dispatch) => {
-	return {
-		userLogout: () => dispatch(userOperations.userLogout())
-	}
-}
-export default connect(mapStateToProps, mapDispatchToProps)(AccountDisplay);
+export default AccountDisplay;
