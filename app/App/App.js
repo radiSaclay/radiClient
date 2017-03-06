@@ -46,6 +46,7 @@ class App extends Component {
 
 							<Scene
 								component={NewsContainer}
+								hideNavBar={true}
 								icon={() => {return (<Text>Actualités</Text>)}}
 								initial={true}
 								key="News"
