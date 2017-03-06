@@ -6,11 +6,10 @@ export default styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		paddingBottom: metrics.navBarHeight,
-		paddingTop: metrics.navBarHeight
 	},
 	separator: {
 		flex: 1,
 		height: StyleSheet.hairlineWidth,
 		backgroundColor: colors.greyLight,
-  },
+	},
 });
