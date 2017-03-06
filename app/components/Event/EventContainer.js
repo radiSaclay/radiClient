@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import promises from '../../config/promises';
 import settings from '../../config/settings';
 
-import Event from './Event.js';
+import ListItem from '../ListItem';
 
 class EventContainer extends Component {
 
@@ -20,14 +20,15 @@ class EventContainer extends Component {
 	}
 
 	render() {
-		return (
-			<Event
-				getEventDetail={this.getEventDetail.bind(this)}
+		return(
+			<ListItem
+				onTouchCallback={this.getEventDetail.bind(this)}
 
-				endDate={this.props.endDate}
-				producer={this.props.producer}
+				date={this.props.endDate}
+				detail={this.props.description}
+				subtitle={this.props.farmName}
 				title={this.props.title}
-				/>
+			/>
 		);
 	}
 }
@@ -36,7 +37,7 @@ EventContainer.propTypes = {
 	// from parent
 	endDate: React.PropTypes.string,
 	eventId: React.PropTypes.number,
-	producer: React.PropTypes.string,
+	farmName: React.PropTypes.string,
 	title: React.PropTypes.string,
 
 	// from redux

@@ -10,10 +10,11 @@ import NewsBlock from '../../components/NewsBlock';
 
 var createEventRow = (event) =>
 	<EventContainer
+		description={event.description}
 		endDate={event.endAt}
 		eventId={event.id}
 		key={event.id}
-		producer={event.producer}
+		farmName={event.farm.name}
 		title={event.title}
 		/>
 
