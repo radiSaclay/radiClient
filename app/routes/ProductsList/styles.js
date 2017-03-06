@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		paddingBottom: metrics.navBarHeight,
-		paddingTop: metrics.navBarHeight,
 	},
 	separator: {
 		backgroundColor: colors.greyLight,

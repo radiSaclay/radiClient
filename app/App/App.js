@@ -63,6 +63,7 @@ class App extends Component {
 
 							<Scene
 								component={ProductsListContainer}
+								hideNavBar={true}
 								icon={() => {return (<Text>Produits</Text>)}}
 								key="ProductsList"
 								title="Les produits du plateau"
