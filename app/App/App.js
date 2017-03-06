@@ -71,6 +71,7 @@ class App extends Component {
 
 							<Scene
 								component={FarmsListContainer}
+								hideNavBar={true}
 								icon={() => {return (<Text>Fermes</Text>)}}
 								key="FarmsList"
 								title="Les fermes du plateau"

@@ -6,6 +6,7 @@ import settings from '../../config/settings'
 import * as farmOperations from '../../operations/farmOperations'
 
 import FarmsList from './FarmsList'
+import Header from '../../components/Header'
 
 class FarmsListContainer extends Component {
 
@@ -24,7 +25,9 @@ class FarmsListContainer extends Component {
 			)
 		} else {
 			return (
-				<FarmsList	farmsList={this.props.farmsList} />
+				<Header title={this.props.title}>
+					<FarmsList	farmsList={this.props.farmsList} />
+				</Header>
 			)
 		}
 	}
