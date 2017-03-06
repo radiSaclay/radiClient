@@ -21,7 +21,7 @@ class Header extends Component {
 			<Drawer
 				acceptPan={true}
 				content={<SideMenu actions={this.props.menuActions} />}
-				openDrawerOffset={0.1}
+				openDrawerOffset={0.15}
 				ref={(ref) => this._sideMenu = ref}
 				side="right"
 				tapToClose={true}
@@ -108,7 +108,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => {
-	stateProps.menuActions = ownProps.menuActions.concat([
+	stateProps.menuActions = (ownProps.menuActions || []).concat([
 		{
 			// Adds logout option to the SideMenu
 			label: 'Logout',
