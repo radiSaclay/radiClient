@@ -1,14 +1,20 @@
 import eventReducer from '../../app/reducers/eventReducer'
 import * as eventActions from '../../app/actions/eventActions'
+import * as userActions from '../../app/actions/userActions'
 
 describe('Event reducer', () =>{
+	initialState = {
+		events: [],
+		error: null,
+		isLoading: false
+	}
+
 	it('should return the initialState', () => {
-		let expectedState = {
-			events: [],
-			error: null,
-			isLoading: false
-		}
-		expect(eventReducer(undefined, {})).toEqual(expectedState)
+		expect(eventReducer(undefined, {})).toEqual(initialState)
+	})
+
+	it('should return the initialState when user logs out', () =>{
+		expect(eventReducer([], userActions.logout())).toEqual(initialState)
 	})
 
 	it('should handle EVENTS_LIST_FETCH_REQUEST', () => {

@@ -31,6 +31,8 @@ export default function products(state = initialState, action) {
 				error: action.error,
 				isLoading: false
 			}
+		case actionTypes.USER_LOGOUT:
+			return initialState;
 		default:
 			return state
 	}
