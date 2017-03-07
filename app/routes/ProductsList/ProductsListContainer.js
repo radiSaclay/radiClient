@@ -10,26 +10,21 @@ import ProductsList from './ProductsList';
 
 class ProductsListContainer extends Component {
 
-	componentWillMount(){
-		// TODO: find better strategy to load know when to load products list
-		if (!this.props.productsList.length){
-			this.props.fetchProductsList(this.props.idToken)
-		}
+	onRefresh() {
+		this.props.fetchProductsList(this.props.idToken)
 	}
 
 	// TODO: add error handling
 	render() {
-		if (this.props.isLoading) {
-			return (
-				<ActivityIndicator />
-			)
-		} else {
-			return (
-				<Header title={this.props.title}>
-					<ProductsList	productsList={this.props.productsList} />
-				</Header>
-			)
-		}
+		return (
+			<Header title={this.props.title}>
+				<ProductsList
+					productsList={this.props.productsList}
+					isLoading={this.props.isLoading}
+					onRefresh={this.onRefresh.bind(this)}
+				/>
+			</Header>
+		)
 	}
 }
 
