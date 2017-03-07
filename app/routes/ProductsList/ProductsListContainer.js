@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import settings from '../../config/settings';
 import * as productOperations from '../../operations/productOperations';
 
+import Header from '../../components/Header';
 import ProductsList from './ProductsList';
 
 class ProductsListContainer extends Component {
@@ -24,7 +25,9 @@ class ProductsListContainer extends Component {
 			)
 		} else {
 			return (
-				<ProductsList	productsList={this.props.productsList} />
+				<Header title={this.props.title}>
+					<ProductsList	productsList={this.props.productsList} />
+				</Header>
 			)
 		}
 	}

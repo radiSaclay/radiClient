@@ -46,6 +46,7 @@ class App extends Component {
 
 							<Scene
 								component={NewsContainer}
+								hideNavBar={true}
 								icon={() => {return (<Text>Actualités</Text>)}}
 								initial={true}
 								key="News"
@@ -54,13 +55,15 @@ class App extends Component {
 
 							<Scene
 								component={EventsListContainer}
+								hideNavBar={true}
 								icon={() => {return (<Text>Events</Text>)}}
 								key="EventsList"
-								title="Mes abonnements"
+								title="Abonnements"
 								/>
 
 							<Scene
 								component={ProductsListContainer}
+								hideNavBar={true}
 								icon={() => {return (<Text>Produits</Text>)}}
 								key="ProductsList"
 								title="Les produits du plateau"
@@ -68,6 +71,7 @@ class App extends Component {
 
 							<Scene
 								component={FarmsListContainer}
+								hideNavBar={true}
 								icon={() => {return (<Text>Fermes</Text>)}}
 								key="FarmsList"
 								title="Les fermes du plateau"

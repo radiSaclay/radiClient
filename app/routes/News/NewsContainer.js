@@ -6,7 +6,8 @@ import _ from 'lodash'
 
 import * as newsOperations from '../../operations/newsOperations'
 
-import News from './News.js'
+import Header from '../../components/Header'
+import News from './News'
 
 class NewsContainer extends Component {
 
@@ -33,15 +34,17 @@ class NewsContainer extends Component {
 			)
 		} else {
 			return (
-				<News
-					showEventsList = {this.showEventsList}
-					showFarmsList = {this.showFarmsList}
-					showProductsList = {this.showProductsList}
+				<Header title={this.props.title}>
+					<News
+						showEventsList = {this.showEventsList}
+						showFarmsList = {this.showFarmsList}
+						showProductsList = {this.showProductsList}
 
-					eventsList = {this.props.featuredEvents}
-					farmsList = {this.props.featuredFarms}
-					productsList = {this.props.featuredProducts}
-					/>
+						eventsList = {this.props.featuredEvents}
+						farmsList = {this.props.featuredFarms}
+						productsList = {this.props.featuredProducts}
+						/>
+				</Header>
 			)
 		}
 	}

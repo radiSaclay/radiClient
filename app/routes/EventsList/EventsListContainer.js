@@ -6,6 +6,7 @@ import settings from '../../config/settings';
 import * as eventOperations from '../../operations/eventOperations'
 
 import EventsList from './EventsList';
+import Header from '../../components/Header';
 
 class EventsListContainer extends Component {
 
@@ -24,7 +25,9 @@ class EventsListContainer extends Component {
 			)
 		} else {
 			return (
-				<EventsList	eventsList={this.props.eventsList} />
+				<Header title={this.props.title}>
+					<EventsList	eventsList={this.props.eventsList} />
+				</Header>
 			)
 		}
 	}
