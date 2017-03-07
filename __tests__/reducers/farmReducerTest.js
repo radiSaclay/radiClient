@@ -1,14 +1,20 @@
 import farmReducer from '../../app/reducers/farmReducer'
 import * as farmActions from '../../app/actions/farmActions'
+import * as userActions from '../../app/actions/userActions'
 
 describe('Farm reducer', () =>{
+	initialState = {
+		error: null,
+		farms: [],
+		isLoading: false
+	}
+
 	it('should return the initialState', () => {
-		let expectedState = {
-			error: null,
-			farms: [],
-			isLoading: false
-		}
-		expect(farmReducer(undefined, {})).toEqual(expectedState)
+		expect(farmReducer(undefined, {})).toEqual(initialState)
+	})
+
+	it('should return the initialState when user logs out', () =>{
+		expect(farmReducer([], userActions.logout())).toEqual(initialState)
 	})
 
 	it('should handle FARM_TOGGLE_SUBSCRIBED_STATUS', () => {
