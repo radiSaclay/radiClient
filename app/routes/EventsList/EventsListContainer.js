@@ -10,26 +10,21 @@ import Header from '../../components/Header';
 
 class EventsListContainer extends Component {
 
-	componentWillMount(){
-		// TODO: find better strategy to load know when to load events list
-		if (!this.props.eventsList.length){
-			this.props.fetchEventsList(this.props.idToken)
-		}
+	onRefresh() {
+		this.props.fetchEventsList(this.props.idToken)
 	}
 
 	// TODO: add error handling
 	render() {
-		if (this.props.isLoading) {
-			return (
-				<ActivityIndicator />
-			)
-		} else {
-			return (
-				<Header title={this.props.title}>
-					<EventsList	eventsList={this.props.eventsList} />
-				</Header>
-			)
-		}
+		return (
+			<Header title={this.props.title}>
+				<EventsList
+					eventsList={this.props.eventsList}
+					isLoading={this.props.isLoading}
+					onRefresh={this.onRefresh.bind(this)}
+				/>
+			</Header>
+		)
 	}
 }
 
