@@ -10,26 +10,21 @@ import Header from '../../components/Header'
 
 class FarmsListContainer extends Component {
 
-	componentWillMount(){
-		// TODO: find better strategy to load know when to load farms list
-		if (!this.props.farmsList.length){
-			this.props.fetchFarmsList(this.props.idToken)
-		}
+	onRefresh() {
+		this.props.fetchFarmsList(this.props.idToken)
 	}
 
 	// TODO: add error handling
 	render() {
-		if (this.props.isLoading) {
-			return (
-				<ActivityIndicator />
-			)
-		} else {
-			return (
-				<Header title={this.props.title}>
-					<FarmsList	farmsList={this.props.farmsList} />
-				</Header>
-			)
-		}
+		return (
+			<Header title={this.props.title}>
+				<FarmsList
+					farmsList={this.props.farmsList}
+					isLoading={this.props.isLoading}
+					onRefresh={this.onRefresh.bind(this)}
+				/>
+			</Header>
+		)
 	}
 }
 
