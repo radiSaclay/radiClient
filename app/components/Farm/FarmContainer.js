@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import promises from '../../config/promises'
 import settings from '../../config/settings'
 
-import Farm from './Farm'
+import ListItem from '../ListItem';
 
 class FarmContainer extends Component {
 
@@ -20,14 +20,14 @@ class FarmContainer extends Component {
 	}
 
 	render() {
-		return (
-			<Farm
-				getFarmDetail={this.getFarmDetail.bind(this)}
+		return(
+			<ListItem
+				onTouchCallback={this.getFarmDetail.bind(this)}
 
-				address={this.props.address}
-				name={this.props.name}
-				/>
-		)
+				subtitle={this.props.address}
+				title={this.props.name}
+			/>
+		);
 	}
 }
 
