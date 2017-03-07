@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import promises from '../../config/promises';
 import settings from '../../config/settings';
 
-import Product from './Product';
+import ListItem from '../ListItem';
 
 class ProductContainer extends Component {
 
@@ -20,13 +20,13 @@ class ProductContainer extends Component {
 	}
 
 	render() {
-		return (
-			<Product
-				getProductDetail={this.getProductDetail.bind(this)}
+		return(
+			<ListItem
+				onTouchCallback={this.getProductDetail.bind(this)}
 
-				name={this.props.name}
-				/>
-		)
+				title={this.props.name}
+			/>
+		);
 	}
 }
 
