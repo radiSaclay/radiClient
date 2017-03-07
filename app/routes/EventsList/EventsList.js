@@ -3,13 +3,13 @@ import { ListView, View } from 'react-native';
 
 import styles from './styles';
 
-import EventContainer from '../../components/Event';
+import Event from '../../components/Event';
 
 class EventsList extends Component {
 
 	renderRow(rowData) {
 		return (
-			<EventContainer
+			<Event
 				description={rowData.description}
 				endDate={rowData.endAt}
 				eventId={rowData.id}

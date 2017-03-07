@@ -7,7 +7,7 @@ import settings from '../../config/settings';
 
 import ListItem from '../ListItem';
 
-class ProductContainer extends Component {
+class Product extends Component {
 
 	getProductDetail() {
 		promises.getWithToken(settings.urls.PRODUCTS_URL + this.props.id, this.props.idToken)
@@ -30,7 +30,7 @@ class ProductContainer extends Component {
 	}
 }
 
-ProductContainer.propTypes = {
+Product.propTypes = {
 	// from parent
 	/* TODO: ask server team to not send farms list in the PRODUCTS_URL route */
 	farms: React.PropTypes.array,
@@ -47,4 +47,4 @@ const mapStateToProps = (store) => {
 	}
 }
 
-export default connect(mapStateToProps)(ProductContainer)
+export default connect(mapStateToProps)(Product)

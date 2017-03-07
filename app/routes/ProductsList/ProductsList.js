@@ -3,13 +3,13 @@ import { ListView, View } from 'react-native';
 
 import styles from './styles';
 
-import ProductContainer from '../../components/Product';
+import Product from '../../components/Product';
 
 class ProductsList extends Component {
 
 	renderRow(rowData) {
 		return (
-			<ProductContainer
+			<Product
 				id={rowData.id}
 				name={rowData.name}
 				/>

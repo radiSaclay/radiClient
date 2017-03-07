@@ -7,7 +7,7 @@ import settings from '../../config/settings';
 
 import ListItem from '../ListItem';
 
-class EventContainer extends Component {
+class Event extends Component {
 
 	getEventDetail() {
 		promises.getWithToken(settings.urls.EVENTS_URL + this.props.eventId, this.props.idToken)
@@ -33,7 +33,7 @@ class EventContainer extends Component {
 	}
 }
 
-EventContainer.propTypes = {
+Event.propTypes = {
 	// from parent
 	endDate: React.PropTypes.string,
 	eventId: React.PropTypes.number,
@@ -50,4 +50,4 @@ const mapStateToProps = (store) => {
 	}
 }
 
-export default connect(mapStateToProps)(EventContainer);
+export default connect(mapStateToProps)(Event);

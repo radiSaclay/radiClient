@@ -7,7 +7,7 @@ import settings from '../../config/settings'
 
 import ListItem from '../ListItem';
 
-class FarmContainer extends Component {
+class Farm extends Component {
 
 	getFarmDetail() {
 		promises.getWithToken(settings.urls.FARMS_URL + this.props.id, this.props.idToken)
@@ -31,7 +31,7 @@ class FarmContainer extends Component {
 	}
 }
 
-FarmContainer.propTypes = {
+Farm.propTypes = {
 	// from parent
 	address: React.PropTypes.string,
 	id: React.PropTypes.number,
@@ -47,4 +47,4 @@ const mapStateToProps = (store) => {
 	}
 }
 
-export default connect(mapStateToProps)(FarmContainer)
+export default connect(mapStateToProps)(Farm)
