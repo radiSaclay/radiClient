@@ -3,17 +3,17 @@ import { ListView, View } from 'react-native';
 
 import styles from './styles';
 
-import EventContainer from '../../components/Event';
+import Event from '../../components/Event';
 
 class EventsList extends Component {
 
-	// TODO: the route doesn't return the producer name for the moment. Update the producer prop once the route is updated
 	renderRow(rowData) {
 		return (
-			<EventContainer
+			<Event
+				description={rowData.description}
 				endDate={rowData.endAt}
 				eventId={rowData.id}
-				producer={rowData.producer}
+				farmName={rowData.farm.name}
 				title={rowData.title}
 				/>
 		)

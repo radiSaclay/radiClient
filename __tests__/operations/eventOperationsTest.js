@@ -20,7 +20,10 @@ describe('Events list fetch operations', () => {
 			"BeginAt": "2017-01-01",
 			"EndAt": "2017-01-30",
 			"pinned": true,
-			"farmId": 1,
+			"farm": {
+				"id": 1,
+				"name": "ferme 1"
+			},
 			"products": []
 		},
 		{
@@ -31,7 +34,10 @@ describe('Events list fetch operations', () => {
 			"BeginAt": "2017-01-01",
 			"EndAt": "2017-01-30",
 			"pinned": false,
-			"farmId": 2,
+			"farm": {
+				"id": 2,
+				"name": "ferme 2"
+			},
 			"products": []
 		},
 	]
@@ -51,7 +57,7 @@ describe('Events list fetch operations', () => {
 		]
 
 		nock(url, requestHeaders)
-			.get('/')
+			.get('/?embedded=1')
 			.reply(200, events)
 
 		return store.dispatch(operations.eventsListFetch(idToken))
@@ -70,7 +76,7 @@ describe('Events list fetch operations', () => {
 		]
 
 		nock(url, requestHeaders)
-			.get('/')
+			.get('/?embedded=1')
 			.replyWithError('something awful happened')
 
 		return store.dispatch(operations.eventsListFetch(idToken))

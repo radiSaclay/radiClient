@@ -1,42 +1,50 @@
-import React from 'react'
-import {
-	Image,
-	Text,
-	TouchableOpacity,
-	View,
-} from 'react-native'
+import React, { Component } from 'react'
+import { Actions } from 'react-native-router-flux'
+import { connect } from 'react-redux'
 
-import styles from './styles'
+import promises from '../../config/promises'
+import settings from '../../config/settings'
 
-/*	Farm receiving props:
-	- address : string
-	- getFarmDetail: function
-	- name : string
-*/
-const Farm = (props) => {
-	return (
-		<TouchableOpacity onPress={props.getFarmDetail}>
-			<View style={styles.mainContainer}>
-				<View style={styles.imageContainer}>
-					<Image
-						source={require('../../images/farm.png')}
-						/>
-				</View>
+import ListItem from '../ListItem';
 
-				<View style={styles.textContainer}>
-					<Text style={styles.name}>
-						{props.name}
-					</Text>
+class Farm extends Component {
 
-					<View style={styles.subtitle}>
-						<Text style={styles.address}>
-							{props.address}
-						</Text>
-					</View>
-				</View>
-			</View>
-		</TouchableOpacity>
-	)
+	getFarmDetail() {
+		promises.getWithToken(settings.urls.FARMS_URL + this.props.id, this.props.idToken)
+		.then((response) => {
+			Actions.FarmDetailContainer(response.data)
+		})
+		.catch((error) => {
+			console.error(error.response.data)
+		})
+	}
+
+	render() {
+		return(
+			<ListItem
+				onTouchCallback={this.getFarmDetail.bind(this)}
+
+				subtitle={this.props.address}
+				title={this.props.name}
+			/>
+		);
+	}
 }
 
-export default Farm;
+Farm.propTypes = {
+	// from parent
+	address: React.PropTypes.string,
+	id: React.PropTypes.number,
+	name: React.PropTypes.string,
+
+	// from redux
+	idToken: React.PropTypes.string,
+}
+
+const mapStateToProps = (store) => {
+	return {
+		idToken: store.user.idToken,
+	}
+}
+
+export default connect(mapStateToProps)(Farm)

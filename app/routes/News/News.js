@@ -3,22 +3,23 @@ import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
 import styles from './styles'
 
-import EventContainer from '../../components/Event';
-import FarmContainer from '../../components/Farm';
-import ProductContainer from '../../components/Product';
+import Event from '../../components/Event';
+import Farm from '../../components/Farm';
+import Product from '../../components/Product';
 import NewsBlock from '../../components/NewsBlock';
 
 var createEventRow = (event) =>
-	<EventContainer
+	<Event
+		description={event.description}
 		endDate={event.endAt}
 		eventId={event.id}
 		key={event.id}
-		producer={event.producer}
+		farmName={event.farm.name}
 		title={event.title}
 		/>
 
 var createFarmRow = (farm) =>
-	<FarmContainer
+	<Farm
 		address={farm.address}
 		id={farm.id}
 		key={farm.id}
@@ -26,7 +27,7 @@ var createFarmRow = (farm) =>
 		/>
 
 var createProductRow = (product) =>
-	<ProductContainer
+	<Product
 		id={product.id}
 		key={product.id}
 		name={product.name}

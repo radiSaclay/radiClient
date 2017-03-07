@@ -3,13 +3,13 @@ import { ListView, View } from 'react-native'
 
 import styles from './styles'
 
-import FarmContainer from '../../components/Farm'
+import Farm from '../../components/Farm'
 
 class FarmsList extends Component {
 
 	renderRow(rowData) {
 		return (
-			<FarmContainer
+			<Farm
 				address={rowData.address}
 				id={rowData.id}
 				name={rowData.name}

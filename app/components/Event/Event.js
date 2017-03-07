@@ -1,47 +1,53 @@
-import React from 'react';
-import {
-	Image,
-	Text,
-	TouchableOpacity,
-	View
-} from 'react-native';
+import React, { Component } from 'react';
+import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 
-import styles from './styles';
+import promises from '../../config/promises';
+import settings from '../../config/settings';
 
-/*	Event receiving props:
-	- endDate : string
-	- getEventDetail: function
-	- producer : string
-	- title : string
-*/
-const Event = (props) => {
-	return (
-		<TouchableOpacity onPress={props.getEventDetail}>
-			<View style={styles.mainContainer}>
-				<View style={styles.imageContainer}>
-					<Image
-						source={require('../../images/icons/radish.png')}
-					/>
-				</View>
+import ListItem from '../ListItem';
 
-				<View style={styles.textContainer}>
-					<Text style={styles.title}>
-						{props.title}
-					</Text>
+class Event extends Component {
 
-					<View style={styles.subtitle}>
-						<Text style={styles.producer}>
-							{props.producer}
-						</Text>
+	getEventDetail() {
+		promises.getWithToken(settings.urls.EVENTS_URL + this.props.eventId, this.props.idToken)
+		.then((response) => {
+			Actions.EventDetailContainer(response.data)
+		})
+		.catch((error) => {
+			console.error(error.response.data)
+		});
+	}
 
-						<Text style={styles.endDate}>
-							{props.endDate}
-						</Text>
-					</View>
-				</View>
-			</View>
-		</TouchableOpacity>
-	);
+	render() {
+		return(
+			<ListItem
+				onTouchCallback={this.getEventDetail.bind(this)}
+
+				date={this.props.endDate}
+				detail={this.props.description}
+				subtitle={this.props.farmName}
+				title={this.props.title}
+			/>
+		);
+	}
 }
 
-export default Event;
+Event.propTypes = {
+	// from parent
+	endDate: React.PropTypes.string,
+	eventId: React.PropTypes.number,
+	farmName: React.PropTypes.string,
+	title: React.PropTypes.string,
+
+	// from redux
+	idToken: React.PropTypes.string,
+};
+
+const mapStateToProps = (store) => {
+	return {
+		idToken: store.user.idToken,
+	}
+}
+
+export default connect(mapStateToProps)(Event);

@@ -1,28 +1,50 @@
-import React from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import React, { Component } from 'react';
+import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 
-import styles from './styles';
+import promises from '../../config/promises';
+import settings from '../../config/settings';
 
-/*	Product receiving props:
-	- getProductDetail : function
-	- name : string
-*/
-const Product = (props) => {
-	return (
-		<TouchableOpacity onPress={props.getProductDetail}>
-			<View style={styles.mainContainer}>
-				<View style={styles.imageContainer}>
-					<Image source={require('../../images/icons/radish.png')} />
-				</View>
+import ListItem from '../ListItem';
 
-				<View style={styles.textContainer}>
-					<Text style={styles.name}>
-						{props.name}
-					</Text>
-				</View>
-			</View>
-		</TouchableOpacity>
-	)
+class Product extends Component {
+
+	getProductDetail() {
+		promises.getWithToken(settings.urls.PRODUCTS_URL + this.props.id, this.props.idToken)
+		.then((response) => {
+			Actions.ProductDetailContainer(response.data);
+		})
+		.catch((error) => {
+			console.error(error.response.data)
+		})
+	}
+
+	render() {
+		return(
+			<ListItem
+				onTouchCallback={this.getProductDetail.bind(this)}
+
+				title={this.props.name}
+			/>
+		);
+	}
 }
 
-export default Product
+Product.propTypes = {
+	// from parent
+	/* TODO: ask server team to not send farms list in the PRODUCTS_URL route */
+	farms: React.PropTypes.array,
+	id: React.PropTypes.number.isRequired,
+	name: React.PropTypes.string.isRequired,
+
+	// from redux
+	idToken: React.PropTypes.string,
+}
+
+const mapStateToProps = (store) => {
+	return {
+		idToken: store.user.idToken,
+	}
+}
+
+export default connect(mapStateToProps)(Product)

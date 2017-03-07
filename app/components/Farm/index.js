@@ -1,3 +1,3 @@
-import FarmContainer from './FarmContainer'
+import Farm from './Farm'
 
-export default FarmContainer
+export default Farm
