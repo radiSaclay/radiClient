@@ -8,7 +8,7 @@ const settings = {
 	urls: {
 		AUTH_LOGIN_URL: SERVEUR_ROOT + 'auth/login',
 		AUTH_SIGNUP_URL: SERVEUR_ROOT + 'auth/signup',
-		EVENTS_URL: SERVEUR_ROOT + API_PATH + 'events/?embedded=1',
+		EVENTS_URL: SERVEUR_ROOT + API_PATH + 'events/',
 		EVENTS_PIN_URL: SERVEUR_ROOT + API_PATH + 'events/pin/',
 		EVENTS_UNPIN_URL: SERVEUR_ROOT + API_PATH + 'events/unpin/',
 		FARMS_URL: SERVEUR_ROOT + API_PATH + 'farms/',

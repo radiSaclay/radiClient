@@ -16,7 +16,8 @@ export function eventTogglePinnedStatus (idToken, eventId, pinnedStatus) {
 export function eventsListFetch (idToken) {
 	return dispatch => {
 		dispatch(actions.eventsListFetchRequest())
-		return promises.getWithToken(settings.urls.EVENTS_URL,idToken)
+		// TODO: erase embedded parameter from the request once all users have access to farm details
+		return promises.getWithToken(settings.urls.EVENTS_URL+'?embedded=1',idToken)
 		.then((events) => {
 			dispatch(actions.eventsListFetchSuccess(events.data))
 		})
