@@ -8,7 +8,7 @@ import Authentication from '../routes/Authentication';
 import EventDetailRoute from '../routes/EventDetail';
 import EventsListRoute from '../routes/EventsList';
 import NewsRoute from '../routes/News';
-import FarmDetailContainer from '../routes/FarmDetail';
+import FarmDetailRoute from '../routes/FarmDetail';
 import FarmsListRoute from '../routes/FarmsList';
 import ProductDetailRoute from '../routes/ProductDetail';
 import ProductsListRoute from '../routes/ProductsList';
@@ -94,9 +94,9 @@ class App extends Component {
 							/>
 
 						<Scene
-							component={FarmDetailContainer}
+							component={FarmDetailRoute}
 							hideNavBar={true}
-							key="FarmDetailContainer"
+							key="FarmDetailRoute"
 							title="Détails de la ferme"
 							/>
 
