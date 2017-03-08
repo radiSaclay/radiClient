@@ -10,7 +10,7 @@ import EventsListRoute from '../routes/EventsList';
 import NewsRoute from '../routes/News';
 import FarmDetailContainer from '../routes/FarmDetail';
 import FarmsListRoute from '../routes/FarmsList';
-import ProductDetailContainer from '../routes/ProductDetail';
+import ProductDetailRoute from '../routes/ProductDetail';
 import ProductsListRoute from '../routes/ProductsList';
 
 import Loader from '../components/Loader';
@@ -101,9 +101,9 @@ class App extends Component {
 							/>
 
 						<Scene
-							component={ProductDetailContainer}
+							component={ProductDetailRoute}
 							hideNavBar={true}
-							key="ProductDetailContainer"
+							key="ProductDetailRoute"
 							title="Détails du produit"
 							/>
 					</Scene>

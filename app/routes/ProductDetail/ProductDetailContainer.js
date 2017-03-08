@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
@@ -7,7 +6,6 @@ import promises from '../../config/promises'
 import settings from '../../config/settings'
 import * as productOperations from '../../operations/productOperations'
 
-import Frame from '../../components/Frame'
 import ProductDetail from './ProductDetail'
 
 class ProductDetailContainer extends Component {
@@ -15,21 +13,13 @@ class ProductDetailContainer extends Component {
 	render() {
 		var {idToken, id, subscribed} = this.props
 		return(
-			<Frame
-				navigation={{
-					source: require('../../images/back.png'),
-					onPress: function(){Actions.pop()}
-				}}
-				title={this.props.title}
-				>
-				<ProductDetail
-					toggleSubscriptionStatus={this.props.toggleSubscriptionStatus.bind(this, idToken, id, subscribed)}
+			<ProductDetail
+				toggleSubscriptionStatus={this.props.toggleSubscriptionStatus.bind(this, idToken, id, subscribed)}
 
-					farms={this.props.farms}
-					name={this.props.name}
-					isSubscribed={this.props.subscribed}
-					/>
-			</Frame>
+				farms={this.props.farms}
+				name={this.props.name}
+				isSubscribed={this.props.subscribed}
+				/>
 		)
 	}
 }
