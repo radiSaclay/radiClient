@@ -1,3 +1,3 @@
-import EventDetailContainer from './EventDetailContainer';
+import EventDetailRoute from './EventDetailRoute';
 
-export default EventDetailContainer;
+export default EventDetailRoute;

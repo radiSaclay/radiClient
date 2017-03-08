@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 
 import AccountDisplay from '../routes/AccountDisplay';
 import Authentication from '../routes/Authentication';
-import EventDetailContainer from '../routes/EventDetail';
+import EventDetailRoute from '../routes/EventDetail';
 import EventsListRoute from '../routes/EventsList';
 import NewsRoute from '../routes/News';
 import FarmDetailContainer from '../routes/FarmDetail';
@@ -87,9 +87,9 @@ class App extends Component {
 						</Scene>
 
 						<Scene
-							component={EventDetailContainer}
+							component={EventDetailRoute}
 							hideNavBar={true}
-							key="EventDetailContainer"
+							key="EventDetailRoute"
 							title="Détails de l'évènement"
 							/>
 
