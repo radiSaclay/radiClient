@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListView, View } from 'react-native';
+import { ListView, RefreshControl, View } from 'react-native';
 
 import styles from './styles';
 
@@ -25,7 +25,13 @@ class ProductsList extends Component {
 					dataSource={dataSource}
 					renderRow={this.renderRow}
 					renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
-					/>
+					refreshControl={
+						<RefreshControl
+							refreshing={this.props.isLoading}
+							onRefresh={this.props.onRefresh}
+						/>
+					}
+				/>
 			</View>
 		)
 	}
@@ -33,7 +39,9 @@ class ProductsList extends Component {
 
 ProductsList.propTypes = {
 	// from parent
-	productsList: React.PropTypes.array,
+	isLoading: React.PropTypes.bool.isRequired,
+	onRefresh: React.PropTypes.func.isRequired,
+	productsList: React.PropTypes.array.isRequired
 }
 
 export default ProductsList
