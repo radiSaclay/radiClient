@@ -16,14 +16,7 @@ class EventDetailRoute extends Component {
 				}}
 				title={this.props.title}
 				>
-				<EventDetailContainer
-					beginAt={this.props.beginAt}
-					description={this.props.description}
-					endAt={this.props.endAt}
-					farmId={this.props.farmId}
-					id={this.props.id}
-					publishAt={this.props.publishAt}
-					/>
+				<EventDetailContainer id={this.props.id}/>
 			</Frame>
 		)
 	}
@@ -31,13 +24,7 @@ class EventDetailRoute extends Component {
 
 EventDetailRoute.propTypes = {
 	// from parent
-	beginAt: React.PropTypes.string,
-	description: React.PropTypes.string,
-	endAt: React.PropTypes.string,
-	farmId: React.PropTypes.number,
-	id: React.PropTypes.number,
-	publishAt: React.PropTypes.string,
-	title: React.PropTypes.string,
+	id: React.PropTypes.number.isRequired,
 }
 
 export default EventDetailRoute;
