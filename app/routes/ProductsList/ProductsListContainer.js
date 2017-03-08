@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 
 import settings from '../../config/settings';
