@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, Text } from 'react-native';
+import { Text } from 'react-native';
 import { Router, Scene, TabBar } from 'react-native-router-flux';
 import { connect } from 'react-redux'
 
@@ -13,6 +13,7 @@ import FarmsListContainer from '../routes/FarmsList';
 import ProductDetailContainer from '../routes/ProductDetail';
 import ProductsListContainer from '../routes/ProductsList';
 
+import Loader from '../components/Loader';
 import settings from '../config/settings';
 import styles from './styles.js';
 
@@ -20,9 +21,7 @@ class App extends Component {
 	render() {
 		if (!this.props.isMounted){
 			// TODO: Replace this loader by a welcome screen
-			return (
-				<ActivityIndicator />
-			)
+			return <Loader />
 		} else {
 			return (
 				<Router>

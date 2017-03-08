@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-	ActivityIndicator,
 	Alert,
 	AsyncStorage,
 	Image,
@@ -16,6 +15,7 @@ import styles from './styles';
 
 import promises from '../../config/promises';
 import settings from '../../config/settings';
+import Loader from '../../components/Loader'
 import * as userOperations from '../../operations/userOperations'
 
 class Authentication extends Component {
@@ -48,7 +48,7 @@ class Authentication extends Component {
 
 	render() {
 		if (this.props.isLoading) {
-			return <ActivityIndicator />
+			return <Loader />
 		} else {
 			return (
 				<View style={styles.container}>
