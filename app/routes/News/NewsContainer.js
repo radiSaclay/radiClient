@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { ActivityIndicator } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux'
 import _ from 'lodash'
@@ -7,6 +6,7 @@ import _ from 'lodash'
 import * as newsOperations from '../../operations/newsOperations'
 
 import Frame from '../../components/Frame'
+import Loader from '../../components/Loader'
 import News from './News'
 
 class NewsContainer extends Component {
@@ -30,7 +30,7 @@ class NewsContainer extends Component {
 	render() {
 		if (this.props.isLoading) {
 			return (
-				<ActivityIndicator />
+				<Loader />
 			)
 		} else {
 			return (
