@@ -6,7 +6,7 @@ import settings from '../../config/settings'
 import * as farmOperations from '../../operations/farmOperations'
 
 import FarmsList from './FarmsList'
-import Header from '../../components/Header'
+import Frame from '../../components/Frame'
 
 class FarmsListContainer extends Component {
 
@@ -17,13 +17,13 @@ class FarmsListContainer extends Component {
 	// TODO: add error handling
 	render() {
 		return (
-			<Header title={this.props.title}>
+			<Frame title={this.props.title}>
 				<FarmsList
 					farmsList={this.props.farmsList}
 					isLoading={this.props.isLoading}
 					onRefresh={this.onRefresh.bind(this)}
 				/>
-			</Header>
+			</Frame>
 		)
 	}
 }

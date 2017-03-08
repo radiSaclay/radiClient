@@ -6,7 +6,7 @@ import settings from '../../config/settings';
 import * as eventOperations from '../../operations/eventOperations'
 
 import EventsList from './EventsList';
-import Header from '../../components/Header';
+import Frame from '../../components/Frame';
 
 class EventsListContainer extends Component {
 
@@ -17,13 +17,13 @@ class EventsListContainer extends Component {
 	// TODO: add error handling
 	render() {
 		return (
-			<Header title={this.props.title}>
+			<Frame title={this.props.title}>
 				<EventsList
 					eventsList={this.props.eventsList}
 					isLoading={this.props.isLoading}
 					onRefresh={this.onRefresh.bind(this)}
 				/>
-			</Header>
+			</Frame>
 		)
 	}
 }
