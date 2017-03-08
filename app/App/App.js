@@ -7,7 +7,7 @@ import AccountDisplay from '../routes/AccountDisplay';
 import Authentication from '../routes/Authentication';
 import EventDetailContainer from '../routes/EventDetail';
 import EventsListContainer from '../routes/EventsList';
-import NewsContainer from '../routes/News';
+import NewsRoute from '../routes/News';
 import FarmDetailContainer from '../routes/FarmDetail';
 import FarmsListContainer from '../routes/FarmsList';
 import ProductDetailContainer from '../routes/ProductDetail';
@@ -44,7 +44,7 @@ class App extends Component {
 							>
 
 							<Scene
-								component={NewsContainer}
+								component={NewsRoute}
 								hideNavBar={true}
 								icon={() => {return (<Text>Actualités</Text>)}}
 								initial={true}
