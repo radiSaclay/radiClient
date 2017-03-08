@@ -11,7 +11,7 @@ import NewsRoute from '../routes/News';
 import FarmDetailContainer from '../routes/FarmDetail';
 import FarmsListContainer from '../routes/FarmsList';
 import ProductDetailContainer from '../routes/ProductDetail';
-import ProductsListContainer from '../routes/ProductsList';
+import ProductsListRoute from '../routes/ProductsList';
 
 import Loader from '../components/Loader';
 import settings from '../config/settings';
@@ -61,7 +61,7 @@ class App extends Component {
 								/>
 
 							<Scene
-								component={ProductsListContainer}
+								component={ProductsListRoute}
 								hideNavBar={true}
 								icon={() => {return (<Text>Produits</Text>)}}
 								key="ProductsList"
