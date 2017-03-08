@@ -13,7 +13,7 @@ export default styles = StyleSheet.create({
 		borderRadius: metrics.borderRadius,
 	},
 	container: {
-		top: metrics.navBarHeight
+		flex: 1,
 	},
 	description: {
 		fontSize: 30,

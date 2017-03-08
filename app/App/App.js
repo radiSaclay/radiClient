@@ -89,21 +89,21 @@ class App extends Component {
 
 						<Scene
 							component={EventDetailContainer}
-							hideNavBar={false}
+							hideNavBar={true}
 							key="EventDetailContainer"
 							title="Détails de l'évènement"
 							/>
 
 						<Scene
 							component={FarmDetailContainer}
-							hideNavBar={false}
+							hideNavBar={true}
 							key="FarmDetailContainer"
 							title="Détails de la ferme"
 							/>
 
 						<Scene
 							component={ProductDetailContainer}
-							hideNavBar={false}
+							hideNavBar={true}
 							key="ProductDetailContainer"
 							title="Détails du produit"
 							/>

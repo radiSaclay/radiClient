@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
 	},
 	mainContainer: {
 		flex: 1,
-		top: metrics.navBarHeight,
 	},
 	name: {
 		color: colors.lightGrey,

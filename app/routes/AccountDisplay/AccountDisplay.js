@@ -6,12 +6,12 @@ import { connect } from 'react-redux';
 import settings from '../../config/settings';
 import styles from './styles';
 
-import Header from '../../components/Header'
+import Frame from '../../components/Frame'
 
 class AccountDisplay extends Component {
 	render() {
 		return (
-			<Header
+			<Frame
 				menuActions={[
 					{
 						label: 'Awesome option',
@@ -99,7 +99,7 @@ class AccountDisplay extends Component {
 						</Text>
 					</TouchableOpacity>
 				</View>
-			</Header>
+			</Frame>
 		);
 	}
 }

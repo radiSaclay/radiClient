@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import settings from '../../config/settings';
 import * as productOperations from '../../operations/productOperations';
 
-import Header from '../../components/Header';
+import Frame from '../../components/Frame';
 import ProductsList from './ProductsList';
 
 class ProductsListContainer extends Component {
@@ -17,13 +17,13 @@ class ProductsListContainer extends Component {
 	// TODO: add error handling
 	render() {
 		return (
-			<Header title={this.props.title}>
+			<Frame title={this.props.title}>
 				<ProductsList
 					productsList={this.props.productsList}
 					isLoading={this.props.isLoading}
 					onRefresh={this.onRefresh.bind(this)}
 				/>
-			</Header>
+			</Frame>
 		)
 	}
 }

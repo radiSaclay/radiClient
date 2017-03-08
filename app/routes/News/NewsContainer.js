@@ -6,7 +6,7 @@ import _ from 'lodash'
 
 import * as newsOperations from '../../operations/newsOperations'
 
-import Header from '../../components/Header'
+import Frame from '../../components/Frame'
 import News from './News'
 
 class NewsContainer extends Component {
@@ -34,7 +34,7 @@ class NewsContainer extends Component {
 			)
 		} else {
 			return (
-				<Header title={this.props.title}>
+				<Frame title={this.props.title}>
 					<News
 						showEventsList = {this.showEventsList}
 						showFarmsList = {this.showFarmsList}
@@ -44,7 +44,7 @@ class NewsContainer extends Component {
 						farmsList = {this.props.featuredFarms}
 						productsList = {this.props.featuredProducts}
 						/>
-				</Header>
+				</Frame>
 			)
 		}
 	}

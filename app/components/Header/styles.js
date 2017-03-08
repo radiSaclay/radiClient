@@ -13,9 +13,6 @@ export default styles = StyleSheet.create({
 		paddingLeft: metrics.basePadding,
 		paddingRight: metrics.basePadding,
 	},
-	mainContainer: {
-		flex: 1,
-	},
 	navContainer: {
 		flex: 0.25,
 		flexDirection: 'row',
