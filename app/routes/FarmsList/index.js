@@ -1,3 +1,3 @@
-import FarmsListContainer from './FarmsListContainer'
+import FarmsListRoute from './FarmsListRoute'
 
-export default FarmsListContainer
+export default FarmsListRoute

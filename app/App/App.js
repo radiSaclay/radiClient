@@ -9,7 +9,7 @@ import EventDetailContainer from '../routes/EventDetail';
 import EventsListRoute from '../routes/EventsList';
 import NewsRoute from '../routes/News';
 import FarmDetailContainer from '../routes/FarmDetail';
-import FarmsListContainer from '../routes/FarmsList';
+import FarmsListRoute from '../routes/FarmsList';
 import ProductDetailContainer from '../routes/ProductDetail';
 import ProductsListRoute from '../routes/ProductsList';
 
@@ -69,7 +69,7 @@ class App extends Component {
 								/>
 
 							<Scene
-								component={FarmsListContainer}
+								component={FarmsListRoute}
 								hideNavBar={true}
 								icon={() => {return (<Text>Fermes</Text>)}}
 								key="FarmsList"
