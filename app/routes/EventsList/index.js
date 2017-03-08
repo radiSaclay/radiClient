@@ -1,3 +1,3 @@
-import EventsListContainer from './EventsListContainer';
+import EventsListRoute from './EventsListRoute';
 
-export default EventsListContainer;
+export default EventsListRoute;
