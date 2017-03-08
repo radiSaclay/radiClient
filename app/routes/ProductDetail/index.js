@@ -1,3 +1,3 @@
-import ProductDetailContainer from './ProductDetailContainer'
+import ProductDetailRoute from './ProductDetailRoute'
 
-export default ProductDetailContainer
+export default ProductDetailRoute

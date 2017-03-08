@@ -5,8 +5,8 @@ import _ from 'lodash'
 
 import * as newsOperations from '../../operations/newsOperations'
 
-import Frame from '../../components/Frame'
 import Loader from '../../components/Loader'
+
 import News from './News'
 
 class NewsContainer extends Component {
@@ -34,17 +34,15 @@ class NewsContainer extends Component {
 			)
 		} else {
 			return (
-				<Frame title={this.props.title}>
-					<News
-						showEventsList = {this.showEventsList}
-						showFarmsList = {this.showFarmsList}
-						showProductsList = {this.showProductsList}
+				<News
+					showEventsList = {this.showEventsList}
+					showFarmsList = {this.showFarmsList}
+					showProductsList = {this.showProductsList}
 
-						eventsList = {this.props.featuredEvents}
-						farmsList = {this.props.featuredFarms}
-						productsList = {this.props.featuredProducts}
-						/>
-				</Frame>
+					eventsList = {this.props.featuredEvents}
+					farmsList = {this.props.featuredFarms}
+					productsList = {this.props.featuredProducts}
+					/>
 			)
 		}
 	}

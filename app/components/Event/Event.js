@@ -12,7 +12,7 @@ class Event extends Component {
 	getEventDetail() {
 		promises.getWithToken(settings.urls.EVENTS_URL + this.props.eventId, this.props.idToken)
 		.then((response) => {
-			Actions.EventDetailContainer(response.data)
+			Actions.EventDetailRoute(response.data)
 		})
 		.catch((error) => {
 			console.error(error.response.data)

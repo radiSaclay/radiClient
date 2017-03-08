@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import settings from '../../config/settings';
 import * as productOperations from '../../operations/productOperations';
 
-import Frame from '../../components/Frame';
 import ProductsList from './ProductsList';
 
 class ProductsListContainer extends Component {
@@ -16,13 +15,11 @@ class ProductsListContainer extends Component {
 	// TODO: add error handling
 	render() {
 		return (
-			<Frame title={this.props.title}>
-				<ProductsList
-					productsList={this.props.productsList}
-					isLoading={this.props.isLoading}
-					onRefresh={this.onRefresh.bind(this)}
-				/>
-			</Frame>
+			<ProductsList
+				productsList={this.props.productsList}
+				isLoading={this.props.isLoading}
+				onRefresh={this.onRefresh.bind(this)}
+			/>
 		)
 	}
 }

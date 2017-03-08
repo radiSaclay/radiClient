@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
@@ -8,29 +7,20 @@ import settings from '../../config/settings';
 import * as eventOperations from '../../operations/eventOperations';
 
 import EventDetail from './EventDetail';
-import Frame from '../../components/Frame';
 
 class EventDetailContainer extends Component {
 
 	render() {
 		var {idToken, id, pinned} = this.props
 		return(
-			<Frame
-				navigation={{
-					source: require('../../images/back.png'),
-					onPress: function(){Actions.pop()}
-				}}
-				title={this.props.title}
-				>
-				<EventDetail
-					togglePinStatus={this.props.togglePinStatus.bind(this, idToken, id, pinned)}
+			<EventDetail
+				togglePinStatus={this.props.togglePinStatus.bind(this, idToken, id, pinned)}
 
-					description={this.props.description}
-					endAt={this.props.endAt}
-					farmId={this.props.farmId}
-					isPinned={this.props.pinned}
-					/>
-			</Frame>
+				description={this.props.description}
+				endAt={this.props.endAt}
+				farmId={this.props.farmId}
+				isPinned={this.props.pinned}
+				/>
 		)
 	}
 }
@@ -43,7 +33,6 @@ EventDetailContainer.propTypes = {
 	farmId: React.PropTypes.number,
 	id: React.PropTypes.number,
 	publishAt: React.PropTypes.string,
-	title: React.PropTypes.string,
 
 	// from redux
 	idToken: React.PropTypes.string,

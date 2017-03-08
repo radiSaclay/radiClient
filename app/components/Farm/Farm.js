@@ -12,7 +12,7 @@ class Farm extends Component {
 	getFarmDetail() {
 		promises.getWithToken(settings.urls.FARMS_URL + this.props.id, this.props.idToken)
 		.then((response) => {
-			Actions.FarmDetailContainer(response.data)
+			Actions.FarmDetailRoute(response.data)
 		})
 		.catch((error) => {
 			console.error(error.response.data)

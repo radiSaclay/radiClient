@@ -5,13 +5,13 @@ import { connect } from 'react-redux'
 
 import AccountDisplay from '../routes/AccountDisplay';
 import Authentication from '../routes/Authentication';
-import EventDetailContainer from '../routes/EventDetail';
-import EventsListContainer from '../routes/EventsList';
-import NewsContainer from '../routes/News';
-import FarmDetailContainer from '../routes/FarmDetail';
-import FarmsListContainer from '../routes/FarmsList';
-import ProductDetailContainer from '../routes/ProductDetail';
-import ProductsListContainer from '../routes/ProductsList';
+import EventDetailRoute from '../routes/EventDetail';
+import EventsListRoute from '../routes/EventsList';
+import NewsRoute from '../routes/News';
+import FarmDetailRoute from '../routes/FarmDetail';
+import FarmsListRoute from '../routes/FarmsList';
+import ProductDetailRoute from '../routes/ProductDetail';
+import ProductsListRoute from '../routes/ProductsList';
 
 import Loader from '../components/Loader';
 import settings from '../config/settings';
@@ -44,7 +44,7 @@ class App extends Component {
 							>
 
 							<Scene
-								component={NewsContainer}
+								component={NewsRoute}
 								hideNavBar={true}
 								icon={() => {return (<Text>Actualités</Text>)}}
 								initial={true}
@@ -53,7 +53,7 @@ class App extends Component {
 								/>
 
 							<Scene
-								component={EventsListContainer}
+								component={EventsListRoute}
 								hideNavBar={true}
 								icon={() => {return (<Text>Events</Text>)}}
 								key="EventsList"
@@ -61,7 +61,7 @@ class App extends Component {
 								/>
 
 							<Scene
-								component={ProductsListContainer}
+								component={ProductsListRoute}
 								hideNavBar={true}
 								icon={() => {return (<Text>Produits</Text>)}}
 								key="ProductsList"
@@ -69,7 +69,7 @@ class App extends Component {
 								/>
 
 							<Scene
-								component={FarmsListContainer}
+								component={FarmsListRoute}
 								hideNavBar={true}
 								icon={() => {return (<Text>Fermes</Text>)}}
 								key="FarmsList"
@@ -87,23 +87,23 @@ class App extends Component {
 						</Scene>
 
 						<Scene
-							component={EventDetailContainer}
+							component={EventDetailRoute}
 							hideNavBar={true}
-							key="EventDetailContainer"
+							key="EventDetailRoute"
 							title="Détails de l'évènement"
 							/>
 
 						<Scene
-							component={FarmDetailContainer}
+							component={FarmDetailRoute}
 							hideNavBar={true}
-							key="FarmDetailContainer"
+							key="FarmDetailRoute"
 							title="Détails de la ferme"
 							/>
 
 						<Scene
-							component={ProductDetailContainer}
+							component={ProductDetailRoute}
 							hideNavBar={true}
-							key="ProductDetailContainer"
+							key="ProductDetailRoute"
 							title="Détails du produit"
 							/>
 					</Scene>

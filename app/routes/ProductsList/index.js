@@ -1,3 +1,3 @@
-import ProductsListContainer from './ProductsListContainer'
+import ProductsListRoute from './ProductsListRoute'
 
-export default ProductsListContainer
+export default ProductsListRoute

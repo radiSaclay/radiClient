@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import _ from 'lodash'
 
@@ -8,34 +7,25 @@ import settings from '../../config/settings.js'
 import * as farmOperations from '../../operations/farmOperations'
 
 import FarmDetail from './FarmDetail';
-import Frame from '../../components/Frame';
 
 class FarmDetailContainer extends Component {
 
 	render() {
 		var {idToken, id, subscribed} = this.props
 		return(
-			<Frame
-				navigation={{
-					source: require('../../images/back.png'),
-					onPress: function(){Actions.pop()}
-				}}
-				title={this.props.title}
-				>
-				<FarmDetail
-					toggleSubscriptionStatus={this.props.toggleSubscriptionStatus.bind(this, idToken, id, subscribed)}
+			<FarmDetail
+				toggleSubscriptionStatus={this.props.toggleSubscriptionStatus.bind(this, idToken, id, subscribed)}
 
-					address={this.props.address}
-					email={this.props.email}
-					id={this.props.id}
-					isSubscribed={this.props.subscribed}
-					name={this.props.name}
-					ownerId={this.props.ownerId}
-					phone={this.props.phone}
-					products={this.props.products}
-					website={this.props.website}
-					/>
-			</Frame>
+				address={this.props.address}
+				email={this.props.email}
+				id={this.props.id}
+				isSubscribed={this.props.subscribed}
+				name={this.props.name}
+				ownerId={this.props.ownerId}
+				phone={this.props.phone}
+				products={this.props.products}
+				website={this.props.website}
+				/>
 		)
 	}
 }
@@ -48,6 +38,11 @@ FarmDetailContainer.propTypes = {
 	name: React.PropTypes.string,
 	ownerId: React.PropTypes.number,
 	phone: React.PropTypes.string,
+	products: React.PropTypes.arrayOf(
+		React.PropTypes.shape({
+			id: React.PropTypes.number.isRequired,
+			name: React.PropTypes.string.isRequired,
+	})),
 	website: React.PropTypes.string,
 
 	// from redux

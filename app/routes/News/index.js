@@ -1,3 +1,3 @@
-import NewsContainer from './NewsContainer';
+import NewsRoute from './NewsRoute';
 
-export default NewsContainer;
+export default NewsRoute;

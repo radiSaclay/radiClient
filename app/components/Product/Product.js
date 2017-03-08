@@ -12,7 +12,7 @@ class Product extends Component {
 	getProductDetail() {
 		promises.getWithToken(settings.urls.PRODUCTS_URL + this.props.id, this.props.idToken)
 		.then((response) => {
-			Actions.ProductDetailContainer(response.data);
+			Actions.ProductDetailRoute(response.data);
 		})
 		.catch((error) => {
 			console.error(error.response.data)
