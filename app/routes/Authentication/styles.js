@@ -12,7 +12,7 @@ export default styles = StyleSheet.create({
 	buttonWrapper: {
 		backgroundColor: colors.salmonLight,
 		borderRadius: metrics.borderRadius,
-		marginBottom: metrics.baseMargin
+		marginTop: metrics.baseMargin
 	},
 	container: {
 		alignItems: 'center',
@@ -27,8 +27,12 @@ export default styles = StyleSheet.create({
 		backgroundColor: colors.white,
 		borderRadius: metrics.borderRadius,
 		color: colors.greyLight,
-		marginBottom: metrics.baseMargin,
+		marginTop: metrics.baseMargin,
 		padding: metrics.basePadding
+	},
+	invalidInput: {
+		color: colors.white,
+		fontWeight: 'bold',
 	},
 	logo: {
 		height: metrics.logoHeight,
