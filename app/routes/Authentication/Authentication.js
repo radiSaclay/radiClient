@@ -23,6 +23,8 @@ class Authentication extends Component {
 		super();
 		this.state = {
 			email: null,
+			isEmailValid: null,
+			isPasswordValid: null,
 			password: null
 		}
 	}
@@ -35,15 +37,26 @@ class Authentication extends Component {
 	}
 
 	userLogin() {
-		if (this.state.email && this.state.password){
+		if (this.isFormValid()) {
 			this.props.userLogin(this.state.email, this.state.password)
 		}
 	}
 
 	userSignup() {
-		if (this.state.email && this.state.password){
+		if(this.isFormValid()) {
 			this.props.userSignup(this.state.email, this.state.password)
 		}
+	}
+
+	isFormValid() {
+		isEmailValid = (/.+@.+/.test(this.state.email))
+		isPasswordValid = (this.state.password && this.state.password.length > 8)
+		this.setState({
+			isEmailValid: isEmailValid,
+			isPasswordValid: isPasswordValid
+		})
+		// Since the state setting doesn't happen immediately, for coherence issues the variables are returned instead of the state
+		return (isEmailValid && isPasswordValid)
 	}
 
 	render() {
@@ -72,7 +85,10 @@ class Authentication extends Component {
 							style={styles.inputText}
 							value={this.state.email}
 							underlineColorAndroid='transparent'
-							/>
+						/>
+						{this.state.isEmailValid === false &&
+							<Text style={styles.invalidInput}> Email invalide </Text>
+						}
 						<TextInput
 							autoCapitalize='none'
 							autoCorrect={false}
@@ -86,7 +102,10 @@ class Authentication extends Component {
 							style={styles.inputText}
 							value={this.state.password}
 							underlineColorAndroid='transparent'
-							/>
+						/>
+						{this.state.isPasswordValid === false &&
+							<Text style={styles.invalidInput}> 8 caractères minimum </Text>
+						}
 						<TouchableOpacity style={styles.buttonWrapper}>
 							<Text
 								style={styles.buttonText}
