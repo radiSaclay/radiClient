@@ -16,11 +16,7 @@ class ProductDetailRoute extends Component {
 				}}
 				title={this.props.title}
 				>
-				<ProductDetailContainer
-					farm={this.props.farm}
-					id={this.props.id}
-					name={this.props.name}
-					/>
+				<ProductDetailContainer id={this.props.id}/>
 			</Frame>
 		)
 	}
@@ -28,9 +24,7 @@ class ProductDetailRoute extends Component {
 
 ProductDetailRoute.propTypes = {
 	// from parent
-	farms: React.PropTypes.array,
 	id: React.PropTypes.number.isRequired,
-	name: React.PropTypes.string.isRequired,
 }
 
 export default ProductDetailRoute

@@ -26,20 +26,27 @@ class ProductDetailContainer extends Component {
 
 ProductDetailContainer.propTypes = {
 	// from parent
-	farms: React.PropTypes.array,
 	id: React.PropTypes.number.isRequired,
-	name: React.PropTypes.string.isRequired,
 
 	// from redux
+	ancestors: React.PropTypes.arrayOf(React.PropTypes.number),
+	farms: React.PropTypes.arrayOf(React.PropTypes.number),
 	idToken: React.PropTypes.string,
+	name: React.PropTypes.string.isRequired,
+	subproducts: React.PropTypes.arrayOf(React.PropTypes.number),
 	subscribed: React.PropTypes.bool.isRequired,
 	toggleSubscriptionStatus: React.PropTypes.func,
 }
 
 const mapStateToProps = (store, ownProps) => {
+	let product = _.find(store.products.products, (product) => { return product.id === ownProps.id });
 	return {
+		ancestors: product.ancestors,
 		idToken: store.user.idToken,
-		subscribed: _.find(store.products.products, (product) => { return product.id === ownProps.id }).subscribed,
+		farms: product.farms,
+		name: product.name,
+		subproducts: product.subproducts,
+		subscribed: product.subscribed,
 	}
 }
 

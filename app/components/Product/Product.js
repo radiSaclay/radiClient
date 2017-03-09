@@ -1,22 +1,12 @@
 import React, { Component } from 'react';
 import { Actions } from 'react-native-router-flux';
-import { connect } from 'react-redux';
-
-import promises from '../../config/promises';
-import settings from '../../config/settings';
 
 import ListItem from '../ListItem';
 
 class Product extends Component {
 
 	getProductDetail() {
-		promises.getWithToken(settings.urls.PRODUCTS_URL + this.props.id, this.props.idToken)
-		.then((response) => {
-			Actions.ProductDetailRoute(response.data);
-		})
-		.catch((error) => {
-			console.error(error.response.data)
-		})
+		Actions.ProductDetailRoute({id: this.props.id});
 	}
 
 	render() {
@@ -36,15 +26,6 @@ Product.propTypes = {
 	farms: React.PropTypes.array,
 	id: React.PropTypes.number.isRequired,
 	name: React.PropTypes.string.isRequired,
-
-	// from redux
-	idToken: React.PropTypes.string,
 }
 
-const mapStateToProps = (store) => {
-	return {
-		idToken: store.user.idToken,
-	}
-}
-
-export default connect(mapStateToProps)(Product)
+export default Product
