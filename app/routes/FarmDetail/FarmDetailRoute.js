@@ -16,16 +16,7 @@ class FarmDetailRoute extends Component {
 				}}
 				title={this.props.title}
 				>
-				<FarmDetailContainer
-					address={this.props.address}
-					email={this.props.email}
-					id={this.props.id}
-					name={this.props.name}
-					ownerId={this.props.ownerId}
-					phone={this.props.phone}
-					products={this.props.products}
-					website={this.props.website}
-					/>
+				<FarmDetailContainer id={this.props.id}/>
 			</Frame>
 		)
 	}
@@ -33,18 +24,7 @@ class FarmDetailRoute extends Component {
 
 FarmDetailRoute.propTypes = {
 	// from parent
-	address: React.PropTypes.string,
-	email: React.PropTypes.string,
 	id: React.PropTypes.number,
-	name: React.PropTypes.string,
-	ownerId: React.PropTypes.number,
-	phone: React.PropTypes.string,
-	products: React.PropTypes.arrayOf(
-		React.PropTypes.shape({
-			id: React.PropTypes.number.isRequired,
-			name: React.PropTypes.string.isRequired,
-	})),
-	website: React.PropTypes.string,
 }
 
 export default FarmDetailRoute

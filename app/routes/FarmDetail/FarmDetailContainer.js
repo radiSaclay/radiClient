@@ -32,29 +32,33 @@ class FarmDetailContainer extends Component {
 
 FarmDetailContainer.propTypes = {
 	// from parent
+	id: React.PropTypes.number.isRequired,
+
+	// from redux
 	address: React.PropTypes.string,
 	email: React.PropTypes.string,
-	id: React.PropTypes.number,
+	idToken: React.PropTypes.string,
 	name: React.PropTypes.string,
 	ownerId: React.PropTypes.number,
 	phone: React.PropTypes.string,
-	products: React.PropTypes.arrayOf(
-		React.PropTypes.shape({
-			id: React.PropTypes.number.isRequired,
-			name: React.PropTypes.string.isRequired,
-	})),
-	website: React.PropTypes.string,
-
-	// from redux
-	idToken: React.PropTypes.string,
+	products: React.PropTypes.arrayOf(React.PropTypes.number),
 	subscribed: React.PropTypes.bool,
 	toggleSubscriptionStatus: React.PropTypes.func,
+	website: React.PropTypes.string,
 }
 
 const mapStateToProps = (store, ownProps) => {
+	let farm = _.find(store.farms.farms, (farm) => { return farm.id === ownProps.id });
 	return {
+		address: farm.address,
+		email: farm.email,
 		idToken: store.user.idToken,
-		subscribed: _.find(store.farms.farms, (farm) => { return farm.id === ownProps.id }).subscribed,
+		name: farm.name,
+		ownerId: farm.ownerId,
+		phone: farm.phone,
+		products: farm.products,
+		subscribed: farm.subscribed,
+		website: farm.website,
 	}
 }
 
