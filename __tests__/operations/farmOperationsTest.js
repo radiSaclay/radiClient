@@ -44,7 +44,7 @@ describe('Farms list fetch operations', () => {
 	})
 
 	it('creates FARMS_LIST_FETCH_SUCCESS when fetching farms list done', () => {
-		let store = mockStore({farms: [], error: null, isLoading: false})
+		let store = mockStore({farms: []})
 		let expectedActions = [
 			farmActions.farmsListFetchRequest(),
 			farmActions.farmsListFetchSuccess(farms)
@@ -61,17 +61,18 @@ describe('Farms list fetch operations', () => {
 	})
 
 
-	it('creates FARMS_ERROR when fetching farms list fails', () => {
-		let responseError = new Error('something awful happened')
-		let store = mockStore({farms: [], error: null, isLoading: false})
+	it('creates FARM_ERROR when fetching farms list fails', () => {
+		let errorMessage = 'something awful happened'
+		let errorStatus = 401
+		let store = mockStore({farms: []})
 		let expectedActions = [
 			farmActions.farmsListFetchRequest(),
-			farmActions.farmsError(responseError)
+			farmActions.farmError(errorMessage, errorStatus)
 		]
 
 		nock(url, requestHeaders)
 		.get('/')
-		.replyWithError('something awful happened')
+		.reply(errorStatus, {msg: errorMessage})
 
 		return store.dispatch(operations.farmsListFetch(idToken))
 		.then(() => {
@@ -103,9 +104,7 @@ describe('Farms list fetch operations', () => {
 					"subscribed": false,
 					"ownerId": 1,
 					"products": [1, 2, 3]
-				}],
-				error: null,
-				isLoading: false
+				}]
 			})
 			let expectedActions = [
 				farmActions.farmToggleSubscribedStatus(farmId, !subscribedStatus)
@@ -120,8 +119,8 @@ describe('Farms list fetch operations', () => {
 		})
 
 		it('creates FARM_TOGGLE_SUBSCRIBED_STATUS when toggle subscribed status fails', () => {
-			errorMessage = 'error occured'
-			let error = new Error(errorMessage)
+			let errorMessage = 'something awful happened'
+			let errorStatus = 401
 			let store = mockStore({
 				farms: [{
 					"id": 1,
@@ -133,17 +132,15 @@ describe('Farms list fetch operations', () => {
 					"subscribed": false,
 					"ownerId": 1,
 					"products": [1, 2, 3]
-				}],
-				error: null,
-				isLoading: false
+				}]
 			})
 			let expectedActions = [
-				farmActions.farmsError(error)
+				farmActions.farmError(errorMessage, errorStatus)
 			]
 
 			nock(url, requestHeaders)
 			.post('')
-			.replyWithError(errorMessage)
+			.reply(errorStatus, {msg: errorMessage})
 
 			return store.dispatch(operations.farmToggleSubscribedStatus(idToken, farmId, subscribedStatus))
 			.then(() => expect(store.getActions()).toEqual(expectedActions))

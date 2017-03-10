@@ -2,9 +2,7 @@ import actionTypes from '../config/actionTypes';
 import _ from 'lodash'
 
 const initialState = {
-	error: null,
-	farms: [],
-	isLoading: false
+	farms: []
 }
 
 export default function farms(state = initialState, action) {
@@ -17,19 +15,10 @@ export default function farms(state = initialState, action) {
 				...state,
 				farms
 			}
-		case actionTypes.FARMS_LIST_FETCH_REQUEST:
-			return {...state, isLoading: true}
 		case actionTypes.FARMS_LIST_FETCH_SUCCESS:
 			return {
 				...state,
 				farms: action.farms,
-				isLoading:false
-			}
-		case actionTypes.FARMS_ERROR:
-			return {
-				...state,
-				error: action.error,
-				isLoading: false
 			}
 		case actionTypes.USER_LOGOUT:
 			return initialState;
