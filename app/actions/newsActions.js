@@ -12,9 +12,10 @@ export function newsFetchSuccess() {
 	}
 }
 
-export function newsFetchError(error) {
+export function newsFetchError(errorMessage, errorStatus) {
 	return {
-		type: actionTypes.NEWS_FETCH_ERROR,
-		error
+		type: actionTypes.NEWS_ERROR,
+		errorMessage,
+		errorStatus
 	}
 }

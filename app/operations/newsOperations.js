@@ -19,6 +19,6 @@ export function newsFetch (idToken) {
 		.then(() => {
 			dispatch(actions.newsFetchSuccess())
 		})
-		.catch(error => dispatch(actions.newsFetchError(error)))
+		.catch(error => dispatch(actions.newsFetchError(error.response.data.msg, error.response.status)))
 	}
 }

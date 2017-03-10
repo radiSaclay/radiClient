@@ -3,6 +3,7 @@ import * as appActions from '../../app/actions/appActions'
 import * as userActions from '../../app/actions/userActions'
 import * as eventActions from '../../app/actions/eventActions'
 import * as farmActions from '../../app/actions/farmActions'
+import * as newsActions from '../../app/actions/newsActions'
 import * as productActions from '../../app/actions/productActions'
 import actionTypes from '../../app/config/actionTypes';
 
@@ -139,5 +140,32 @@ describe('appReducer catching product actions', () =>{
 			isLoading: false
 		}
 		expect(appReducer([], productActions.productError(errorMessage, errorStatus))).toEqual(expectedState)
+	})
+})
+
+describe('appReducer catching news actions', () =>{
+	it('should handle NEWS_FETCH_REQUEST', () => {
+		let expectedState = {
+			isLoading: true,
+		}
+		expect(appReducer([], newsActions.newsFetchRequest())).toEqual(expectedState)
+	})
+
+	it('should handle NEWS_FETCH_SUCCESS', () => {
+		let expectedState = {
+			isLoading: false,
+		}
+		expect(appReducer([], newsActions.newsFetchSuccess())).toEqual(expectedState)
+	})
+
+	it('should handle NEWS_ERROR', () => {
+		let errorMessage = 'I am an awful error message'
+		let errorStatus = 401
+		let expectedState = {
+			errorMessage: errorMessage,
+			errorStatus: errorStatus,
+			isLoading: false
+		}
+		expect(appReducer([], newsActions.newsFetchError(errorMessage, errorStatus))).toEqual(expectedState)
 	})
 })
