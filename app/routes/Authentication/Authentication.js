@@ -17,6 +17,7 @@ import promises from '../../config/promises';
 import settings from '../../config/settings';
 import Loader from '../../components/Loader'
 import * as userOperations from '../../operations/userOperations'
+import * as appOperations from '../../operations/appOperations'
 
 class Authentication extends Component {
 	constructor(){
@@ -34,6 +35,16 @@ class Authentication extends Component {
 		if(nextProps.idToken) {
 			Actions.MainTab({type: ActionConst.REPLACE})
 		}
+		if(nextProps.errorMessage){
+			Alert.alert(
+				"Problème d'authentification",
+				nextProps.errorMessage,
+				[
+					{text: 'OK', onPress: () => this.props.errorRemove()}
+				],
+				{cancelable: false}
+			)
+		}
 	}
 
 	userLogin() {
@@ -50,7 +61,7 @@ class Authentication extends Component {
 
 	isFormValid() {
 		isEmailValid = (/.+@.+/.test(this.state.email))
-		isPasswordValid = (this.state.password && this.state.password.length > 8)
+		isPasswordValid = (this.state.password && this.state.password.length > 7)
 		this.setState({
 			isEmailValid: isEmailValid,
 			isPasswordValid: isPasswordValid
@@ -131,6 +142,8 @@ class Authentication extends Component {
 
 Authentication.propTypes = {
 	// from redux
+	errorMessage: React.PropTypes.string,
+	errorRemove: React.PropTypes.func,
 	isLoading: React.PropTypes.bool,
 	idToken: React.PropTypes.string,
 	userLogin: React.PropTypes.func,
@@ -139,6 +152,7 @@ Authentication.propTypes = {
 
 const mapStateToProps = (store) => {
 	return {
+		errorMessage: store.app.errorMessage,
 		idToken: store.user.idToken,
 		isLoading: store.user.isLoading
 	}
@@ -146,6 +160,7 @@ const mapStateToProps = (store) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
+		errorRemove: () => dispatch(appOperations.errorRemove()),
 		userLogin: (email, password) => {
 			dispatch(userOperations.userAuth(
 				settings.urls.AUTH_LOGIN_URL,

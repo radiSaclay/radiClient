@@ -8,7 +8,7 @@ export function userAuth (url, body) {
 		.then((responseJson) => {
 			dispatch(actions.authSuccess(responseJson.data.token))
 		})
-		.catch(error => dispatch(actions.authError(error)))
+		.catch(error => dispatch(actions.authError(error.response.data.msg)))
 	}
 }
 

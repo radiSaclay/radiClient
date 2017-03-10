@@ -39,13 +39,12 @@ describe('User authentication operations', () => {
 	})
 
 	it('creates USER_AUTHENTICATION_ERROR when authenticating user returns an error', () => {
-		let responseError = new Error('something awful happened')
-		let expectedActions = [userActions.authRequest(), userActions.authError(responseError)]
+		let expectedActions = [userActions.authRequest(), userActions.authError('something awful happened')]
 		let store = mockStore({error: null, idToken: null, isLoading: false, isMounted: true})
 
 		nock(url)
 			.post('', requestBody)
-			.replyWithError('something awful happened')
+			.reply(401, {msg: 'something awful happened'})
 
 		return store.dispatch(operations.userAuth(url, requestBody))
 			.then(() => {
