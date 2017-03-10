@@ -39,6 +39,13 @@ describe('appReducer catching user actions', () =>{
 		expect(appReducer([], userActions.authRequest())).toEqual(expectedState)
 	})
 
+	it('should handle USER_AUTHENTICATION_SUCCESS', () => {
+		let expectedState = {
+			isLoading: false,
+		}
+		expect(appReducer([], userActions.authSuccess())).toEqual(expectedState)
+	})
+
 	it('should handle USER_AUTHENTICATION_ERROR', () => {
 		let errorMessage = 'I am an awful error message'
 		let errorStatus = 401

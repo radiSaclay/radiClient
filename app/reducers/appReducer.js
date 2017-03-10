@@ -17,6 +17,8 @@ export default function app(state = initialState, action) {
 		// User actions
 		case actionTypes.USER_AUTHENTICATION_REQUEST:
 			return{...state, isLoading: true}
+		case actionTypes.USER_AUTHENTICATION_SUCCESS:
+			return{...state, isLoading: false}
 		case actionTypes.USER_AUTHENTICATION_ERROR:
 			return {
 				...state,
