@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { Actions } from 'react-native-router-flux';
+import { Alert } from 'react-native';
+import { Actions, ActionConst } from 'react-native-router-flux';
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
+import * as appOperations from '../../operations/appOperations'
 import * as newsOperations from '../../operations/newsOperations'
+import * as userOperations from '../../operations/userOperations'
 
 import Loader from '../../components/Loader'
 
@@ -13,6 +16,24 @@ class NewsContainer extends Component {
 
 	componentWillMount(){
 		this.props.fetchNews(this.props.idToken)
+	}
+
+	componentWillUpdate(nextProps) {
+		if(nextProps.errorStatus === 401){
+			Alert.alert(
+				"Problème d'authentification",
+				nextProps.errorMessage,
+				[{
+					text: 'OK',
+					onPress: () => {
+						this.props.errorRemove()
+						this.props.userLogout()
+						Actions.Authentication({type: ActionConst.REPLACE})
+					}
+				}],
+				{cancelable: false}
+			)
+		}
 	}
 
 	showEventsList() {
@@ -50,6 +71,8 @@ class NewsContainer extends Component {
 
 const mapStateToProps = (store) => {
 	return {
+		errorMessage: store.app.errorMessage,
+		errorStatus: store.app.errorStatus,
 		featuredEvents: _.slice(store.events.events, 0, 3),
 		featuredFarms: _.slice(store.farms.farms, 0, 3),
 		featuredProducts: _.slice(store.products.products, 0, 3),
@@ -60,7 +83,9 @@ const mapStateToProps = (store) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		fetchNews: (idToken) => dispatch(newsOperations.newsFetch(idToken))
+		errorRemove: () => dispatch(appOperations.errorRemove()),
+		fetchNews: (idToken) => dispatch(newsOperations.newsFetch(idToken)),
+		userLogout: () => dispatch(userOperations.userLogout())
 	}
 }
 
