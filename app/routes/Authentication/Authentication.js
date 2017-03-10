@@ -61,7 +61,7 @@ class Authentication extends Component {
 
 	isFormValid() {
 		isEmailValid = (/.+@.+/.test(this.state.email))
-		isPasswordValid = (this.state.password && this.state.password.length > 8)
+		isPasswordValid = (this.state.password && this.state.password.length > 7)
 		this.setState({
 			isEmailValid: isEmailValid,
 			isPasswordValid: isPasswordValid
