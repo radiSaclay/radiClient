@@ -34,6 +34,9 @@ class Authentication extends Component {
 		if(nextProps.idToken) {
 			Actions.MainTab({type: ActionConst.REPLACE})
 		}
+		if(nextProps.error){
+			Alert.alert("Problème d'authentification", nextProps.error)
+		}
 	}
 
 	userLogin() {
@@ -131,6 +134,7 @@ class Authentication extends Component {
 
 Authentication.propTypes = {
 	// from redux
+	error: React.PropTypes.string,
 	isLoading: React.PropTypes.bool,
 	idToken: React.PropTypes.string,
 	userLogin: React.PropTypes.func,
@@ -139,6 +143,7 @@ Authentication.propTypes = {
 
 const mapStateToProps = (store) => {
 	return {
+		error: store.user.error,
 		idToken: store.user.idToken,
 		isLoading: store.user.isLoading
 	}
