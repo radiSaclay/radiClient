@@ -27,7 +27,7 @@ class ProductsListContainer extends Component {
 const mapStateToProps = (store) => {
 	return {
 		idToken: store.user.idToken,
-		isLoading: store.products.isLoading,
+		isLoading: store.app.isLoading,
 		productsList: store.products.products
 	}
 }
