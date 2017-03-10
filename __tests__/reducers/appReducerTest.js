@@ -1,6 +1,7 @@
 import appReducer from '../../app/reducers/appReducer'
 import * as appActions from '../../app/actions/appActions'
 import * as userActions from '../../app/actions/userActions'
+import * as eventActions from '../../app/actions/eventActions'
 import * as productActions from '../../app/actions/productActions'
 import actionTypes from '../../app/config/actionTypes';
 
@@ -56,6 +57,33 @@ describe('appReducer catching user actions', () =>{
 			isLoading: false
 		}
 		expect(appReducer([], userActions.authError(errorMessage, errorStatus))).toEqual(expectedState)
+	})
+})
+
+describe('appReducer catching event actions', () =>{
+	it('should handle EVENTS_LIST_FETCH_REQUEST', () => {
+		let expectedState = {
+			isLoading: true,
+		}
+		expect(appReducer([], eventActions.eventsListFetchRequest())).toEqual(expectedState)
+	})
+
+	it('should handle EVENTS_LIST_FETCH_SUCCESS', () => {
+		let expectedState = {
+			isLoading: false,
+		}
+		expect(appReducer([], eventActions.eventsListFetchSuccess())).toEqual(expectedState)
+	})
+
+	it('should handle EVENT_ERROR', () => {
+		let errorMessage = 'I am an awful error message'
+		let errorStatus = 401
+		let expectedState = {
+			errorMessage: errorMessage,
+			errorStatus: errorStatus,
+			isLoading: false
+		}
+		expect(appReducer([], eventActions.eventError(errorMessage, errorStatus))).toEqual(expectedState)
 	})
 })
 

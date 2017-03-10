@@ -50,7 +50,7 @@ describe('Events list fetch operations', () => {
 	})
 
 	it('creates EVENTS_LIST_FETCH_SUCCESS when fetching events list done', () => {
-		let store = mockStore({events: [], error: null, isLoading: false})
+		let store = mockStore({events: []})
 		let expectedActions = [
 			eventActions.eventsListFetchRequest(),
 			eventActions.eventsListFetchSuccess(events)
@@ -68,16 +68,17 @@ describe('Events list fetch operations', () => {
 
 
 	it('creates EVENT_ERROR when fetching events list fails', () => {
-		let responseError = new Error('something awful happened')
-		let store = mockStore({events: [], error: null, isLoading: false})
+		let errorMessage = 'something awful happened'
+		let errorStatus = 401
+		let store = mockStore({events: []})
 		let expectedActions = [
 			eventActions.eventsListFetchRequest(),
-			eventActions.eventError(responseError)
+			eventActions.eventError(errorMessage, errorStatus)
 		]
 
 		nock(url, requestHeaders)
 			.get('/?embedded=1')
-			.replyWithError('something awful happened')
+			.reply(errorStatus, {msg: errorMessage})
 
 		return store.dispatch(operations.eventsListFetch(idToken))
 			.then(() => {
@@ -111,9 +112,7 @@ describe('Event toggle pinned status operation', () => {
 				"pinned": true,
 				"farmId": 1,
 				"products": []
-			}],
-			error: null,
-			isLoading: false
+			}]
 		})
 		let expectedActions = [
 			eventActions.eventTogglePinnedStatus(eventId, !pinnedStatus)
@@ -128,8 +127,8 @@ describe('Event toggle pinned status operation', () => {
 	})
 
 	it('creates EVENT_TOGGLE_PINNED_STATUS when toggle pinned status fails', () => {
-		errorMessage = 'error occured'
-		let error = new Error(errorMessage)
+		let errorMessage = 'something awful happened'
+		let errorStatus = 401
 		let store = mockStore({
 			events: [{
 				"id": 1,
@@ -145,13 +144,11 @@ describe('Event toggle pinned status operation', () => {
 			error: null,
 			isLoading: false
 		})
-		let expectedActions = [
-			eventActions.eventError(error)
-		]
+		let expectedActions = [eventActions.eventError(errorMessage,errorStatus)]
 
 		nock(url, requestHeaders)
 		.post('')
-		.replyWithError(errorMessage)
+		.reply(errorStatus, {msg: errorMessage})
 
 		return store.dispatch(operations.eventTogglePinnedStatus(idToken, eventId, pinnedStatus))
 		.then(() => expect(store.getActions()).toEqual(expectedActions))
