@@ -15,7 +15,7 @@ export function newsFetch (idToken) {
 	return dispatch => {
 		dispatch(newsActions.newsFetchRequest())
 		return Promise.all([
-			promises.getWithToken(settings.urls.EVENTS_URL+'?embedded=1',idToken),
+			promises.getWithToken(settings.urls.EVENTS_URL_DETAILED,idToken),
 			promises.getWithToken(settings.urls.FARMS_URL,idToken),
 			promises.getWithToken(settings.urls.PRODUCTS_URL,idToken)
 		])
