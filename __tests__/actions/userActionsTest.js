@@ -20,11 +20,13 @@ describe('Authenticate user', () => {
 
 	it('should create an action when authentication raises an error', () => {
 		let errorMessage = 'I am an awful error message'
+		let errorStatus = 401
 		let expectedAction = {
 			type: actionTypes.USER_AUTHENTICATION_ERROR,
-			errorMessage
+			errorMessage,
+			errorStatus
 		}
-		expect(userActions.authError(errorMessage)).toEqual(expectedAction)
+		expect(userActions.authError(errorMessage, errorStatus)).toEqual(expectedAction)
 	})
 })
 

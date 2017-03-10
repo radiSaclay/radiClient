@@ -2,6 +2,7 @@ import actionTypes from '../config/actionTypes';
 
 const initialState = {
 	errorMessage: null,
+	errorStatus: null,
 	isLoading: false,
 	isMounted: false
 }
@@ -11,7 +12,7 @@ export default function app(state = initialState, action) {
 		case actionTypes.REDUX_STORAGE_LOAD:
 			return {...state, isMounted: true}
 		case actionTypes.APP_ERROR_REMOVE:
-			return {...state, errorMessage: null}
+			return {...state, errorMessage: null, errorStatus: null}
 
 		// User actions
 		case actionTypes.USER_AUTHENTICATION_REQUEST:
@@ -20,6 +21,7 @@ export default function app(state = initialState, action) {
 			return {
 				...state,
 				errorMessage: action.errorMessage,
+				errorStatus: action.errorStatus,
 				isLoading: false
 			}
 

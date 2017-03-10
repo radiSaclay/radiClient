@@ -13,10 +13,11 @@ export function authSuccess(idToken) {
 	}
 }
 
-export function authError(errorMessage) {
+export function authError(errorMessage, errorStatus) {
 	return {
 		type: actionTypes.USER_AUTHENTICATION_ERROR,
-		errorMessage
+		errorMessage,
+		errorStatus
 	}
 }
 

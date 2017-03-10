@@ -39,7 +39,7 @@ describe('User authentication operations', () => {
 	})
 
 	it('creates USER_AUTHENTICATION_ERROR when authenticating user returns an error', () => {
-		let expectedActions = [userActions.authRequest(), userActions.authError('something awful happened')]
+		let expectedActions = [userActions.authRequest(), userActions.authError('something awful happened', 401)]
 		let store = mockStore({error: null, idToken: null, isLoading: false, isMounted: true})
 
 		nock(url)

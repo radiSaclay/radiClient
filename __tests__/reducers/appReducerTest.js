@@ -8,6 +8,7 @@ describe('appReducer', () =>{
 	it('should return the initialState', () => {
 		let expectedState = {
 			errorMessage: null,
+			errorStatus: null,
 			isLoading: false,
 			isMounted: false
 		}
@@ -24,6 +25,7 @@ describe('appReducer', () =>{
 	it('should handle APP_ERROR_REMOVE', () => {
 		let expectedState = {
 			errorMessage: null,
+			errorStatus: null,
 		}
 		expect(appReducer([], appActions.errorRemove())).toEqual(expectedState)
 	})
@@ -39,10 +41,12 @@ describe('appReducer catching user actions', () =>{
 
 	it('should handle USER_AUTHENTICATION_ERROR', () => {
 		let errorMessage = 'I am an awful error message'
+		let errorStatus = 401
 		let expectedState = {
 			errorMessage: errorMessage,
+			errorStatus: errorStatus,
 			isLoading: false
 		}
-		expect(appReducer([], userActions.authError(errorMessage))).toEqual(expectedState)
+		expect(appReducer([], userActions.authError(errorMessage, errorStatus))).toEqual(expectedState)
 	})
 })
