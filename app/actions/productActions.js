@@ -21,9 +21,10 @@ export function productsListFetchSuccess(products) {
 	}
 }
 
-export function productsError(error) {
+export function productError(errorMessage, errorStatus) {
 	return {
-		type: actionTypes.PRODUCTS_ERROR,
-		error
+		type: actionTypes.PRODUCT_ERROR,
+		errorMessage,
+		errorStatus
 	}
 }

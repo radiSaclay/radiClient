@@ -38,7 +38,7 @@ describe('Products list fetch operations', () => {
 	})
 
 	it('creates PRODUCTS_LIST_FETCH_SUCCESS when fetching products list done', () => {
-		let store = mockStore({products: [], error: null, isLoading: false})
+		let store = mockStore({products: []})
 		let expectedActions = [
 			productActions.productsListFetchRequest(),
 			productActions.productsListFetchSuccess(products)
@@ -55,17 +55,18 @@ describe('Products list fetch operations', () => {
 	})
 
 
-	it('creates PRODUCTS_ERROR when fetching products list fails', () => {
-		let responseError = new Error('something awful happened')
-		let store = mockStore({products: [], error: null, isLoading: false})
+	it('creates PRODUCT_ERROR when fetching products list fails', () => {
+		let store = mockStore({products: []})
+		let errorMessage = 'something awful happened'
+		let errorStatus = 401
 		let expectedActions = [
 			productActions.productsListFetchRequest(),
-			productActions.productsError(responseError)
+			productActions.productError(errorMessage, errorStatus)
 		]
 
 		nock(url, requestHeaders)
 		.get('/')
-		.replyWithError('something awful happened')
+		.reply(errorStatus, {msg: errorMessage})
 
 		return store.dispatch(operations.productsListFetch(idToken))
 		.then(() => {
@@ -97,12 +98,8 @@ describe('Product toggle subscribed status operation', () => {
 				"subproducts": [3, 4],
 				"ancestors": [1],
 			}],
-			error: null,
-			isLoading: false
 		})
-		let expectedActions = [
-			productActions.productToggleSubscribedStatus(productId, !subscribedStatus)
-		]
+		let expectedActions = [productActions.productToggleSubscribedStatus(productId, !subscribedStatus)]
 
 		nock(url, requestHeaders)
 		.post('')
@@ -113,8 +110,6 @@ describe('Product toggle subscribed status operation', () => {
 	})
 
 	it('creates PRODUCT_TOGGLE_SUBSCRIBED_STATUS when toggle subscribed status fails', () => {
-		errorMessage = 'error occured'
-		let error = new Error(errorMessage)
 		let store = mockStore({
 			products: [{
 				"id": 1,
@@ -124,16 +119,14 @@ describe('Product toggle subscribed status operation', () => {
 				"subproducts": [3, 4],
 				"ancestors": [1],
 			}],
-			error: null,
-			isLoading: false
 		})
-		let expectedActions = [
-			productActions.productsError(error)
-		]
+		let errorMessage = 'something awful happened'
+		let errorStatus = 401
+		let expectedActions = [productActions.productError(errorMessage, errorStatus)]
 
 		nock(url, requestHeaders)
 		.post('')
-		.replyWithError(errorMessage)
+		.reply(errorStatus, {msg: errorMessage})
 
 		return store.dispatch(operations.productToggleSubscribedStatus(idToken, productId, subscribedStatus))
 		.then(() => expect(store.getActions()).toEqual(expectedActions))

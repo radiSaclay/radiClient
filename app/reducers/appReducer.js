@@ -27,6 +27,19 @@ export default function app(state = initialState, action) {
 				isLoading: false
 			}
 
+		// Product actions
+		case actionTypes.PRODUCTS_LIST_FETCH_REQUEST:
+			return{...state, isLoading: true}
+		case actionTypes.PRODUCTS_LIST_FETCH_SUCCESS:
+			return{...state, isLoading: false}
+		case actionTypes.PRODUCT_ERROR:
+			return {
+				...state,
+				errorMessage: action.errorMessage,
+				errorStatus: action.errorStatus,
+				isLoading: false
+			}
+
 		default:
 			return state
 	}
