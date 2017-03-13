@@ -48,7 +48,7 @@ class Authentication extends Component {
 		}
 	}
 
-	facebookAuth(error, result) {
+	facebookLogin(error, result) {
 		if (error) {
 			console.log('login has error: ' + result.error);
 		} else if (result.isCancelled) {
@@ -56,7 +56,7 @@ class Authentication extends Component {
 		} else {
 			AccessToken.getCurrentAccessToken().then(
 				(data) => {
-					console.log(data.accessToken.toString());
+					this.props.userFacebookAuth(data.accessToken.toString())
 				}
 			)
 		}
@@ -154,7 +154,7 @@ class Authentication extends Component {
 						<View style={styles.facebookButton}>
 							<LoginButton
 								readPermissions={['email', 'public_profile']}
-								onLoginFinished={(error, result) => this.facebookAuth(error, result)}
+								onLoginFinished={(error, result) => this.facebookLogin(error, result)}
 							/>
 						</View>
 
@@ -186,6 +186,12 @@ const mapStateToProps = (store) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		errorRemove: () => dispatch(appOperations.errorRemove()),
+		userFacebookAuth: (token) => {
+			dispatch(userOperations.userFacebookAuth(
+				settings.urls.AUTH_FACEBOOK_URL,
+				token
+			))
+		}
 		userLogin: (email, password) => {
 			dispatch(userOperations.userAuth(
 				settings.urls.AUTH_LOGIN_URL,
