@@ -191,7 +191,7 @@ const mapDispatchToProps = (dispatch) => {
 				settings.urls.AUTH_FACEBOOK_URL,
 				token
 			))
-		}
+		},
 		userLogin: (email, password) => {
 			dispatch(userOperations.userAuth(
 				settings.urls.AUTH_LOGIN_URL,
