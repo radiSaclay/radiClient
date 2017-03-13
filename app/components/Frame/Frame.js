@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import Drawer from 'react-native-drawer'
+import { LoginManager } from 'react-native-fbsdk';
 import { ActionConst, Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux'
 
@@ -80,6 +81,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 			// Adds logout option to the SideMenu
 			label: 'Logout',
 			onPress: function(){
+				LoginManager.logOut()
 				dispatchProps.userLogout()
 				Actions.Authentication({type: ActionConst.RESET})
 			}
