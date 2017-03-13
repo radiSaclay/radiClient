@@ -116,7 +116,7 @@ class App extends Component {
 const mapStateToProps = (store) => {
 	return {
 		idToken: store.user.idToken,
-		isMounted: store.user.isMounted,
+		isMounted: store.app.isMounted,
 	}
 }
 

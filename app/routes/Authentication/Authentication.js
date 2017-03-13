@@ -179,7 +179,7 @@ const mapStateToProps = (store) => {
 	return {
 		errorMessage: store.app.errorMessage,
 		idToken: store.user.idToken,
-		isLoading: store.user.isLoading
+		isLoading: store.app.isLoading
 	}
 }
 
