@@ -5,6 +5,9 @@ import metrics from '../../config/metrics';
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+	},
+	route: {
+		flex: 1,
 		paddingBottom: metrics.navBarHeight,
 	},
 	separator: {
