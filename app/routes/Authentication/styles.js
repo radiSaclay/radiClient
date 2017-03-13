@@ -3,25 +3,41 @@ import colors from '../../config/colors'
 import metrics from '../../config/metrics'
 
 export default styles = StyleSheet.create({
+	buttonsContainer: {
+		flexDirection: 'row',
+		marginTop: metrics.baseMargin,
+	},
 	buttonText: {
 		color: colors.greyLight,
 		fontSize: 20,
 		padding: metrics.basePadding,
 		textAlign: 'center'
 	},
-	buttonWrapper: {
+	buttonWrapperLeft: {
+		flex: 0.5,
 		backgroundColor: colors.salmonLight,
 		borderRadius: metrics.borderRadius,
-		marginTop: metrics.baseMargin
+		marginRight: metrics.baseMargin/2,
+	},
+	buttonWrapperRight: {
+		backgroundColor: colors.salmonLight,
+		borderRadius: metrics.borderRadius,
+		flex: 0.5,
+		marginLeft: metrics.baseMargin/2,
 	},
 	container: {
-		alignItems: 'center',
+		alignItems: 'stretch',
 		backgroundColor: colors.coral,
 		flex: 1,
-		justifyContent: 'center'
+		justifyContent: 'center',
+		padding: metrics.basePadding,
+	},
+	facebookButton:{
+		alignItems: 'center',
+		marginTop: metrics.baseMargin,
 	},
 	form: {
-		width: metrics.screenWidth*0.9
+		padding: metrics.basePadding,
 	},
 	inputText: {
 		backgroundColor: colors.white,
@@ -35,13 +51,13 @@ export default styles = StyleSheet.create({
 		fontWeight: 'bold',
 	},
 	logo: {
+		alignSelf: 'center',
 		height: metrics.logoHeight,
-		width: metrics.logoWidth
+		width: metrics.logoWidth,
 	},
 	title: {
 		color: colors.white,
 		fontSize: 40,
-		margin: metrics.baseMargin,
-		textAlign: 'center'
+		textAlign: 'center',
 	},
 });

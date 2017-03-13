@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { AccessToken, LoginButton } from 'react-native-fbsdk';
 import {
 	Alert,
 	AsyncStorage,
@@ -47,6 +48,20 @@ class Authentication extends Component {
 		}
 	}
 
+	facebookAuth(error, result) {
+		if (error) {
+			console.log('login has error: ' + result.error);
+		} else if (result.isCancelled) {
+			console.log('login is cancelled.');
+		} else {
+			AccessToken.getCurrentAccessToken().then(
+				(data) => {
+					console.log(data.accessToken.toString());
+				}
+			)
+		}
+	}
+
 	userLogin() {
 		if (this.isFormValid()) {
 			this.props.userLogin(this.state.email, this.state.password)
@@ -76,13 +91,13 @@ class Authentication extends Component {
 		} else {
 			return (
 				<View style={styles.container}>
+
 					<Image
 						source={require('../../images/logo.png')}
 						style={styles.logo}
 						/>
-					<Text style={styles.title}>
-						RadiSaclay
-					</Text>
+					<Text style={styles.title}> RadiSaclay </Text>
+
 					<View style={styles.form}>
 						<TextInput
 							autoCapitalize='none'
@@ -117,22 +132,32 @@ class Authentication extends Component {
 						{this.state.isPasswordValid === false &&
 							<Text style={styles.invalidInput}> 8 caractères minimum </Text>
 						}
-						<TouchableOpacity style={styles.buttonWrapper}>
-							<Text
-								style={styles.buttonText}
-								onPress={this.userLogin.bind(this)}
-								>
-								Log In
-							</Text>
-						</TouchableOpacity>
-						<TouchableOpacity style={styles.buttonWrapper}>
-							<Text
-								style={styles.buttonText}
-								onPress={this.userSignup.bind(this)}
-								>
-								Sign Up
-							</Text>
-						</TouchableOpacity>
+						<View style={styles.buttonsContainer}>
+							<TouchableOpacity style={styles.buttonWrapperLeft}>
+								<Text
+									style={styles.buttonText}
+									onPress={this.userLogin.bind(this)}
+									>
+									Log In
+								</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style={styles.buttonWrapperRight}>
+								<Text
+									style={styles.buttonText}
+									onPress={this.userSignup.bind(this)}
+									>
+									Sign Up
+								</Text>
+							</TouchableOpacity>
+						</View>
+
+						<View style={styles.facebookButton}>
+							<LoginButton
+								readPermissions={['email', 'public_profile']}
+								onLoginFinished={(error, result) => this.facebookAuth(error, result)}
+							/>
+						</View>
+
 					</View>
 				</View>
 			);
