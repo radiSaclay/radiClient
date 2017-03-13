@@ -3,8 +3,6 @@ import _ from 'lodash'
 
 const initialState = {
 	events: [],
-	error: null,
-	isLoading: false
 }
 
 export default function events(state = initialState, action) {
@@ -17,19 +15,10 @@ export default function events(state = initialState, action) {
 				...state,
 				events
 			}
-		case actionTypes.EVENTS_LIST_FETCH_REQUEST:
-			return {...state, isLoading: true}
 		case actionTypes.EVENTS_LIST_FETCH_SUCCESS:
 			return {
 				...state,
 				events: action.events,
-				isLoading:false
-			}
-		case actionTypes.EVENT_ERROR:
-			return {
-				...state,
-				error: action.error,
-				isLoading: false
 			}
 		case actionTypes.USER_LOGOUT:
 			return initialState;

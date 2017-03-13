@@ -9,7 +9,7 @@ export function farmToggleSubscribedStatus (idToken, farmId, subscribedStatus) {
 		.then((response) => {
 			dispatch(actions.farmToggleSubscribedStatus(farmId, !subscribedStatus))
 		})
-		.catch((error) => dispatch(actions.farmsError(error)))
+		.catch((error) => dispatch(actions.farmError(error.response.data.msg, error.response.status)))
 	}
 }
 
@@ -20,6 +20,6 @@ export function farmsListFetch (idToken) {
 		.then((farms) => {
 			dispatch(actions.farmsListFetchSuccess(farms.data))
 		})
-		.catch(error => dispatch(actions.farmsError(error)))
+		.catch(error => dispatch(actions.farmError(error.response.data.msg, error.response.status)))
 	}
 }

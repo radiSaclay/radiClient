@@ -28,7 +28,7 @@ class NewsContainer extends Component {
 	}
 
 	render() {
-		if (this.props.isLoading) {
+		if (this.props.fetchedAll) {
 			return (
 				<Loader />
 			)
@@ -53,8 +53,8 @@ const mapStateToProps = (store) => {
 		featuredEvents: _.slice(store.events.events, 0, 3),
 		featuredFarms: _.slice(store.farms.farms, 0, 3),
 		featuredProducts: _.slice(store.products.products, 0, 3),
+		fetchedAll: store.news.fetchedAll, // source must be store.news because it must wait for multiple promises to resolve
 		idToken: store.user.idToken,
-		isLoading: store.news.isLoading
 	}
 }
 

@@ -9,7 +9,7 @@ export function eventTogglePinnedStatus (idToken, eventId, pinnedStatus) {
 		.then((response) => {
 			dispatch(actions.eventTogglePinnedStatus(eventId, !pinnedStatus))
 		})
-		.catch((error) => dispatch(actions.eventError(error)))
+		.catch((error) => dispatch(actions.eventError(error.response.data.msg, error.response.status)))
 	}
 }
 
@@ -21,6 +21,6 @@ export function eventsListFetch (idToken) {
 		.then((events) => {
 			dispatch(actions.eventsListFetchSuccess(events.data))
 		})
-		.catch(error => dispatch(actions.eventError(error)))
+		.catch(error => dispatch(actions.eventError(error.response.data.msg, error.response.status)))
 	}
 }

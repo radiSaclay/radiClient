@@ -21,9 +21,10 @@ export function eventsListFetchSuccess(events) {
 	}
 }
 
-export function eventError(error) {
+export function eventError(errorMessage,errorStatus) {
 	return {
 		type: actionTypes.EVENT_ERROR,
-		error
+		errorMessage,
+		errorStatus
 	}
 }

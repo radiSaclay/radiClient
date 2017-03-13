@@ -5,8 +5,6 @@ import * as userActions from '../../app/actions/userActions'
 describe('Event reducer', () =>{
 	initialState = {
 		events: [],
-		error: null,
-		isLoading: false
 	}
 
 	it('should return the initialState', () => {
@@ -15,13 +13,6 @@ describe('Event reducer', () =>{
 
 	it('should return the initialState when user logs out', () =>{
 		expect(eventReducer([], userActions.logout())).toEqual(initialState)
-	})
-
-	it('should handle EVENTS_LIST_FETCH_REQUEST', () => {
-		let expectedState = {
-			isLoading: true
-		}
-		expect(eventReducer([], eventActions.eventsListFetchRequest())).toEqual(expectedState)
 	})
 
 	it('should handle EVENTS_LIST_FETCH_SUCCESS', () => {
@@ -51,18 +42,8 @@ describe('Event reducer', () =>{
 		]
 		let expectedState = {
 			events: events,
-			isLoading: false
 		}
 		expect(eventReducer([], eventActions.eventsListFetchSuccess(events))).toEqual(expectedState)
-	})
-
-	it('should handle EVENTS_LIST_FETCH_ERROR', () => {
-		let error = new Error()
-		let expectedState = {
-			error: error,
-			isLoading: false
-		}
-		expect(eventReducer([], eventActions.eventError(error))).toEqual(expectedState)
 	})
 
 	it('should handle EVENT_TOGGLE_PINNED_STATUS', () => {

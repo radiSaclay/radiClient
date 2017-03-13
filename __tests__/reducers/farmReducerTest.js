@@ -4,9 +4,7 @@ import * as userActions from '../../app/actions/userActions'
 
 describe('Farm reducer', () =>{
 	initialState = {
-		error: null,
 		farms: [],
-		isLoading: false
 	}
 
 	it('should return the initialState', () => {
@@ -55,13 +53,6 @@ describe('Farm reducer', () =>{
 		expect(farmReducer(initialState, farmActions.farmToggleSubscribedStatus(farmId, subscribedStatus))).toEqual(expectedState)
 	})
 
-	it('should handle FARMS_LIST_FETCH_REQUEST', () => {
-		let expectedState = {
-			isLoading: true
-		}
-		expect(farmReducer([], farmActions.farmsListFetchRequest())).toEqual(expectedState)
-	})
-
 	it('should handle FARMS_LIST_FETCH_SUCCESS', () => {
 		let farms = [
 			{
@@ -89,18 +80,8 @@ describe('Farm reducer', () =>{
 		]
 		let expectedState = {
 			farms: farms,
-			isLoading: false
 		}
 		expect(farmReducer([], farmActions.farmsListFetchSuccess(farms))).toEqual(expectedState)
-	})
-
-	it('should handle FARMS_ERROR', () => {
-		let error = new Error()
-		let expectedState = {
-			error: error,
-			isLoading: false
-		}
-		expect(farmReducer([], farmActions.farmsError(error))).toEqual(expectedState)
 	})
 
 	it('should handle FARM_TOGGLE_SUBSCRIBED_STATUS', () => {

@@ -21,9 +21,10 @@ export function farmsListFetchSuccess(farms) {
 	}
 }
 
-export function farmsError(error) {
+export function farmError(errorMessage, errorStatus) {
 	return {
-		type: actionTypes.FARMS_ERROR,
-		error
+		type: actionTypes.FARM_ERROR,
+		errorMessage,
+		errorStatus
 	}
 }

@@ -28,7 +28,7 @@ const mapStateToProps = (store) => {
 	return {
 		eventsList: store.events.events,
 		idToken: store.user.idToken,
-		isLoading: store.events.isLoading
+		isLoading: store.app.isLoading
 	}
 }
 

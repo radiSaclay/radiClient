@@ -42,12 +42,14 @@ describe('Get events from the API', () => {
 	})
 
 	it('should create an action when fetch events list raises an error', () => {
-		let error = new Error()
+		let errorMessage = 'something awful happened'
+		let errorStatus = 401
 		let expectedAction = {
 			type: actionTypes.EVENT_ERROR,
-			error
+			errorMessage,
+			errorStatus
 		}
-		expect(eventActions.eventError(error)).toEqual(expectedAction)
+		expect(eventActions.eventError(errorMessage, errorStatus)).toEqual(expectedAction)
 	})
 })
 

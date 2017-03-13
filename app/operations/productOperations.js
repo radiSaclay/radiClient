@@ -9,7 +9,7 @@ export function productToggleSubscribedStatus (idToken, productId, subscribedSta
 		.then((response) => {
 			dispatch(actions.productToggleSubscribedStatus(productId, !subscribedStatus))
 		})
-		.catch((error) => dispatch(actions.productsError(error)))
+		.catch((error) => dispatch(actions.productError(error.response.data.msg, error.response.status)))
 	}
 }
 
@@ -20,6 +20,6 @@ export function productsListFetch (idToken) {
 		.then((products) => {
 			dispatch(actions.productsListFetchSuccess(products.data))
 		})
-		.catch(error => dispatch(actions.productsError(error)))
+		.catch(error => dispatch(actions.productError(error.response.data.msg, error.response.status)))
 	}
 }

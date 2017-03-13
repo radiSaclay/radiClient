@@ -42,12 +42,14 @@ describe('Get farms from the API', () => {
 	})
 
 	it('should create an action when fetch farms list raises an error', () => {
-		let error = new Error()
+		let errorMessage = 'something awful happened'
+		let errorStatus = 401
 		let expectedAction = {
-			type: actionTypes.FARMS_ERROR,
-			error
+			type: actionTypes.FARM_ERROR,
+			errorMessage,
+			errorStatus
 		}
-		expect(farmActions.farmsError(error)).toEqual(expectedAction)
+		expect(farmActions.farmError(errorMessage, errorStatus)).toEqual(expectedAction)
 	})
 })
 

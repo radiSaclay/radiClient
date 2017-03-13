@@ -20,7 +20,7 @@ describe('User authentication operations', () => {
 	})
 
 	it('creates USER_AUTHENTICATION_SUCCESS when authenticating user is done', () => {
-		let store = mockStore({error: null, idToken: null, isLoading: false, isMounted: true})
+		let store = mockStore({idToken: null})
 		let expectedActions = [
 			userActions.authRequest(),
 			userActions.authSuccess(idToken)
@@ -39,12 +39,17 @@ describe('User authentication operations', () => {
 	})
 
 	it('creates USER_AUTHENTICATION_ERROR when authenticating user returns an error', () => {
-		let expectedActions = [userActions.authRequest(), userActions.authError('something awful happened')]
-		let store = mockStore({error: null, idToken: null, isLoading: false, isMounted: true})
+		let errorMessage = 'something awful happened'
+		let errorStatus = 401
+		let expectedActions = [
+			userActions.authRequest(),
+			userActions.authError(errorMessage, errorStatus)
+		]
+		let store = mockStore({idToken: null})
 
 		nock(url)
 			.post('', requestBody)
-			.reply(401, {msg: 'something awful happened'})
+			.reply(errorStatus, {msg: errorMessage})
 
 		return store.dispatch(operations.userAuth(url, requestBody))
 			.then(() => {
@@ -55,7 +60,7 @@ describe('User authentication operations', () => {
 
 describe('User logout operations', () => {
 	it('creates USER_LOGOUT when user logs out', () => {
-		let store = mockStore({error: null, idToken: 'bdiu3b92b3r9b', isLoading: false, isMounted: true})
+		let store = mockStore({idToken: 'bdiu3b92b3r9b'})
 		let expectedActions = [userActions.logout()]
 
 		store.dispatch(operations.userLogout())

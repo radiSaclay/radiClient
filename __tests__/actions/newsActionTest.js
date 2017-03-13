@@ -17,11 +17,13 @@ describe('Get news from the API', () => {
 	})
 
 	it('should create an action when fetch news raises an error', () => {
-		let error = new Error()
+		let errorMessage = 'something awful happened'
+		let errorStatus = 401
 		let expectedAction = {
-			type: actionTypes.NEWS_FETCH_ERROR,
-			error
+			type: actionTypes.NEWS_ERROR,
+			errorMessage,
+			errorStatus
 		}
-		expect(newsActions.newsFetchError(error)).toEqual(expectedAction)
+		expect(newsActions.newsFetchError(errorMessage,errorStatus)).toEqual(expectedAction)
 	})
 })

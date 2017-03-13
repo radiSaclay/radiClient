@@ -36,12 +36,14 @@ describe('Get products from the API', () => {
 	})
 
 	it('should create an action when fetch products list raises an error', () => {
-		let error = new Error()
+		let errorMessage = 'I am an awful error message'
+		let errorStatus = 401
 		let expectedAction = {
-			type: actionTypes.PRODUCTS_ERROR,
-			error
+			type: actionTypes.PRODUCT_ERROR,
+			errorMessage,
+			errorStatus
 		}
-		expect(productActions.productsError(error)).toEqual(expectedAction)
+		expect(productActions.productError(errorMessage, errorStatus)).toEqual(expectedAction)
 	})
 })
 
