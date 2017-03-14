@@ -11,18 +11,57 @@ export default styles = StyleSheet.create({
 	buttonWrapper: {
 		backgroundColor: colors.coral,
 		borderRadius: metrics.borderRadius,
+		margin:metrics.baseMargin,
 	},
 	container: {
 		flex: 1,
+		padding: metrics.basePadding,
 	},
-	description: {
+	date:{
+		fontSize: 16,
+		textAlign: 'center',
+	},
+	datesContainer:{
+		flex: 0.8,
+		flexDirection: 'row',
+	},
+	description:{
+		fontStyle: 'italic',
+		marginBottom: metrics.baseMargin,
+	},
+	icon: {
+		height: 30,
+		width: 30,
+	},
+	iconContainer: {
+		alignItems: 'center',
+		flex: 0.2
+	},
+	informationContainer: {
+		alignItems: 'center',
+	},
+	logo: {
+		borderRadius: 50,
+		height: 100,
+		width: 100,
+	},
+	logoContainer: {
+		alignItems: 'center',
+		margin: metrics.baseMargin,
+		justifyContent: 'center',
+	},
+	subtitle: {
+		flex: 0.8,
+		fontSize: 16,
+	},
+	subtitleContainer: {
+		alignItems: 'center',
+		flexDirection: 'row',
+		marginTop: metrics.baseMargin
+	},
+	title:{
 		fontSize: 30,
-		fontWeight: 'bold'
+		marginBottom: metrics.baseMargin,
 	},
-	endDate: {
-		fontSize: 20,
-	},
-	farmId: {
-		fontSize: 20,
-	},
+
 });
