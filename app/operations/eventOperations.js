@@ -2,6 +2,10 @@ import * as actions from '../actions/eventActions'
 import promises from '../config/promises'
 import settings from '../config/settings'
 
+export function eventDisplayPinned (displayPinned) {
+	return dispatch => { dispatch(actions.eventDisplayPinned(displayPinned)) }
+}
+
 export function eventTogglePinnedStatus (idToken, eventId, pinnedStatus) {
 	return dispatch => {
 		let url = (pinnedStatus ? settings.urls.EVENTS_UNPIN_URL : settings.urls.EVENTS_PIN_URL) + eventId

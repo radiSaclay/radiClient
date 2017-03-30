@@ -5,6 +5,7 @@ import * as userActions from '../../app/actions/userActions'
 describe('Event reducer', () =>{
 	initialState = {
 		events: [],
+		displayPinned: false,
 	}
 
 	it('should return the initialState', () => {
@@ -44,6 +45,19 @@ describe('Event reducer', () =>{
 			events: events,
 		}
 		expect(eventReducer([], eventActions.eventsListFetchSuccess(events))).toEqual(expectedState)
+	})
+
+	it('should handle EVENT_DISPLAY_PINNED', () => {
+		let initialState = {
+			displayPinned: false
+		}
+
+		let displayPinned = true
+
+		let expectedState = {
+			displayPinned: true
+		}
+		expect(eventReducer(initialState, eventActions.eventDisplayPinned(displayPinned))).toEqual(expectedState)
 	})
 
 	it('should handle EVENT_TOGGLE_PINNED_STATUS', () => {

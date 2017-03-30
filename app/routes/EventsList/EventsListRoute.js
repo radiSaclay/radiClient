@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { connect } from 'react-redux';
 
-import settings from '../../config/settings';
-import styles from './styles';
+import * as eventOperations from '../../operations/eventOperations';
 
 import EventsListContainer from './EventsListContainer';
 import Frame from '../../components/Frame';
@@ -10,13 +9,37 @@ import Frame from '../../components/Frame';
 class EventsListRoute extends Component {
 	render() {
 		return (
-			<Frame title={this.props.title}>
-				<View style={styles.route}>
-					<EventsListContainer/>
-				</View>
+			<Frame
+				quickActions={[
+					{
+						source: require('../../images/pin.png'),
+						onPress: () => {this.props.operationDisplayPinned(!this.props.displayPinned)}
+					}
+				]}
+				title={this.props.title}
+				>
+				<EventsListContainer displayPinned={this.props.displayPinned} />
 			</Frame>
 		)
 	}
 }
 
-export default EventsListRoute;
+EventsListRoute.PropTypes = {
+	// from redux
+	displayPinned: React.PropTypes.bool,
+	operationDisplayPinned: React.PropTypes.func,
+}
+
+const mapStateToProps = (store) => {
+	return {
+		displayPinned: store.events.displayPinned
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		operationDisplayPinned: (displayPinned) => dispatch(eventOperations.eventDisplayPinned(displayPinned))
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(EventsListRoute);

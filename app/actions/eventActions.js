@@ -1,5 +1,12 @@
 import actionTypes from '../config/actionTypes';
 
+export function eventDisplayPinned(displayPinned) {
+	return {
+		type: actionTypes.EVENT_DISPLAY_PINNED,
+		displayPinned
+	}
+}
+
 export function eventTogglePinnedStatus(eventId, pinnedStatus) {
 	return {
 		type: actionTypes.EVENT_TOGGLE_PINNED_STATUS,

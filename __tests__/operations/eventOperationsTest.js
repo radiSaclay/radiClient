@@ -154,3 +154,20 @@ describe('Event toggle pinned status operation', () => {
 		.then(() => expect(store.getActions()).toEqual(expectedActions))
 	})
 })
+
+describe('Event display pinned operation', () => {
+
+	const displayPinned = true
+
+	it('creates EVENT_DISPLAY_PINNED when display pinned triggers', () => {
+		let store = mockStore({
+			displayPinned: false
+		})
+		let expectedActions = [
+			eventActions.eventDisplayPinned(displayPinned)
+		]
+
+		store.dispatch(operations.eventDisplayPinned(displayPinned))
+		return expect(store.getActions()).toEqual(expectedActions)
+	})
+})

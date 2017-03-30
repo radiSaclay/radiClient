@@ -53,6 +53,18 @@ describe('Get events from the API', () => {
 	})
 })
 
+describe('Switch display pinned events', () => {
+	it('should create an action when switch display pinned events fire', () => {
+		let displayPinned = true
+		let expectedAction = {
+			type: actionTypes.EVENT_DISPLAY_PINNED,
+			displayPinned
+		}
+		expect(eventActions.eventDisplayPinned(displayPinned)).toEqual(expectedAction)
+	})
+})
+
+
 describe('Toggle event pinned status', () => {
 	it('should create an action when toggle pinned status fires', () => {
 		let eventId = 1
